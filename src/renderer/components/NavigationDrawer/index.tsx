@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import {
   StyledNavigationDrawer,
@@ -32,13 +32,9 @@ export const NavigationDrawer = ({
     <StyledNavigationDrawer style={style} dense={dense}>
       {title !== '' && (
         <Header>
-          <Title>{title}</Title>
+          <Title>adam</Title>
+          <p>adam@inn.com</p>
         </Header>
-      )}
-      {search && (
-        <Search>
-          <Input placeholder="Search" onInput={onSearchInput} />
-        </Search>
       )}
       <MenuItems global={global}>{children}</MenuItems>
     </StyledNavigationDrawer>

@@ -1,44 +1,97 @@
 export interface ITheme {
-  'titlebar.backgroundColor': string;
+  titlebar: {
+    background: string;
+  };
+  addressbar: {
+    text: string;
+    background: string;
+  };
+  toolbar: {
+    background: string;
+    seperator: string;
+    border: string;
+  };
+  tab: {
+    text: string;
+    selected: {
+      text: string;
+      background: string;
+    };
+    background: string;
+  };
+  control: {
+    background: string;
+    value: string;
+    border: string;
+    hover: {
+      background: string;
+    };
+  };
+  switch: {
+    background: string;
+  };
+  button: {
+    primary: {
+      background: string;
+      text: string;
+    };
+    secondary: {
+      background: string;
+      text: string;
+    };
+    dark: {
+      background: string;
+      text: string;
+    };
+    light: {
+      background: string;
+      text: string;
+    };
+    danger: {
+      background: string;
+      text: string;
+    };
+    warning: {
+      background: string;
+      text: string;
+    };
+    success: {
+      background: string;
+      text: string;
+    };
+  };
 
-  'addressbar.backgroundColor': string;
-  'addressbar.textColor': string;
+  dialog: {
+    seperator: string;
+    background: string;
+    text: string;
+  };
 
-  'toolbar.backgroundColor': string;
-  'toolbar.bottomLine.backgroundColor': string;
-  'toolbar.lightForeground': boolean;
-  'toolbar.separator.color': string;
+  searchbox: {
+    background: string;
+  };
 
-  'tab.textColor': string;
-  'tab.selected.textColor': string;
-  'tab.selected.backgroundColor': string;
-  'tab.backgroundColor': string;
-  'control.backgroundColor': string;
-  'control.hover.backgroundColor': string;
-  'control.valueColor': string;
-  'control.lightIcon': boolean;
-  'control.borderBottomColor': string;
-  'switch.backgroundColor': string;
+  pages: {
+    background: string;
+    text: string;
+    navigationDrawer1: {
+      background: string;
+    };
+    navigationDrawer2: {
+      background: string;
+      searchBar: {
+        background: string;
+      };
+    };
+  };
 
-  'button.backgroundColor': string;
-  'dialog.separator.color': string;
-  'dialog.backgroundColor': string;
-  'dialog.textColor': string;
-  'dialog.lightForeground': boolean;
-
-  'searchBox.backgroundColor': string;
-  'searchBox.lightForeground': boolean;
-
-  'pages.backgroundColor': string;
-  'pages.lightForeground': boolean;
-  'pages.textColor': string;
-  'pages.navigationDrawer1.backgroundColor': string;
-  'pages.navigationDrawer2.backgroundColor': string;
-  'pages.navigationDrawer2.searchBar.backgroundColor': string;
-  'dropdown.backgroundColor': string;
-  'dropdown.backgroundColor.translucent': string;
-  'dropdown.separator.color': string;
-
+  dropdown: {
+    background: {
+      color: string;
+      translucent: string;
+    };
+    seperator: string;
+  };
   backgroundColor: string;
   accentColor: string;
 
@@ -50,4 +103,6 @@ export interface ITheme {
   isCompact?: boolean;
 
   dark?: boolean;
+  easingFunction: string;
+  dialogEasing: string;
 }

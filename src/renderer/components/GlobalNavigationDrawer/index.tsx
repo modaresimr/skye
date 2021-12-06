@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { NavigationDrawer } from '../NavigationDrawer';
 import { observer } from 'mobx-react-lite';
 import {

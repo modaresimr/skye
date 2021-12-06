@@ -50,7 +50,6 @@ export const StyledAction = styled.div<ActionProps>`
   ${({ visible, theme }) => css`
     opacity: ${visible ? transparency.icons.inactive : 0};
     display: ${visible ? 'block' : 'none'};
-    filter: ${theme['toolbar.lightForeground'] ? 'invert(100%)' : 'none'};
   `}
 
   &:hover {
@@ -76,9 +75,7 @@ export const StyledPinAction = styled.div<PinActionProps>`
 
   ${({ visible, theme }) => css`
     display: ${visible ? 'block' : 'none'};
-    background-color: ${theme['toolbar.lightForeground']
-      ? 'rgb(255, 255, 255)'
-      : 'rgb(0, 0, 0)'};
+    background-color: ${theme.dark ? 'rgb(255, 255, 255)' : 'rgb(0, 0, 0)'};
   `}
 
   &:hover {
@@ -170,78 +167,40 @@ export const TabContainer = styled.div<TabContainerProps>`
     if (color && color !== '') {
       const cc = contrast(color);
 
-      const isDarkMode = theme['toolbar.lightForeground'];
       switch (cc) {
         case 'dark':
-          if (isDarkMode) {
-            if (selected) {
-              return css`
-                background-color: rgb(255, 255, 255, 0.2);
-                color: #fff;
-              `;
-            }
+          if (selected) {
             return css`
-              background-color: rgb(255, 255, 255, 0.1);
+              background-color: rgb(255, 255, 255, 0.2);
               color: #fff;
             `;
-          } else {
-            if (selected) {
-              return css`
-                background-color: rgb(255, 255, 255, 0.2);
-                color: #fff;
-              `;
-            }
-            return css`
-              background-color: rgb(255, 255, 255, 0.1);
-              color: #e5e5e5;
-            `;
           }
+          return css`
+            background-color: rgb(255, 255, 255, 0.1);
+            color: #fff;
+          `;
         case 'light': {
-          if (isDarkMode) {
-            if (selected) {
-              return css`
-                background-color: rgb(0, 0, 0, 0.15);
-              `;
-            }
+          if (selected) {
             return css`
-              background-color: rgb(0, 0, 0, 0.06);
-              color: #000;
-            `;
-          } else {
-            if (selected) {
-              return css`
-                background-color: rgb(0, 0, 0, 0.15);
-              `;
-            }
-            return css`
-              background-color: rgb(0, 0, 0, 0.06);
+              background-color: rgb(0, 0, 0, 0.15);
             `;
           }
+          return css`
+            background-color: rgb(0, 0, 0, 0.06);
+          `;
         }
       }
     }
     return css`
-      color: ${theme['addressbar.textColor']};
+      color: ${theme.tab.text};
       background-color: ${selected
-        ? theme['tab.selected.backgroundColor']
-        : theme['tab.backgroundColor']};
+        ? theme.tab.selected.background
+        : theme.tab.background};
     `;
   }}
 
   ${({ pinned, theme, hasTabGroup, selected, color }) => css`
     max-width: ${pinned ? `${TAB_PINNED_WIDTH}px` : '100%'};
-
-    /* background-color: ${color
-      ? selected
-        ? theme['toolbar.lightForeground']
-          ? 'rgb(255,255,255,0.20)'
-          : 'rgb(0,0,0,0.15) '
-        : theme['toolbar.lightForeground']
-        ? 'rgb(255,255,255,0.10)'
-        : 'rgb(0,0,0,0.05) '
-      : selected
-      ? theme['tab.selected.backgroundColor']
-      : theme['tab.backgroundColor']}; */
 
     height: ${theme.tabHeight}px;
     border-radius: ${theme.isCompact && !hasTabGroup ? '8px' : 'auto'};

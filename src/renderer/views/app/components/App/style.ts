@@ -13,6 +13,6 @@ export const Line = styled.div`
 export const StyledApp = styled.div`
   display: flex;
   flex-flow: column;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.toolbar.background};
   -webkit-app-region: drag;
 `;

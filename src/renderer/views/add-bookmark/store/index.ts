@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron';
-import { makeObservable, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { IBookmark } from '~/interfaces';
-import * as React from 'react';
+import React from 'react';
 import { DialogStore } from '~/models/dialog-store';
 
 export class Store extends DialogStore {
@@ -14,8 +14,31 @@ export class Store extends DialogStore {
   public folders: IBookmark[] = [];
 
   public dialogTitle = '';
-
+  public dialogURL = '';
+  public url = '';
+  public title = '';
+  public favicon = '';
   public currentFolder: IBookmark = null;
+
+  @action
+  async addBookmark() {
+    if (!this.bookmark) {
+      this.bookmark = await ipcRenderer.invoke('bookmarks-add', {
+        title: this.title,
+        url: this.url,
+        favicon: this.favicon,
+        parent: this.folders.find((x) => x.static === 'main')._id,
+      });
+    }
+    this.currentFolder = this.folders.find(
+      (x) => x._id === this.bookmark.parent,
+    );
+    if (this.titleRef.current) {
+      this.titleRef.current.value = this.bookmark.title ?? this.title;
+      this.titleRef.current.focus();
+      this.titleRef.current.select();
+    }
+  }
 
   public constructor() {
     super();
@@ -34,31 +57,14 @@ export class Store extends DialogStore {
     ipcRenderer.on('data', async (e, data) => {
       const { bookmark, title, url, favicon } = data;
 
-      if (!bookmark) {
-        this.dialogTitle = !bookmark ? 'Bookmark Added' : 'Edit Bookmark';
-      }
+      this.dialogTitle = !bookmark ? 'New Bookmark' : 'Edit Bookmark';
+      this.dialogURL = new URL(url).hostname;
+      this.title = title;
+      this.url = url;
+      this.favicon = favicon;
 
       this.bookmark = bookmark;
       this.folders = await ipcRenderer.invoke('bookmarks-get-folders');
-
-      if (!this.bookmark) {
-        this.bookmark = await ipcRenderer.invoke('bookmarks-add', {
-          title,
-          url,
-          favicon,
-          parent: this.folders.find((x) => x.static === 'main')._id,
-        });
-      }
-
-      this.currentFolder = this.folders.find(
-        (x) => x._id === this.bookmark.parent,
-      );
-
-      if (this.titleRef.current) {
-        this.titleRef.current.value = this.bookmark.title ?? title;
-        this.titleRef.current.focus();
-        this.titleRef.current.select();
-      }
     });
   }
 }

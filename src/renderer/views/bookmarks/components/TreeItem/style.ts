@@ -6,7 +6,6 @@ import { ICON_FOLDER, ICON_DROPDOWN } from '~/renderer/constants/icons';
 import { ITheme } from '~/interfaces';
 
 interface TreeItemProps {
-  theme?: ITheme;
   selected: boolean;
 }
 
@@ -21,10 +20,10 @@ export const StyledTreeItem = styled.div<TreeItemProps>`
 
   ${({ theme, selected }) => css`
     &:hover {
-      background-color: ${theme['backgroundColor']};
+      background-color: ${theme.backgroundColor};
     }
 
-    background-color: ${selected ? theme['backgroundColor'] : 'none'};
+    background-color: ${selected ? theme.backgroundColor : 'none'};
   `}
 `;
 
@@ -45,7 +44,6 @@ export const DropIcon = styled.div<DropIconProps>`
   ${centerIcon(20)};
   ${({ visible, expanded, theme }) => css`
     opacity: ${visible ? transparency.icons.inactive : 0};
-    filter: ${theme['pages.lightForeground'] ? 'invert(100%)' : ''};
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);
@@ -68,7 +66,7 @@ export const FolderIcon = styled.div<FolderIconProps>`
   ${centerIcon(20)}
 
   ${({ theme }: FolderIconProps) => css`
-    color: ${theme['accentColor'] ? 'invert(100%)' : ''};
+    color: ${theme.accentColor ? 'invert(100%)' : ''};
   `}
 `;
 

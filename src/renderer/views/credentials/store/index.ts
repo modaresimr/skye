@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import * as React from 'react';
+import React from 'react';
 import { action, makeObservable, observable } from 'mobx';
 
 import { Textfield } from '~/renderer/components/Textfield';

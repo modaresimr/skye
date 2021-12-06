@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 
-import { Title, Row, Control, Header, SecondaryText } from '../App/style';
+import { Title, Row, Control, Header, SecondaryText } from '../../style';
 import store from '../../store';
-import { NormalButton } from '../App';
 import { getWebUIURL } from '~/common/webui';
 import { observer } from 'mobx-react-lite';
+import Button from '~/renderer/components/Button';
 
 export const Accounts = observer(() => {
   const { token } = store.settings;
@@ -43,16 +43,16 @@ export const Accounts = observer(() => {
 
         <Control>
           {token ? (
-            <NormalButton
+            <Button
               onClick={() => {
                 store.settings.token = null;
                 store.save();
               }}
             >
               Logout
-            </NormalButton>
+            </Button>
           ) : (
-            <NormalButton
+            <Button
               onClick={() =>
                 (window.location.href = `https://id.innatical.com/connect?id=ea27b1df-ff32-4252-996f-65ceda9f0953&callback=${getWebUIURL(
                   'settings',
@@ -60,7 +60,7 @@ export const Accounts = observer(() => {
               }
             >
               Login
-            </NormalButton>
+            </Button>
           )}
         </Control>
       </Row>

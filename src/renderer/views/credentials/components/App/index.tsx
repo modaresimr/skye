@@ -1,13 +1,12 @@
 import { ipcRenderer } from 'electron';
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
 import { Textfield } from '~/renderer/components/Textfield';
 import { PasswordInput } from '~/renderer/components/PasswordInput';
-import { Button } from '~/renderer/components/Button';
+import Button from '~/renderer/components/Button';
 import List from '../List';
-import { BLUE_500 } from '~/renderer/constants';
 import { StyledApp, Title, Buttons, Container } from './style';
 import { UIStyle } from '~/renderer/mixins/default-styles';
 
@@ -70,7 +69,7 @@ export const App = observer(() => {
         )}
         {store.content === 'list' && (
           <Button
-            foreground={BLUE_500}
+            primary
             background="transparent"
             style={{ marginRight: 'auto', padding: '0px 12px' }}
             onClick={onClose}

@@ -80,6 +80,7 @@ export class Store {
     zoom: false,
     'extension-popup': false,
     'downloads-dialog': false,
+    tracking: false,
   };
 
   // Computed

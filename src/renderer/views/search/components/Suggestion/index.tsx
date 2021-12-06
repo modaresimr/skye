@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import * as React from 'react';
+import React from 'react';
 
 import { transparency, ICON_PAGE, ICON_SEARCH } from '~/renderer/constants';
 import {

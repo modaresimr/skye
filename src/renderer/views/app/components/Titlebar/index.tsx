@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import * as React from 'react';
+import React from 'react';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
 import store from '../../store';

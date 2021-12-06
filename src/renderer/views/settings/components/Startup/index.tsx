@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { Title, Row, Header } from '../App/style';
+import { Title, Row, Header } from '../../style';
 import { Textfield } from '~/renderer/components/Textfield';
 import { RadioButton } from '~/renderer/components/RadioButton';
-import { Button } from '~/renderer/components/Button';
+import Button from '~/renderer/components/Button';
 import { IStartupTab } from '~/interfaces/startup-tab';
-import { BLUE_500, ICON_CLOSE } from '~/renderer/constants';
+import { ICON_CLOSE } from '~/renderer/constants';
 import store from '../../store';
 
 interface Props {
@@ -128,12 +128,7 @@ class StartupControl extends React.PureComponent<Props, State> {
               ))}
             </div>
 
-            <Button
-              type="outlined"
-              foreground={BLUE_500}
-              background={BLUE_500}
-              onClick={this.onAddNewPageClick}
-            >
+            <Button primary onClick={this.onAddNewPageClick}>
               Add a new page
             </Button>
           </div>

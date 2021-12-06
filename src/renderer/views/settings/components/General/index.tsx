@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 
-import { Title, Row, Control, Header } from '../App/style';
+import { Title, Row, Control, Header } from '../../style';
 import store from '../../store';
 import { observer } from 'mobx-react-lite';
-import { Switch } from '~/renderer/components/Switch';
-import { NormalButton } from '../App';
+import Switch from '~/renderer/components/Switch';
 import { ipcRenderer } from 'electron';
+import Button from '~/renderer/components/Button';
 
 export const General = observer(() => {
   return (
@@ -16,13 +16,14 @@ export const General = observer(() => {
           <Title>Default Browser</Title>
         </div>
         <Control>
-          <NormalButton
+          <Button
             onClick={async () => {
               await ipcRenderer.invoke('set-default-browser');
             }}
+            primary
           >
             Set as Default
-          </NormalButton>
+          </Button>
         </Control>
       </Row>
     </>

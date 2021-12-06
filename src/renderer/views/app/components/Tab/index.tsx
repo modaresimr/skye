@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import * as React from 'react';
+import React from 'react';
 
 import { Preloader } from '~/renderer/components/Preloader';
 import {
@@ -203,8 +203,12 @@ const Content = observer(({ tab }: { tab: ITab }) => {
     if (tab.favicon.startsWith('data:undefined')) return undefined;
     else return tab.favicon !== '' ? tab.favicon : undefined;
   }, [tab.favicon]);
+  const [hovering, setHovering] = React.useState(false);
   return (
-    <StyledContent>
+    <StyledContent
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
       {!tab.loading && !!favicon && (
         <StyledIcon
           isIconSet={favicon !== ''}
@@ -232,7 +236,7 @@ const Content = observer(({ tab }: { tab: ITab }) => {
         </StyledTitle>
       )}
       <ExpandedVolume tab={tab} />
-      <Close tab={tab} />
+      <Close hovering={hovering} tab={tab} />
     </StyledContent>
   );
 });
@@ -265,17 +269,19 @@ const PinnedVolume = observer(({ tab }: { tab: ITab }) => {
   );
 });
 
-const Close = observer(({ tab }: { tab: ITab }) => {
-  return (
-    <StyledClose
-      onMouseDown={onCloseMouseDown}
-      onClick={removeTab(tab)}
-      visible={tab.isExpanded && !tab.isPinned}
-    >
-      <FontAwesomeIcon icon={ICON_CLOSE} />
-    </StyledClose>
-  );
-});
+const Close = observer(
+  ({ tab, hovering }: { tab: ITab; hovering: boolean }) => {
+    return (
+      <StyledClose
+        onMouseDown={onCloseMouseDown}
+        onClick={removeTab(tab)}
+        visible={!!hovering || (tab.isExpanded && !tab.isPinned)}
+      >
+        <FontAwesomeIcon icon={ICON_CLOSE} />
+      </StyledClose>
+    );
+  },
+);
 
 export default observer(({ tab, index }: { tab: ITab; index: number }) => {
   return (

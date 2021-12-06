@@ -16,9 +16,7 @@ export const EmptySection = styled.div<EmptySectionProps>`
   }
 
   ${({ theme }) => css`
-    background-color: ${theme['pages.lightForeground']
-      ? 'rgba(255, 255, 255, 0.05)'
-      : '#fafafa'};
+    background-color: ${theme.dialog.background};
   `};
 `;
 

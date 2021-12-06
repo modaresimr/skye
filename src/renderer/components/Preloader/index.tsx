@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { BLUE_500 } from '~/renderer/constants';
 import { Path, StyledPreloader } from './style';

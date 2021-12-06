@@ -39,7 +39,7 @@ export const showAddBookmarkDialog = async (
     getBounds: () => ({
       width: 366,
       height: 300,
-      x: x - 366 + DIALOG_MARGIN,
+      x: x - 211 + DIALOG_MARGIN,
       y: y - DIALOG_MARGIN_TOP,
     }),
     onWindowBoundsUpdate: () => dialog.hide(),

@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { ThemeProvider } from 'styled-components';
 
 import { StyledApp, Label, Buttons, Spacer } from './style';
 import { ToolbarButton } from '../../../app/components/ToolbarButton';
 import store from '../../store';
-import { Button } from '~/renderer/components/Button';
+import Button from '~/renderer/components/Button';
 import { ipcRenderer } from 'electron';
 import { UIStyle } from '~/renderer/mixins/default-styles';
 
@@ -55,17 +55,7 @@ export const App = observer(() => {
             onClick={onMinus}
           />
           <Spacer />
-          <Button
-            onClick={onReset}
-            background={
-              store.theme['dialog.lightForeground']
-                ? 'rgba(255, 255, 255, 0.08)'
-                : 'rgba(0, 0, 0, 0.08)'
-            }
-            foreground={
-              store.theme['dialog.lightForeground'] ? 'white' : 'black'
-            }
-          >
+          <Button onClick={onReset} primary>
             Reset
           </Button>
         </Buttons>

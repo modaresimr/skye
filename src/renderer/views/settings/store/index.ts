@@ -1,5 +1,5 @@
 import { observable, computed, makeObservable } from 'mobx';
-import * as React from 'react';
+import React from 'react';
 import { ISettings, ITheme, ISearchEngine } from '~/interfaces';
 import { AutoFillStore } from './autofill';
 import { StartupTabsStore } from './startup-tabs';

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import {
@@ -14,7 +14,7 @@ import {
 import store from '../../store';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
-import { Switch } from '~/renderer/components/Switch';
+import Switch from '~/renderer/components/Switch';
 import {
   ICON_FIRE,
   ICON_TOPMOST,
@@ -92,12 +92,7 @@ const onUpdateClick = () => {
 
 export const QuickMenu = observer(() => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexFlow: 'column',
-      }}
-    >
+    <div>
       <Content>
         <MenuItems>
           {store.updateAvailable && (
@@ -111,16 +106,6 @@ export const QuickMenu = observer(() => {
               <Line />
             </>
           )}
-          <MenuItem onClick={onAlwaysClick}>
-            <Icon>
-              <FontAwesomeIcon icon={ICON_TOPMOST} />
-            </Icon>
-            <MenuItemTitle>Always on top</MenuItemTitle>
-            <RightControl>
-              <Switch dense value={store.alwaysOnTop}></Switch>
-            </RightControl>
-          </MenuItem>
-          <Line />
           <MenuItem onClick={goToWebUIPage('newtab')}>
             <Icon>
               <FontAwesomeIcon icon={ICON_TAB} />

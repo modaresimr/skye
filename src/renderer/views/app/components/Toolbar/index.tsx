@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import * as React from 'react';
+import React from 'react';
 
 import { StyledToolbar } from './style';
 import { NavigationButtons } from '../NavigationButtons';

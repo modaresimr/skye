@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { ThemeProvider } from 'styled-components';
 
 import { StyledApp, Title, Permissions, Permission, Buttons } from './style';
 import store from '../../store';
-import { Button } from '~/renderer/components/Button';
+import Button from '~/renderer/components/Button';
 import { UIStyle } from '~/renderer/mixins/default-styles';
 
 const sendResult = (r: boolean) => {

@@ -11,24 +11,14 @@ interface NavigationDrawerItemProps {
 }
 export const StyledNavigationDrawerItem = styled.div<NavigationDrawerItemProps>`
   display: flex;
-  height: 40px;
   align-items: center;
   position: relative;
-  border-radius: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   cursor: pointer;
   ${({ theme, global, selected }) => css`
-    &:hover {
-      background-color: ${global ? 'transparent' : theme['backgroundColor']};
-    }
-
-    ${selected &&
-    !global && {
-      backgroundColor: theme['backgroundColor'],
-    }}
-
-    ${selected &&
-    global && {
-      color: '#1E6FEB',
+    ${selected && {
+      fontWeight: 700,
     }}
 
     ${global && {

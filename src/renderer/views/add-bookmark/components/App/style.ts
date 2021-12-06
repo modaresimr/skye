@@ -4,7 +4,6 @@ import { ITheme } from '~/interfaces';
 import { DialogStyle } from '~/renderer/mixins/dialogs';
 
 interface AppProps {
-  theme?: ITheme;
   visible: boolean;
 }
 export const StyledApp = styled(DialogStyle)<AppProps>`
@@ -13,19 +12,19 @@ export const StyledApp = styled(DialogStyle)<AppProps>`
   display: flex;
   flex-direction: column;
   ${({ theme }) => css`
-    color: ${theme['dialog.lightForeground'] ? '#fff' : '#000'};
+    color: ${theme.dialog.text};
+    background: ${theme.dialog.background};
   `}
 `;
 
 export const Subtitle = styled.div`
-  font-size: 13px;
-  opacity: 0.54;
-  margin-top: 8px;
+  font-size: 14px;
 `;
 
 export const Title = styled.div`
   font-size: 16px;
   margin-bottom: 10px;
+  margin-top: 5px;
   font-weight: bold;
 `;
 
@@ -55,13 +54,12 @@ export const Buttons = styled.div`
   justify-content: flex-end;
   margin-top: 6px;
   & .button:not(:last-child) {
+    width: 100%;
     margin-right: 8px;
   }
 `;
 
-export const Select = styled.select<{
-  theme: ITheme;
-}>`
+export const Select = styled.select`
   height: 40px;
   min-width: 200px;
   position: relative;
@@ -74,10 +72,10 @@ export const Select = styled.select<{
   align-items: center;
   -webkit-appearance: none;
   ${({ theme }) => css`
-    background-color: ${theme['control.backgroundColor']};
+    background-color: ${theme.control.background};
 
     &:hover {
-      background-color: ${theme['control.hover.backgroundColor']};
+      background-color: ${theme.control.hover.background};
     }
   `}
 `;

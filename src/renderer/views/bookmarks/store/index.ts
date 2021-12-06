@@ -3,7 +3,7 @@ import { ISettings, IFavicon, ITheme, IBookmark } from '~/interfaces';
 import { getTheme } from '~/utils/themes';
 import { PreloadDatabase } from '~/preloads/models/database';
 import { ipcRenderer } from 'electron';
-import * as React from 'react';
+import React from 'react';
 import { Textfield } from '~/renderer/components/Textfield';
 
 export class Store {
