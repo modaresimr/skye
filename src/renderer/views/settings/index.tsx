@@ -35,10 +35,9 @@ import { Appearance } from './components/Appearance';
 import { Autofill } from './components/Autofill';
 import { Dialog } from './components/Dialog';
 import { Downloads } from './components/Downloads';
-import { General } from './components/General';
 import { Privacy } from './components/Privacy';
 import { OnStartup } from './components/Startup';
-import { StyledSettings } from './style';
+import { StyledSetDefaultButton, StyledSettings } from './style';
 
 const MenuItem = observer(
   ({
@@ -225,7 +224,6 @@ const App = observer(() => {
         </Dialog>
         <StyledSettings>
           <NavigationDrawer title="Settings">
-            <MenuItem section="general">General</MenuItem>
             <MenuItem section="appearance">Appearance</MenuItem>
             {process.env.ENABLE_AUTOFILL && (
               <MenuItem section="autofill">Autofill</MenuItem>
@@ -237,10 +235,16 @@ const App = observer(() => {
             <MenuItem section="downloads">Downloads</MenuItem>
             <MenuItem section="privacy">Privacy</MenuItem>
             <MenuItem section="account">Innatical ID</MenuItem>
+            <StyledSetDefaultButton
+              onClick={async () => {
+                await ipcRenderer.invoke('set-default-browser');
+              }}
+            >
+              Set as default browser
+            </StyledSetDefaultButton>
           </NavigationDrawer>
           <Content>
-            <LeftContent style={{ maxWidth: 800, marginTop: 56 }}>
-              {selectedSection === 'general' && <General />}
+            <LeftContent>
               {selectedSection === 'appearance' && <Appearance />}
               {selectedSection === 'autofill' &&
                 process.env.ENABLE_AUTOFILL && <Autofill />}

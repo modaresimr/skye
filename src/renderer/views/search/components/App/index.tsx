@@ -133,10 +133,6 @@ export const App = observer(() => {
     <ThemeProvider
       theme={{
         ...store.theme,
-        searchBoxHeight:
-          store.settings.topBarVariant === 'compact'
-            ? COMPACT_TITLEBAR_HEIGHT
-            : TOOLBAR_HEIGHT - 1,
       }}
     >
       <StyledApp>
@@ -145,10 +141,7 @@ export const App = observer(() => {
           <CurrentIcon
             style={{
               backgroundImage: `url(${favicon})`,
-              filter:
-                customIcon && store.theme['dialog.lightForeground']
-                  ? 'invert(100%)'
-                  : 'none',
+              filter: customIcon && store.theme.dark ? 'invert(100%)' : 'none',
               opacity: customIcon ? 0.54 : 1,
             }}
           ></CurrentIcon>

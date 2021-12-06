@@ -74,7 +74,7 @@ export const Suggestion = observer(({ suggestion }: Props) => {
             backgroundImage: `url(${favicon})`,
             opacity: customFavicon ? 1 : transparency.icons.inactive,
             filter: !customFavicon
-              ? store.theme['searchBox.lightForeground']
+              ? store.theme.dark
                 ? 'invert(100%)'
                 : 'none'
               : 'none',

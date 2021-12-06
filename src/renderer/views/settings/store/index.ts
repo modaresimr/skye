@@ -67,7 +67,7 @@ export class Store {
     | 'privacy' = null;
 
   @observable
-  public selectedSection: SettingsSection = 'general';
+  public selectedSection: SettingsSection = 'appearance';
 
   @observable
   public settings: ISettings = { ...(window as any).settings };

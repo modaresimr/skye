@@ -16,16 +16,13 @@ export const StyledNavigationDrawerItem = styled.div<NavigationDrawerItemProps>`
   padding-top: 6px;
   padding-bottom: 6px;
   cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.7;
   ${({ theme, global, selected }) => css`
     ${selected && {
       fontWeight: 700,
+      opacity: 1,
     }}
-
-    ${global && {
-      fontSize: 18,
-    }}
-    padding-left: ${global ? '0' : '10px'};
-    padding-right: ${global ? '0' : '10px'};
     justify-content: ${global ? 'center' : 'left'};
   `};
 `;

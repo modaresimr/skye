@@ -9,7 +9,7 @@ export const skyeLight: ITheme = {
     background: '#F4F4F4',
   },
   toolbar: {
-    background: '#F4F4F4',
+    background: '#fff',
     border: 'rgba(0, 0, 0, 0.12)',
     seperator: 'rgba(0, 0, 0, 0.12)',
   },

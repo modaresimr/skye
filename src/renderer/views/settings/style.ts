@@ -100,10 +100,21 @@ export const Back = styled(IconButton)`
 export const StyledSettings = styled.div`
   display: flex;
   align-items: center;
-  max-width: 900px;
+  max-width: 1200px;
   width: 900ex;
   margin-left: auto;
-
+  padding: 200px;
   margin-right: auto;
-  margin-top: 80px;
+  margin-top: 200px;
+`;
+
+export const StyledSetDefaultButton = styled.button`
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: transparent;
+  border: 0;
+  margin-top: 15px;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
 `;

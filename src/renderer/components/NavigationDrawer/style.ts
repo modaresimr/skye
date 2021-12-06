@@ -10,16 +10,14 @@ interface NavigationDrawerProps {
 }
 
 export const StyledNavigationDrawer = styled.div<NavigationDrawerProps>`
-  height: 100%;
+  height: 100vh;
   left: 0;
   display: flex;
   flex-flow: column;
   transition: 0.2s width;
 
   ${({ theme, dense }) => css`
-    padding: ${dense ? 0 : '0 32px'};
-
-    width: ${dense ? 56 : 320}px;
+    width: ${dense ? 56 : 220}px;
 
     background-color: ${theme.backgroundColor};
   `}
@@ -35,18 +33,11 @@ export const MenuItems = styled.div<{
   padding-bottom: 24px;
   overflow: hidden auto;
   ${noButtons('6px', 'rgba(0, 0, 0, 0.04)', 'rgba(0, 0, 0, 0.12)')};
-  ${({ global }) => css`
-    margin-left: ${global ? '0' : '-10px'};
-    margin-right: ${global ? '0' : '-10px'};
-    justify-content: ${global ? 'center' : 'left'};
-    gap: ${global ? '30px' : '0'};
-  `}
 `;
 
 export const Header = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
   p {
     margin: 0;
   }
@@ -54,6 +45,7 @@ export const Header = styled.div`
 
 export const Title = styled.div`
   font-size: 24px;
+  margin-top: 10px;
   font-weight: 900;
 `;
 

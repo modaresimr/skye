@@ -9,6 +9,8 @@ import {
   Header,
 } from './style';
 import { NavigationDrawerItem } from './NavigationDrawerItem';
+import Avatar from '../Avatar';
+import { useHash } from '../Avatar/Avatar';
 
 export const NavigationDrawer = ({
   children,
@@ -28,10 +30,12 @@ export const NavigationDrawer = ({
   dense?: boolean;
   global?: boolean;
 }) => {
+  const hash = useHash('adam');
   return (
     <StyledNavigationDrawer style={style} dense={dense}>
       {title !== '' && (
         <Header>
+          <Avatar hash={hash} />
           <Title>adam</Title>
           <p>adam@inn.com</p>
         </Header>
