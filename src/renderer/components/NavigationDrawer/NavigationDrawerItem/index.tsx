@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { StyledNavigationDrawerItem, Icon } from './style';
@@ -10,13 +10,11 @@ export const NavigationDrawerItem = observer(
     children,
     selected,
     onClick,
-    icon,
     global,
   }: {
     children: any;
     selected?: boolean;
     onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-    icon?: IconProp;
     global?: boolean;
   }) => {
     return (
@@ -26,11 +24,6 @@ export const NavigationDrawerItem = observer(
         selected={selected}
         global={global}
       >
-        {icon && (
-          <Icon>
-            <FontAwesomeIcon icon={icon} fixedWidth />
-          </Icon>
-        )}
         {children}
       </StyledNavigationDrawerItem>
     );

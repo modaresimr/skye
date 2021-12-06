@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ICON_MORE } from '~/renderer/constants';
-import { IconButton } from '../App/style';
+import { IconButton } from '../../style';
 import { centerIcon } from '~/renderer/mixins';
 
 export const EnginesTable = styled.div`

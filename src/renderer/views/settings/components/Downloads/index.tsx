@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React from 'react';
 
-import { Switch } from '~/renderer/components/Switch';
-import { Title, Row, Control, Header, SecondaryText } from '../App/style';
+import Switch from '~/renderer/components/Switch';
+import { Title, Row, Control, Header, SecondaryText } from '../../style';
 import store from '../../store';
 import { onSwitchChange } from '../../utils';
 import { ipcRenderer } from 'electron';
 import { observer } from 'mobx-react-lite';
-import { NormalButton } from '../App';
+import Button from '~/renderer/components/Button';
 
 const AskToggle = observer(() => {
   const { downloadsDialog } = store.settings;
@@ -15,7 +15,7 @@ const AskToggle = observer(() => {
     <Row onClick={onSwitchChange('downloadsDialog')}>
       <Title>Ask where to save each file before downloading</Title>
       <Control>
-        <Switch value={downloadsDialog} />
+        <Switch toggled={downloadsDialog} />
       </Control>
     </Row>
   );
@@ -34,7 +34,9 @@ const Location = observer(() => {
       </div>
 
       <Control>
-        <NormalButton onClick={onChangeClick}>Change</NormalButton>
+        <Button primary onClick={onChangeClick}>
+          Change
+        </Button>
       </Control>
     </Row>
   );

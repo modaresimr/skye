@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
@@ -8,7 +8,7 @@ import {
 } from '~/renderer/components/ContextMenu';
 import { Passwords } from './Passwords';
 import { Addresses } from './Addresses';
-import { Header } from '../App/style';
+import { Header } from '../../style';
 import { ICON_EDIT, ICON_TRASH } from '~/renderer/constants';
 
 const onEditClick = () => {

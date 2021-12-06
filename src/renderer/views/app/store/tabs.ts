@@ -5,7 +5,7 @@ import {
   makeObservable,
   makeAutoObservable,
 } from 'mobx';
-import * as React from 'react';
+import React from 'react';
 
 import { ITab, ITabGroup } from '../models';
 

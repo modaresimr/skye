@@ -42,6 +42,7 @@ const extPopupConfig = getConfig({
 applyEntries(appConfig, [
   ...(process.env.ENABLE_AUTOFILL ? ['form-fill', 'credentials'] : []),
   'app',
+  'welcome',
   'permissions',
   'auth',
   'find',
@@ -52,6 +53,7 @@ applyEntries(appConfig, [
   'downloads-dialog',
   'add-bookmark',
   'zoom',
+  'tracking',
   'settings',
   'history',
   'newtab',

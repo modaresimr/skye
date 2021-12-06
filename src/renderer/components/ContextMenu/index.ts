@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { shadows, centerIcon } from '~/renderer/mixins';
+import { shadows, centerIcon } from '../../../renderer/mixins';
 import { ITheme } from '~/interfaces';
-import { DIALOG_EASING } from '~/renderer/constants';
 
 interface ContextMenuProps {
   visible: boolean;
@@ -26,14 +25,14 @@ export const ContextMenu = styled.div<ContextMenuProps>`
   ${({ visible, theme, bigger, translucent }) => css`
     padding: ${bigger ? 8 : 4}px 0;
     transition: ${visible
-      ? `0.35s opacity ${DIALOG_EASING}, 0.35s transform ${DIALOG_EASING}`
+      ? `0.35s opacity ${theme.dialogEasing}, 0.35s transform ${theme.dialogEasing}`
       : 'none'};
     opacity: ${visible ? 1 : 0};
     transform: translate3d(0px, ${visible ? 0 : -10}px, 0px);
     pointer-events: ${visible ? 'inherit' : 'none'};
     background-color: ${translucent
-      ? theme['dropdown.backgroundColor.translucent']
-      : theme['dropdown.backgroundColor']};
+      ? theme.dropdown.background.translucent
+      : theme.dropdown.background};
   `}
 `;
 
@@ -47,7 +46,7 @@ export const ContextMenuSeparator = styled.div<ContextMenuSeperatorProps>`
   width: 100%;
 
   ${({ theme, bigger }) => css`
-    background-color: ${theme['dropdown.separator.color']};
+    background-color: ${theme.dropdown.seperator};
     margin: ${bigger ? 8 : 4}px 0px;
   `}
 `;
@@ -80,19 +79,13 @@ export const ContextMenuItem = styled.div<ContextMenuItemProps>`
     padding: ${bigger ? 12 : 10}px ${bigger ? 20 : 12}px;
     align-items: center;
     display: ${visible === undefined || visible ? 'flex' : 'none'};
-    background-color: ${selected
-      ? theme['control.lightIcon']
-        ? 'rgba(255, 255, 255, 0.15)'
-        : 'rgba(0, 0, 0, 0.1)'
-      : 'none'};
+    background-color: ${selected ? 'rgba(0, 0, 0, 0.1)' : 'none'};
 
     svg {
       margin-right: 8px;
     }
     &:hover {
-      background-color: ${theme['control.lightIcon']
-        ? `rgba(255, 255, 255, ${selected ? 0.15 : 0.08})`
-        : `rgba(0, 0, 0, ${selected ? 0.1 : 0.06})`};
+      background-color: ${`rgba(0, 0, 0, ${selected ? 0.1 : 0.06})`};
     }
 
     ${icon &&
@@ -100,7 +93,7 @@ export const ContextMenuItem = styled.div<ContextMenuItemProps>`
       padding-left: ${16 + iconSize + 12}px;
       &:before {
         content: '';
-        filter: ${theme['control.lightIcon'] ? 'invert(100%)' : 'none'};
+        filter: ${'none'};
         opacity: 0.54;
         ${centerIcon()};
         width: ${iconSize}px;

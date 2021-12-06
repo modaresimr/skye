@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { ipcRenderer } from 'electron';
 import { observable, computed, makeObservable } from 'mobx';
@@ -102,8 +102,7 @@ export class Store extends DialogStore {
 
     (async () => {
       await this.loadHistory();
-    })()
-    
+    })();
 
     ipcRenderer.send(`can-show-${this.id}`);
 
@@ -123,7 +122,8 @@ export class Store extends DialogStore {
   }
 
   public getCanSuggest(key: number) {
-    return key !== 8 && // backspace
+    return (
+      key !== 8 && // backspace
       key !== 13 && // enter
       key !== 17 && // ctrl
       key !== 18 && // alt
@@ -131,7 +131,8 @@ export class Store extends DialogStore {
       key !== 9 && // tab
       key !== 20 && // capslock
       key !== 46 && // delete
-      key !== 32;
+      key !== 32
+    );
   }
 
   public async loadHistory() {

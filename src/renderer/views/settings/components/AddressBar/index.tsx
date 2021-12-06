@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Dropdown } from '~/renderer/components/Dropdown';
-import { Switch } from '~/renderer/components/Switch';
-import { Title, Control, Header, Back, Row } from '../App/style';
+import Switch from '~/renderer/components/Switch';
+import { Title, Control, Header, Back, Row } from '../../style';
 import store from '../../store';
 import { onSwitchChange } from '../../utils';
 import { observer } from 'mobx-react-lite';
@@ -13,8 +13,9 @@ import {
   TableHeader,
   MoreButton,
 } from './style';
-import { NormalButton } from '../App';
+
 import { ISearchEngine } from '~/interfaces';
+import Button from '~/renderer/components/Button';
 
 const SuggestionsToggle = observer(() => {
   const { suggestions } = store.settings;
@@ -23,7 +24,7 @@ const SuggestionsToggle = observer(() => {
     <Row onClick={onSwitchChange('suggestions')}>
       <Title>Show search and site suggestions</Title>
       <Control>
-        <Switch value={suggestions} />
+        <Switch toggled={suggestions} />
       </Control>
     </Row>
   );
@@ -109,7 +110,9 @@ export const ManageSearchEngines = observer(() => {
       <Row>
         <Title>Address bar search engines</Title>
         <Control>
-          <NormalButton onClick={onAddClick}>Add</NormalButton>
+          <Button primary onClick={onAddClick}>
+            Add
+          </Button>
         </Control>
       </Row>
       <EnginesTable>

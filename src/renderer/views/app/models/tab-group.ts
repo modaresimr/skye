@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observable, action, makeObservable } from 'mobx';
 
 import { LIGHT_BLUE_500 } from '~/renderer/constants';

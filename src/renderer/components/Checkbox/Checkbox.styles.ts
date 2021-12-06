@@ -1,8 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { EASING_FUNCTION, BLUE_500 } from '~/renderer/constants';
-import { ICON_CHECK } from '~/renderer/constants/icons';
-import { centerIcon, centerBoth } from '~/renderer/mixins';
+import { centerIcon, centerBoth } from '../../mixins';
 
 export const Container = styled.div`
   height: 40px;
@@ -31,42 +28,47 @@ export const StyledCheckbox = styled.div<CheckboxProps>`
   border-style: solid;
   transition: 0.15s background-color, 0.15s border-color;
 
-  ${({ toggled }) => css`
-    background-color: ${toggled ? BLUE_500 : 'transparent'};
-    border-color: ${toggled ? BLUE_500 : 'rgba(0, 0, 0, 0.54)'};
+  ${({ toggled, theme }) => css`
+    background-color: ${toggled
+      ? theme.button.primary.background
+      : 'transparent'};
+    border-color: ${toggled
+      ? theme.button.primary.background
+      : 'rgba(0, 0, 0, 0.54)'};
 
     &::before {
-      background-color: ${toggled ? BLUE_500 : '#000'};
+      background-color: ${toggled ? theme.button.primary.background : '#000'};
+      content: '';
+      width: 0;
+      height: 0;
+      border-radius: 100%;
+      display: block;
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+      transition: 0.1s width ${theme.easingFunction},
+        0.1s height ${theme.easingFunction}, 0.15s opacity,
+        0.15s background-color;
+      ${centerBoth()};
     }
   `}
-
-  &::before {
-    content: '';
-    width: 0;
-    height: 0;
-    border-radius: 100%;
-    display: block;
-    position: absolute;
-    pointer-events: none;
-    opacity: 0;
-    transition: 0.1s width ${EASING_FUNCTION}, 0.1s height ${EASING_FUNCTION},
-      0.15s opacity, 0.15s background-color;
-    ${centerBoth()};
-  }
 `;
 
-export const Icon = styled.div`
+export const Icon = styled.div<{
+  toggled?: boolean;
+}>`
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  transition: 0.3s clip-path ${EASING_FUNCTION};
   -webkit-font-smoothing: antialiased;
   filter: invert(100%);
   ${centerIcon(22)};
 
-  ${({ toggled }: { toggled: boolean }) => css`
+  ${({ toggled, theme }) => css`
     clip-path: ${toggled ? 'inset(0 0 0 0)' : 'inset(100% 50% 0 50%)'};
+
+    transition: 0.3s clip-path ${theme.easingFunction};
   `};
 `;

@@ -4,11 +4,7 @@ import { centerIcon } from '~/renderer/mixins';
 import { ITheme } from '~/interfaces';
 import { ICON_MORE } from '~/renderer/constants/icons';
 
-interface MoreProps {
-  theme: ITheme;
-}
-
-export const More = styled.div<MoreProps>`
+export const More = styled.div`
   ${centerIcon(20)};
   height: 24px;
   width: 24px;
@@ -17,9 +13,6 @@ export const More = styled.div<MoreProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ theme }) => css`
-    filter: ${theme['pages.lightForeground'] ? 'invert(0%)' : 'none'};
-  `}
   &:hover {
     opacity: 1;
   }
@@ -33,16 +26,9 @@ export const Favicon = styled.div`
   align-items: center;
   width: 16px;
   margin-right: 24px;
-  ${({ theme }: { theme?: ITheme }) => css`
-    filter: ${theme['dialog.lightForeground'] ? 'invert(100%)' : ''};
-  `}
 `;
 
-interface TitleProps {
-  theme: ITheme;
-}
-
-export const Title = styled.div<TitleProps>`
+export const Title = styled.div`
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -50,7 +36,7 @@ export const Title = styled.div<TitleProps>`
   margin-right: 16px;
 
   ${({ theme }) => css`
-    color: ${theme['pages.lightForeground'] ? '#fff' : '#000'};
+    color: ${theme.dialog.text};
   `}
 `;
 

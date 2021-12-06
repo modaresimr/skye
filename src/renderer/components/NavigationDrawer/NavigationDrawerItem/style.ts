@@ -11,31 +11,18 @@ interface NavigationDrawerItemProps {
 }
 export const StyledNavigationDrawerItem = styled.div<NavigationDrawerItemProps>`
   display: flex;
-  height: 40px;
   align-items: center;
   position: relative;
-  border-radius: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.7;
   ${({ theme, global, selected }) => css`
-    &:hover {
-      background-color: ${global ? 'transparent' : theme['backgroundColor']};
-    }
-
-    ${selected &&
-    !global && {
-      backgroundColor: theme['backgroundColor'],
+    ${selected && {
+      fontWeight: 700,
+      opacity: 1,
     }}
-
-    ${selected &&
-    global && {
-      color: '#1E6FEB',
-    }}
-
-    ${global && {
-      fontSize: 18,
-    }}
-    padding-left: ${global ? '0' : '10px'};
-    padding-right: ${global ? '0' : '10px'};
     justify-content: ${global ? 'center' : 'left'};
   `};
 `;

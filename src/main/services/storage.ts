@@ -1,7 +1,7 @@
 import { ipcMain, dialog } from 'electron';
-import * as Datastore from 'nedb';
+import Datastore from 'nedb';
 import { fromBuffer } from 'file-type';
-import * as icojs from 'icojs';
+import icojs from 'icojs';
 
 import { getPath } from '~/utils';
 import {
@@ -18,7 +18,7 @@ import { countVisitedTimes } from '~/utils/history';
 import { promises } from 'fs';
 import { Application } from '../application';
 import { requestURL } from '../network/request';
-import * as parse from 'node-bookmarks-parser';
+import parse from 'node-bookmarks-parser';
 import fetch from 'node-fetch';
 import { Settings } from '../models/settings';
 
@@ -110,7 +110,7 @@ export class StorageService {
       return this.bookmarks;
     });
 
-    ipcMain.handle('bookmarks-sync', async() => {
+    ipcMain.handle('bookmarks-sync', async () => {
       await this.loadBookmarks();
     });
 
@@ -351,7 +351,11 @@ export class StorageService {
       await this.saveBookmarks();
       const removed = this.bookmarks.filter((x) => x.parent === id);
 
-      await this.remove({ scope: 'bookmarks', query: { parent: id }, multi: true });
+      await this.remove({
+        scope: 'bookmarks',
+        query: { parent: id },
+        multi: true,
+      });
 
       for (const i of removed) {
         if (i.isFolder) {
@@ -434,7 +438,7 @@ export class StorageService {
         const res = await requestURL(url);
 
         if (res.statusCode === 404) {
-          return undefined
+          return undefined;
         }
 
         let data = Buffer.from(res.data, 'binary');

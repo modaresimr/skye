@@ -40,14 +40,14 @@ interface ButtonProps {
 }
 
 export const Button = styled.div<ButtonProps>`
-  border-radius: 2px;
+  border-radius: 6px;
   position: relative;
   transition: 0.2s background-color;
   backface-visibility: hidden;
   margin: 0 1px;
 
   ${({ theme, toggled, disabled, dense }) => css`
-    border-radius: ${dense ? 2 : 4}px;
+    border-radius: ${dense ? 8 : 8}px;
     height: ${dense ? 26 : TOOLBAR_BUTTON_HEIGHT}px;
     min-width: ${dense ? 34 : TOOLBAR_BUTTON_WIDTH}px;
     pointer-events: ${disabled ? 'none' : 'inherit'};

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { Favicon, Title, Site, More } from './style';
@@ -92,10 +92,6 @@ export const Bookmark = observer(({ data }: { data: IBookmark }) => {
         theme={store.theme}
         style={{
           backgroundImage: typeof favicon === 'string' ? `url(${favicon})` : '',
-          filter:
-            store.theme['pages.lightForeground'] && customFavicon
-              ? 'invert(0%)'
-              : 'none',
         }}
       >
         {typeof favicon !== 'string' && <FontAwesomeIcon icon={favicon} />}

@@ -42,17 +42,17 @@ export const Dialog = styled.div<DialogProps>`
   padding: 16px;
   left: 50%;
   top: 50%;
-  border-radius: ${DIALOG_BORDER_RADIUS}px;
+  border-radius: 8px;
   z-index: 999;
   box-shadow: ${shadows(8)};
   transition: 0.2s opacity;
   transform: translate(-50%, -50%);
 
   ${({ visible, theme }) => css`
-    opacity: ${visible ? 1 : 0};
     pointer-events: ${visible ? 'inherit' : 'none'};
-    background-color: ${theme['dialog.backgroundColor']};
-    color: ${theme['dialog.lightForeground'] ? 'white' : 'black'};
+    background-color: ${theme.dialog.background};
+    color: ${theme.dialog.text};
+    opacity: ${visible ? 1 : 0};
   `}
 `;
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
@@ -25,7 +25,7 @@ import Tree from '../Tree';
 import { Bookmark } from '../Bookmark';
 import { ipcRenderer } from 'electron';
 import { Textfield } from '~/renderer/components/Textfield';
-import { Button } from '~/renderer/components/Button';
+import Button from '~/renderer/components/Button';
 import {
   ICON_EDIT,
   ICON_TRASH,

@@ -9,12 +9,15 @@ export const Line = styled.div`
   margin-top: 4px;
   margin-bottom: 4px;
 
-  ${({ theme }: { theme?: ITheme }) => css`
-    background-color: ${theme['dialog.separator.color']};
+  ${({ theme }) => css`
+    background-color: ${theme.dialog.seperator};
   `};
 `;
 
-export const MenuItem = styled.div`
+export const MenuItem = styled.div<{
+  arrow?: boolean;
+  disabled?: boolean;
+}>`
   height: 36px;
   align-items: center;
   display: flex;
@@ -23,7 +26,7 @@ export const MenuItem = styled.div`
   font-size: 12px;
   border-radius: 4px;
 
-  ${({ arrow }: { arrow?: boolean; disabled?: boolean }) =>
+  ${({ arrow }) =>
     arrow &&
     css`
       &:after {
@@ -35,22 +38,20 @@ export const MenuItem = styled.div`
         opacity: 0.54;
         ${centerIcon(20)};
         ${({ theme }: { theme?: ITheme }) => css`
-          filter: ${theme['dialog.lightForeground'] ? 'invert(100%)' : 'none'};
+          filter: ${'none'};
         `};
       }
     `};
 
-  ${({ disabled }: { arrow?: boolean; disabled?: boolean }) =>
+  ${({ disabled }) =>
     css`
       pointer-events: ${disabled ? 'none' : 'inherit'};
       opacity: ${disabled ? 0.54 : 1};
     `};
 
   &:hover {
-    ${({ theme }: { theme?: ITheme }) => css`
-      background-color: ${theme['dialog.lightForeground']
-        ? 'rgba(255, 255, 255, 0.06)'
-        : 'rgba(0, 0, 0, 0.03)'};
+    ${({ theme }) => css`
+      background-color: rgba(0, 0, 0, 0.03);
     `};
   }
 `;
@@ -62,10 +63,11 @@ export const MenuItemTitle = styled.div`
 export const MenuItems = styled.div`
   flex: 1;
   overflow: hidden;
-  padding: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   ${({ theme }: { theme?: ITheme }) => css`
-    background-color: ${theme['dialog.backgroundColor']};
-    color: ${theme['dialog.textColor']};
+    background-color: ${theme.dialog.background};
+    color: ${theme.dialog.text};
   `};
 `;
 
@@ -86,9 +88,6 @@ export const Icon = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 15px;
-
-  ${({ theme }: { theme?: ITheme }) => css`
-  `};
 `;
 
 export const RightControl = styled.div`

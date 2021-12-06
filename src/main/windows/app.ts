@@ -21,6 +21,7 @@ export class AppWindow {
       minWidth: 900,
       minHeight: 250,
       width: 900,
+
       height: 700,
       titleBarStyle: 'hiddenInset',
       backgroundColor: '#ffffff',
@@ -166,11 +167,13 @@ export class AppWindow {
         this.webContents.openDevTools({ mode: 'detach' });
         await this.win.loadURL('http://localhost:4444/app.html');
       } else {
-        await this.win.loadURL(join('file://', app.getAppPath(), 'build/app.html'));
+        await this.win.loadURL(
+          join('file://', app.getAppPath(), 'build/app.html'),
+        );
       }
-    })()
+    })();
 
-    this.win.on('enter-full-screen', async() => {
+    this.win.on('enter-full-screen', async () => {
       this.send('fullscreen', true);
       await this.viewManager.fixBounds();
     });

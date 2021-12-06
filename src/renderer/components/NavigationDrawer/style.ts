@@ -10,20 +10,16 @@ interface NavigationDrawerProps {
 }
 
 export const StyledNavigationDrawer = styled.div<NavigationDrawerProps>`
-  height: 100%;
+  height: 100vh;
   left: 0;
   display: flex;
   flex-flow: column;
   transition: 0.2s width;
 
   ${({ theme, dense }) => css`
-    padding: ${dense ? 0 : '0 32px'};
+    width: ${dense ? 56 : 220}px;
 
-    width: ${dense ? 56 : 320}px;
-
-    background-color: ${dense
-      ? theme['pages.navigationDrawer1.backgroundColor']
-      : theme['pages.navigationDrawer2.backgroundColor']};
+    background-color: ${theme.backgroundColor};
   `}
 `;
 
@@ -37,22 +33,19 @@ export const MenuItems = styled.div<{
   padding-bottom: 24px;
   overflow: hidden auto;
   ${noButtons('6px', 'rgba(0, 0, 0, 0.04)', 'rgba(0, 0, 0, 0.12)')};
-  ${({ global }) => css`
-    margin-left: ${global ? '0' : '-10px'};
-    margin-right: ${global ? '0' : '-10px'};
-    justify-content: ${global ? 'center' : 'left'};
-    gap: ${global ? '30px' : '0'};
-  `}
 `;
 
 export const Header = styled.div`
   display: flex;
-  margin-top: 32px;
-  align-items: center;
+  flex-direction: column;
+  p {
+    margin: 0;
+  }
 `;
 
 export const Title = styled.div`
   font-size: 24px;
+  margin-top: 10px;
   font-weight: 900;
 `;
 
@@ -71,15 +64,11 @@ export const Input = styled.input<InputProps>`
   font-size: 14px;
 
   ${({ theme }) => css`
-    color: ${theme['pages.lightForeground']
-      ? 'white'
-      : `rgba(0, 0, 0, ${transparency.text.high})`};
+    color: ${theme.dark ? 'white' : `rgba(0, 0, 0, ${transparency.text.high})`};
     border-radius: 8px;
-    background-color: ${theme[
-      'pages.navigationDrawer2.searchBar.backgroundColor'
-    ]};
+    background-color: ${theme.pages.navigationDrawer2.searchBar.background};
     &::placeholder {
-      color: ${theme['pages.lightForeground']
+      color: ${theme.dark
         ? 'rgba(255, 255, 255, 0.54)'
         : `rgba(0, 0, 0, ${transparency.text.medium})`};
     }
@@ -98,7 +87,7 @@ export const Search = styled.div<SearchProps>`
   position: relative;
 
   ${({ theme }) => css`
-    background-color: ${theme['pages.lightForeground']
+    background-color: ${theme.dark
       ? 'rgba(255, 255, 255, 0.12)'
       : 'rgba(0, 0, 0, 0.04)'};
   `}
@@ -114,7 +103,7 @@ export const Search = styled.div<SearchProps>`
     ${centerIcon(16)};
 
     ${({ theme }) => css`
-      filter: ${theme['pages.lightForeground'] ? 'invert(100%)' : 'none'};
+      filter: ${theme.dark ? 'invert(100%)' : 'none'};
     `}
   }
 `;
