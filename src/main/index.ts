@@ -1,4 +1,4 @@
-import { ipcMain, app, webContents } from 'electron';
+import { ipcMain, app, components, webContents } from 'electron';
 import { setIpcMain } from '@wexond/rpc-electron';
 setIpcMain(ipcMain);
 
@@ -16,7 +16,6 @@ export const isNightly = app.name === 'skye-nightly';
 app.name = isNightly ? 'Skye Nightly' : 'Skye';
 
 (process.env as any)['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
-
 app.commandLine.appendSwitch('--enable-transparent-visuals');
 app.commandLine.appendSwitch(
   'enable-features',
@@ -74,8 +73,11 @@ ipcMain.handle(
 
 // We need to prevent extension background pages from being garbage collected.
 const backgroundPages: Electron.WebContents[] = [];
-
-app.on('web-contents-created', (e, webContents) => {
-  if (webContents.getType() === 'backgroundPage')
-    backgroundPages.push(webContents);
+app.whenReady().then(async () => {
+  await components.whenReady();
+  console.log('components ready:', components.status());
+  app.on('web-contents-created', (e, webContents) => {
+    if (webContents.getType() === 'backgroundPage')
+      backgroundPages.push(webContents);
+  })
 });

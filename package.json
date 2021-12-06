@@ -65,7 +65,7 @@
     "concurrently": "^6.0.2",
     "copy-webpack-plugin": "^8.1.1",
     "cross-env": "7.0.3",
-    "electron": "^16.0.4",
+    "electron": "https://github.com/castlabs/electron-releases#v16.0.4+wvcus.1",
     "electron-builder": "22.14.5",
     "electron-updater": "4.6.1",
     "eslint": "^7.24.0",
@@ -120,5 +120,10 @@
     "react-image-fallback": "^8.0.0",
     "react-query": "^3.28.0",
     "react-use": "^17.3.1"
+  },
+  "build": {
+    "electronDownload": {
+      "mirror": "https://github.com/castlabs/electron-releases/releases/download/v"
+    }
   }
 }
