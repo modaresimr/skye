@@ -10,6 +10,36 @@ import path from 'path';
 
 protocol.registerSchemesAsPrivileged([
   {
+    scheme: 'ipfs',
+    privileges: {
+      bypassCSP: false,
+      secure: true,
+      standard: true,
+      supportFetchAPI: true,
+      allowServiceWorkers: true,
+      corsEnabled: true,
+      stream: true,
+    },
+  },
+]);
+
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: 'ipns',
+    privileges: {
+      bypassCSP: false,
+      secure: true,
+      standard: true,
+      supportFetchAPI: true,
+      allowServiceWorkers: true,
+      corsEnabled: true,
+      stream: true,
+    },
+  },
+]);
+
+protocol.registerSchemesAsPrivileged([
+  {
     scheme: 'skye',
     privileges: {
       bypassCSP: true,
@@ -30,18 +60,25 @@ let ipfs: IPFS.IPFS;
 })();
 
 export const registerProtocol = (session: Electron.Session) => {
+  session.protocol.registerFileProtocol(
+    ERROR_PROTOCOL,
+    (request, callback: any) => {
+      const parsed = new URL(request.url);
+
+      if (parsed.hostname === 'network-error') {
+        return callback({
+          path: join(__dirname, '../static/pages/', `network-error.html`),
+        });
+      }
+    },
+  );
+
   session.protocol.registerStreamProtocol('ipfs', async (req, cb) => {
+    console.log(req);
     const url = new URL(req.url);
     // TODO:  Check if IPFS is ready
-    // TODO: Check if IPFS file exists
-    // TODO: Prefix with index.html/.html if not found
-    // const file = ipfs.cat(url.hostname + url.pathname);
-    // console.log(file);
-    // cb({
-    // data: itToStream(file),
-    // });
 
-    let name = await ipfs.resolve('/ipfs/' + url.hostname + url.pathname, {
+    const name = await ipfs.resolve('/ipfs/' + url.hostname + url.pathname, {
       recursive: true,
     });
 
@@ -56,6 +93,15 @@ export const registerProtocol = (session: Electron.Session) => {
     }
 
     if (stats.type === 'directory') {
+      if (!req.url.endsWith('/')) {
+        return cb({
+          statusCode: 301,
+          headers: {
+            Location: req.url + '/',
+          },
+        });
+      }
+
       const index = path.join(name, 'index.html');
 
       try {
@@ -63,23 +109,22 @@ export const registerProtocol = (session: Electron.Session) => {
       } catch {
         return cb({
           statusCode: 404,
+          headers: {},
         });
       }
 
       const file = ipfs.cat(index);
       cb({
         data: itToStream(file),
+        headers: {},
       });
     } else {
-      if (name.substr(-1) != '/') {
-        name = url + '/';
-      }
-
       try {
         await ipfs.files.stat(name);
       } catch {
         return cb({
           statusCode: 404,
+          headers: {},
         });
       }
 
@@ -87,6 +132,7 @@ export const registerProtocol = (session: Electron.Session) => {
 
       cb({
         data: itToStream(file),
+        headers: {},
       });
     }
   });
@@ -95,7 +141,7 @@ export const registerProtocol = (session: Electron.Session) => {
     const url = new URL(req.url);
     // TODO:  Check if IPFS is ready
 
-    let name = await itLast(
+    const name = await itLast(
       ipfs.name.resolve('/ipns/' + url.hostname + url.pathname, {
         recursive: true,
       }),
@@ -112,6 +158,15 @@ export const registerProtocol = (session: Electron.Session) => {
     }
 
     if (stats.type === 'directory') {
+      if (!req.url.endsWith('/')) {
+        return cb({
+          statusCode: 301,
+          headers: {
+            Location: req.url + '/',
+          },
+        });
+      }
+
       const index = path.join(name, 'index.html');
 
       try {
@@ -119,6 +174,7 @@ export const registerProtocol = (session: Electron.Session) => {
       } catch {
         return cb({
           statusCode: 404,
+          headers: {},
         });
       }
 
@@ -127,37 +183,22 @@ export const registerProtocol = (session: Electron.Session) => {
         data: itToStream(file),
       });
     } else {
-      if (name.substr(-1) != '/') {
-        name = url + '/';
-      }
-
       try {
         await ipfs.files.stat(name);
       } catch {
         return cb({
           statusCode: 404,
+          headers: {},
         });
       }
 
       const file = ipfs.cat(name);
       cb({
         data: itToStream(file),
+        headers: {},
       });
     }
   });
-
-  session.protocol.registerFileProtocol(
-    ERROR_PROTOCOL,
-    (request, callback: any) => {
-      const parsed = new URL(request.url);
-
-      if (parsed.hostname === 'network-error') {
-        return callback({
-          path: join(__dirname, '../static/pages/', `network-error.html`),
-        });
-      }
-    },
-  );
 
   if (process.env.NODE_ENV !== 'development') {
     session.protocol.registerFileProtocol(
