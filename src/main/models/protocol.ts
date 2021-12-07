@@ -6,6 +6,7 @@ import * as IPFS from 'ipfs-core';
 //@ts-ignore
 import itToStream from 'it-to-stream';
 import itLast from 'it-last';
+import path from 'path';
 
 protocol.registerSchemesAsPrivileged([
   {
@@ -39,11 +40,22 @@ export const registerProtocol = (session: Electron.Session) => {
         recursive: true,
       }),
     );
-    console.log(name);
-    const file = ipfs.cat(name);
-    cb({
-      data: itToStream(file),
-    });
+
+    const stats = await ipfs.files.stat(name);
+
+    if (stats.type === 'directory') {
+      const index = path.join(name, 'index.html');
+      await ipfs.files.stat(index);
+      const file = ipfs.cat(index);
+      cb({
+        data: itToStream(file),
+      });
+    } else {
+      const file = ipfs.cat(name);
+      cb({
+        data: itToStream(file),
+      });
+    }
   });
 
   session.protocol.registerFileProtocol(
