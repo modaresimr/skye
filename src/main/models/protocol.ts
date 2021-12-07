@@ -41,7 +41,7 @@ export const registerProtocol = (session: Electron.Session) => {
     // data: itToStream(file),
     // });
 
-    const name = await ipfs.resolve('/ipfs/' + url.hostname + url.pathname, {
+    let name = await ipfs.resolve('/ipfs/' + url.hostname + url.pathname, {
       recursive: true,
     });
 
@@ -71,8 +71,20 @@ export const registerProtocol = (session: Electron.Session) => {
         data: itToStream(file),
       });
     } else {
+      if (name.substr(-1) != '/') {
+        name = url + '/';
+      }
+
+      try {
+        await ipfs.files.stat(name);
+      } catch {
+        return cb({
+          statusCode: 404,
+        });
+      }
+
       const file = ipfs.cat(name);
-      console.log(file);
+
       cb({
         data: itToStream(file),
       });
@@ -83,7 +95,7 @@ export const registerProtocol = (session: Electron.Session) => {
     const url = new URL(req.url);
     // TODO:  Check if IPFS is ready
 
-    const name = await itLast(
+    let name = await itLast(
       ipfs.name.resolve('/ipns/' + url.hostname + url.pathname, {
         recursive: true,
       }),
@@ -115,6 +127,18 @@ export const registerProtocol = (session: Electron.Session) => {
         data: itToStream(file),
       });
     } else {
+      if (name.substr(-1) != '/') {
+        name = url + '/';
+      }
+
+      try {
+        await ipfs.files.stat(name);
+      } catch {
+        return cb({
+          statusCode: 404,
+        });
+      }
+
       const file = ipfs.cat(name);
       cb({
         data: itToStream(file),
