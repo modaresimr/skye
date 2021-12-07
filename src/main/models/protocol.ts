@@ -5,6 +5,7 @@ import { URL } from 'url';
 import * as IPFS from 'ipfs-core';
 //@ts-ignore
 import itToStream from 'it-to-stream';
+import itLast from 'it-last';
 
 protocol.registerSchemesAsPrivileged([
   {
@@ -24,16 +25,22 @@ let ipfs: IPFS.IPFS;
 
 // TODO: Maybe block until IPFS is ready?
 (async () => {
-  console.log(process.versions);
   ipfs = await IPFS.create();
 })();
 
 export const registerProtocol = (session: Electron.Session) => {
-  session.protocol.registerStreamProtocol('ipfs', (req, cb) => {
+  session.protocol.registerStreamProtocol('ipfs', async (req, cb) => {
     const url = new URL(req.url);
     // TODO:  Check if IPFS is ready
     // TODO: Check if IPFS file exists
-    const file = ipfs.cat(url.hostname + url.pathname);
+    // TODO: Prefix with index.html/.html if not found
+    const name = await itLast(
+      ipfs.name.resolve(url.hostname + url.pathname, {
+        recursive: true,
+      }),
+    );
+    console.log(name);
+    const file = ipfs.cat(name);
     cb({
       data: itToStream(file),
     });
