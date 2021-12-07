@@ -1,14 +1,24 @@
 import React from 'react';
 
-import { Dropdown } from '~/renderer/components/Dropdown';
-import Switch from '~/renderer/components/Switch';
-import { Title, Row, Control, Header } from '../../style';
+import {
+  Header,
+  StyledSettingsCardGrid,
+  StyledSettingsCard,
+  StyledSettingsTitle,
+  StyledSettingsSubtitle,
+  StyledSettingsIcon,
+} from '../../style';
 import store from '../../store';
 import { onSwitchChange } from '../../utils';
 import { observer } from 'mobx-react-lite';
-import { Input } from '~/renderer/components/Input';
 import { useState } from 'react';
-import Button from '~/renderer/components/Button';
+import {
+  faBookBookmark,
+  faChartSimple,
+  faEclipse,
+  faImageLandscape,
+  faSquareExclamation,
+} from '@fortawesome/pro-solid-svg-icons';
 
 const onThemeChange = (value: string) => {
   if (value === 'auto') {
@@ -25,9 +35,16 @@ const ThemeVariant = observer(() => {
   const defaultValue = store.settings.theme;
 
   return (
-    <Row>
-      <Title>Theme variant</Title>
-      <Control>
+    <StyledSettingsCard>
+      <StyledSettingsTitle>Theme Variant</StyledSettingsTitle>
+      <StyledSettingsSubtitle>
+        {store.settings.themeAuto
+          ? 'Auto'
+          : defaultValue === 'skye-light'
+          ? 'Light'
+          : 'Dark'}
+      </StyledSettingsSubtitle>
+      {/* <Control>
         <Dropdown
           defaultValue={store.settings.themeAuto ? 'auto' : defaultValue}
           onChange={onThemeChange}
@@ -36,8 +53,9 @@ const ThemeVariant = observer(() => {
           <Dropdown.Item value="skye-light">Light</Dropdown.Item>
           <Dropdown.Item value="skye-dark">Dark</Dropdown.Item>
         </Dropdown>
-      </Control>
-    </Row>
+      </Control> */}
+      <StyledSettingsIcon icon={faEclipse} />
+    </StyledSettingsCard>
   );
 });
 
@@ -45,12 +63,17 @@ const WarnQuit = observer(() => {
   const { warnOnQuit } = store.settings;
 
   return (
-    <Row onClick={onSwitchChange('warnOnQuit')}>
-      <Title>Show warning dialog when closing multiple tabs</Title>
-      <Control>
+    <StyledSettingsCard onClick={onSwitchChange('warnOnQuit')}>
+      <StyledSettingsTitle>Warn before Quitting</StyledSettingsTitle>
+      <StyledSettingsSubtitle>
+        {warnOnQuit ? 'Enabled' : 'Disabled'}
+      </StyledSettingsSubtitle>
+      {/* <Title>Show warning dialog when closing multiple tabs</Title> */}
+      {/* <Control>
         <Switch toggled={warnOnQuit} />
-      </Control>
-    </Row>
+      </Control> */}
+      <StyledSettingsIcon icon={faSquareExclamation} />
+    </StyledSettingsCard>
   );
 });
 
@@ -58,12 +81,16 @@ const BookmarksBar = observer(() => {
   const { bookmarksBar } = store.settings;
 
   return (
-    <Row onClick={onSwitchChange('bookmarksBar')}>
-      <Title>Show bookmarks bar</Title>
-      <Control>
+    <StyledSettingsCard onClick={onSwitchChange('bookmarksBar')}>
+      <StyledSettingsTitle>Bookmarks Bar</StyledSettingsTitle>
+      <StyledSettingsSubtitle>
+        {bookmarksBar ? 'Enabled' : 'Disabled'}
+      </StyledSettingsSubtitle>
+      {/* <Control>
         <Switch toggled={bookmarksBar} />
-      </Control>
-    </Row>
+      </Control> */}
+      <StyledSettingsIcon icon={faBookBookmark} />
+    </StyledSettingsCard>
   );
 });
 
@@ -71,25 +98,13 @@ const ShowFrequentlyVisited = observer(() => {
   const { tab } = store.settings;
 
   return (
-    <Row onClick={onSwitchChange('tab', 'topSites')}>
-      <Title>Show frequently visited</Title>
-      <Control>
-        <Switch toggled={tab.topSites} />
-      </Control>
-    </Row>
-  );
-});
-
-const ShowPinnedSites = observer(() => {
-  const { tab } = store.settings;
-
-  return (
-    <Row onClick={onSwitchChange('tab', 'pinned')}>
-      <Title>Show pinned sites</Title>
-      <Control>
-        <Switch toggled={tab.pinned} />
-      </Control>
-    </Row>
+    <StyledSettingsCard onClick={onSwitchChange('tab', 'topSites')}>
+      <StyledSettingsTitle>Frequently Visited</StyledSettingsTitle>
+      <StyledSettingsSubtitle>
+        {tab.topSites ? 'Shown' : 'Not Shown'}
+      </StyledSettingsSubtitle>
+      <StyledSettingsIcon icon={faChartSimple} />
+    </StyledSettingsCard>
   );
 });
 
@@ -97,9 +112,9 @@ const NewTabImage = observer(() => {
   const { tab } = store.settings;
   const [image, setImage] = useState('');
   return (
-    <Row>
-      <Title>New tab image</Title>
-      <Control>
+    <StyledSettingsCard>
+      <StyledSettingsTitle>New Tab Background</StyledSettingsTitle>
+      {/* <Control>
         <Input
           onChange={(event) => {
             setImage(event.target.value);
@@ -120,8 +135,9 @@ const NewTabImage = observer(() => {
         }}
       >
         Save
-      </Button>
-    </Row>
+      </Button> */}
+      <StyledSettingsIcon icon={faImageLandscape} />
+    </StyledSettingsCard>
   );
 });
 
@@ -129,11 +145,16 @@ export const Appearance = observer(() => {
   return (
     <>
       <Header>Appearance</Header>
-      <BookmarksBar />
-      <WarnQuit />
-      <ThemeVariant />
-      <ShowFrequentlyVisited />
-      <NewTabImage />
+      <span>
+        Make your browser yours, customize theming and other styles here.
+      </span>
+      <StyledSettingsCardGrid>
+        <BookmarksBar />
+        <WarnQuit />
+        <ThemeVariant />
+        <ShowFrequentlyVisited />
+        <NewTabImage />
+      </StyledSettingsCardGrid>
     </>
   );
 });

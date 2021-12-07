@@ -190,4 +190,5 @@ export const skyeDark: ITheme = {
   accentColor: '#fff',
   easingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
   dialogEasing: 'cubic-bezier(0.1, 0.9, 0.2, 1)',
+  dark: true,
 };
