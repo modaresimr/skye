@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { Dialog, Title, Content, Buttons, CloseButton } from '../../Dialog';
-import { Button } from '~/renderer/components/Button';
+import Button from '~/renderer/components/Button';
 import store from '../../../store';
 
 export default observer(() => {

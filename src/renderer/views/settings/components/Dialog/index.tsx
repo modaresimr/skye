@@ -1,9 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 
-import { EASING_FUNCTION } from '~/renderer/constants';
 import { interRegular, interMedium } from '~/renderer/mixins';
-import { Button } from '~/renderer/components/Button';
+import { Button } from '~/renderer/components/Button/Button';
 import store from '../../store';
 
 const onHideClick = () => {
@@ -26,7 +25,7 @@ export const Dialog = styled.div`
   background-color: #fff;
   border-radius: 8px;
   padding-bottom: 8px;
-  transition: 0.15s transform ${EASING_FUNCTION};
+  transition: 0.15s transform ${({ theme }) => theme.easingFunction};
   ${interRegular()};
 
   ${({ visible }: { visible: boolean }) => css`

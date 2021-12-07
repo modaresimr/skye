@@ -1,5 +1,5 @@
 import { observable, computed, makeObservable } from 'mobx';
-import * as React from 'react';
+import React from 'react';
 import { ISettings, ITheme, ISearchEngine } from '~/interfaces';
 import { AutoFillStore } from './autofill';
 import { StartupTabsStore } from './startup-tabs';
@@ -67,7 +67,7 @@ export class Store {
     | 'privacy' = null;
 
   @observable
-  public selectedSection: SettingsSection = 'general';
+  public selectedSection: SettingsSection = 'appearance';
 
   @observable
   public settings: ISettings = { ...(window as any).settings };

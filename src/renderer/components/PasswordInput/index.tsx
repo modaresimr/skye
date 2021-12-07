@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Textfield, TextFieldProps } from '../Textfield';
 import { ICON_INVISIBLE, ICON_VISIBLE } from '~/renderer/constants/icons';

@@ -7,13 +7,14 @@ import { showMenuDialog } from '../dialogs/menu';
 import { IFormFillData, IBookmark } from '~/interfaces';
 import { SearchDialog } from '../dialogs/search';
 import { URL } from 'url';
-import * as bookmarkMenu from '../menus/bookmarks';
+import bookmarkMenu from '../menus/bookmarks';
 import { showFindDialog } from '../dialogs/find';
 import { showAddBookmarkDialog } from '../dialogs/add-bookmark';
 import { showExtensionDialog } from '../dialogs/extension-popup';
 import { showDownloadsDialog } from '../dialogs/downloads';
 import { showZoomDialog } from '../dialogs/zoom';
 import { showTabGroupDialog } from '../dialogs/tabgroup';
+import { showTrackingDialog } from '../dialogs/tracking';
 
 export const runMessagingService = (appWindow: AppWindow) => {
   const { id } = appWindow;
@@ -69,6 +70,10 @@ export const runMessagingService = (appWindow: AppWindow) => {
 
   ipcMain.on(`show-add-bookmark-dialog-${id}`, (e, left, top) => {
     showAddBookmarkDialog(appWindow.win, left, top);
+  });
+
+  ipcMain.on(`show-tracking-dialog-${id}`, (e, left, top) => {
+    showTrackingDialog(appWindow.win, left, top);
   });
 
   if (process.env.ENABLE_EXTENSIONS) {

@@ -17,7 +17,7 @@ interface StyledAppProps {
 export const StyledApp = styled.div<StyledAppProps>`
   display: flex;
   flex-flow: column;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.toolbar.background};
   ${({ dialogOpen }) =>
     css`
       -webkit-app-region: ${dialogOpen ? 'no-drag' : 'drag'};

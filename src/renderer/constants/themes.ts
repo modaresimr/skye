@@ -1,80 +1,194 @@
 import { ITheme } from '~/interfaces';
-import { BLUE_500 } from './colors';
 
 export const skyeLight: ITheme = {
-  'titlebar.backgroundColor': '#fff',
-  'addressbar.backgroundColor': '#F2F8FF',
-  'addressbar.textColor': '#000',
-  'toolbar.backgroundColor': '#F2F8FF',
-  'toolbar.bottomLine.backgroundColor': 'rgba(0, 0, 0, 0.12)',
-  'toolbar.lightForeground': false,
-  'toolbar.separator.color': 'rgba(0, 0, 0, 0.12)',
-  'tab.selected.textColor': '#000',
-  'tab.selected.backgroundColor': '#E5F1FF',
-  'tab.backgroundColor': '#F2F8FF',
-  'tab.textColor': `rgba(0, 0, 0, 0.7)`,
-  'control.backgroundColor': '#F2F8FF',
-  'control.hover.backgroundColor': 'rgba(0, 0, 0, 0.1)',
-  'control.valueColor': '#000',
-  'control.lightIcon': false,
-  'control.borderBottomColor': '#E5F1FF',
-  'button.backgroundColor': '#1E6FEB',
-  'switch.backgroundColor': 'rgba(0, 0, 0, 0.16)',
-  'dialog.backgroundColor': '#fff',
-  'dialog.separator.color': 'rgba(0, 0, 0, 0.12)',
-  'dialog.textColor': '#000',
-  'dialog.lightForeground': false,
-  'searchBox.backgroundColor': '#F7FBFF',
-  'searchBox.lightForeground': false,
-  'pages.backgroundColor': '#fff',
-  'pages.lightForeground': false,
-  'pages.textColor': '#000',
-  'dropdown.backgroundColor': '#fff',
-  'dropdown.backgroundColor.translucent': 'rgba(255, 255, 255, 0.7)',
-  'dropdown.separator.color': 'rgba(0, 0, 0, 0.12)',
-  'pages.navigationDrawer1.backgroundColor': '#E5F1FF',
-  'pages.navigationDrawer2.backgroundColor': '#F2F8FF',
-  'pages.navigationDrawer2.searchBar.backgroundColor': '#ffffff',
+  titlebar: {
+    background: '#fff',
+  },
+  addressbar: {
+    text: '#000',
+    background: '#F4F4F4',
+  },
+  toolbar: {
+    background: '#fff',
+    border: 'rgba(0, 0, 0, 0.12)',
+    seperator: 'rgba(0, 0, 0, 0.12)',
+  },
+  tab: {
+    selected: {
+      text: '#000',
+      background: '#F1F1F1',
+    },
+    background: '#F9F9F9',
+    text: 'rgba(0, 0, 0, 0.7)',
+  },
+  control: {
+    background: '#F4F4F4',
+    hover: {
+      background: 'rgba(0, 0, 0, 0.1)',
+    },
+    value: '#000',
+    border: '#E5F1FF',
+  },
+  button: {
+    primary: {
+      text: '#fff',
+      background: '#000',
+    },
+    secondary: {
+      text: '#fff',
+      background: '#000',
+    },
+    dark: {
+      text: '#fff',
+      background: '#000',
+    },
+    light: {
+      text: '#000',
+      background: '#fff',
+    },
+    danger: {
+      text: '#fff',
+      background: '#f86464',
+    },
+    warning: {
+      text: '#fff',
+      background: '#ff7d0e',
+    },
+    success: {
+      text: '#fff',
+      background: '#23db5f',
+    },
+  },
+  switch: {
+    background: 'rgba(0, 0, 0, 0.16)',
+  },
+  dialog: {
+    seperator: 'rgba(0,0,0,0.12)',
+    background: '#FFF',
+    text: '#000',
+  },
+  searchbox: {
+    background: '#F7FBFF',
+  },
+  pages: {
+    background: '#fff',
+    text: '#000',
+    navigationDrawer1: {
+      background: '#E5F1FF',
+    },
+    navigationDrawer2: {
+      background: '#F2F8FF',
+      searchBar: {
+        background: '#ffffff',
+      },
+    },
+  },
+  dropdown: {
+    background: {
+      color: '#fff',
+      translucent: 'rgba(255, 255, 255, 0.7)',
+    },
+    seperator: 'rgba(0, 0, 0, 0.12)',
+  },
   accentColor: '#fff',
   backgroundColor: '#fff',
+  easingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  dialogEasing: 'cubic-bezier(0.1, 0.9, 0.2, 1)',
 };
 
 export const skyeDark: ITheme = {
-  'titlebar.backgroundColor': '#070B10',
-  'addressbar.backgroundColor': '#1A1E2C',
-  'addressbar.textColor': '#fff',
-  'toolbar.backgroundColor': '#1A1E2C',
-  'toolbar.bottomLine.backgroundColor': 'rgba(255, 255, 255, 0.08)',
-  'toolbar.lightForeground': true,
-  'toolbar.separator.color': 'rgba(255, 255, 255, 0.12)',
-  'tab.selected.textColor': '#fff',
-  'tab.textColor': 'rgba(255, 255, 255, 0.54)',
-
-  'tab.selected.backgroundColor': '#1A1E2C',
-  'tab.backgroundColor': '#11151A',
-
-  'control.backgroundColor': '#11151A',
-  'control.hover.backgroundColor': 'rgba(255, 255, 255, 0.12)',
-  'control.valueColor': '#fff',
-  'control.lightIcon': true,
-  'control.borderBottomColor': '#10121a',
-  'button.backgroundColor': '#1E6FEB',
-  'switch.backgroundColor': 'rgba(255, 255, 255, 0.24)',
-  'dialog.backgroundColor': '#1A1E2C',
-  'dialog.separator.color': 'rgba(255, 255, 255, 0.12)',
-  'dialog.textColor': '#fff',
-  'dialog.lightForeground': true,
-  'searchBox.backgroundColor': '#070B10',
-  'searchBox.lightForeground': true,
-  'pages.backgroundColor': '#1A1E2C',
-  'pages.lightForeground': true,
-  'pages.textColor': '#fff',
-  'dropdown.backgroundColor': '#1A1E2C',
-  'dropdown.backgroundColor.translucent': 'rgb(60, 60, 60, 0.6)',
-  'dropdown.separator.color': 'rgba(255, 255, 255, 0.12)',
-  'pages.navigationDrawer1.backgroundColor': '#12151f',
-  'pages.navigationDrawer2.backgroundColor': '#10121a',
-  'pages.navigationDrawer2.searchBar.backgroundColor': '#000000',
-  backgroundColor: '#070B10',
-  accentColor: '#1A1E2C',
+  titlebar: {
+    background: '#070B10',
+  },
+  addressbar: {
+    text: '#fff',
+    background: '#1F1F1F',
+  },
+  toolbar: {
+    background: '#000',
+    border: 'rgba(255, 255, 255, 0.08)',
+    seperator: 'rgba(255, 255, 255, 0.12)',
+  },
+  tab: {
+    selected: {
+      text: '#fff',
+      background: '#1F1F1F',
+    },
+    background: '#121212',
+    text: 'rgba(255, 255, 255, 0.54)',
+  },
+  control: {
+    background: '#11151A',
+    hover: {
+      background: 'rgba(255, 255, 255, 0.12)',
+    },
+    value: '#fff',
+    border: '#10121a',
+  },
+  button: {
+    primary: {
+      text: '#000',
+      background: '#fff',
+    },
+    secondary: {
+      text: '#000',
+      background: '#fff',
+    },
+    dark: {
+      text: '#fff',
+      background: '#000',
+    },
+    light: {
+      text: '#000',
+      background: '#fff',
+    },
+    danger: {
+      text: '#fff',
+      background: '#f86464',
+    },
+    warning: {
+      text: '#fff',
+      background: '#ff7d0e',
+    },
+    success: {
+      text: '#fff',
+      background: '#23db5f',
+    },
+  },
+  switch: {
+    background: 'rgba(255, 255, 255, 0.24)',
+  },
+  dialog: {
+    seperator: 'rgba(255, 255, 255, 0.12)',
+    background: '#000',
+    text: '#fff',
+  },
+  searchbox: {
+    background: '#070B10',
+  },
+  pages: {
+    background: '#000',
+    text: '#fff',
+    navigationDrawer1: {
+      background: '#12151f',
+    },
+    navigationDrawer2: {
+      background: '#10121a',
+      searchBar: {
+        background: '#000000',
+      },
+    },
+  },
+  dropdown: {
+    background: {
+      color: '#1A1E2C',
+      translucent: 'rgb(60, 60, 60, 0.6)',
+    },
+    seperator: 'rgba(255, 255, 255, 0.12)',
+  },
+  backgroundColor: '#000',
+  accentColor: '#fff',
+  easingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  dialogEasing: 'cubic-bezier(0.1, 0.9, 0.2, 1)',
+  dark: true,
 };

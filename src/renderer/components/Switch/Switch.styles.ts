@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
 import { ITheme } from '~/interfaces';
-import { centerVertical } from '~/renderer/mixins';
+import { centerVertical } from '../../mixins';
 
 interface SwitchProps {
-  activated: boolean;
-  color: string;
+  toggled?: boolean;
+  color?: string;
   theme: ITheme;
   clickable: boolean;
   dense: boolean;
@@ -27,15 +27,17 @@ export const StyledSwitch = styled.div<SwitchProps>`
     z-index: 2;
   }
 
-  ${({ activated, color, theme, clickable, dense }) => css`
-    background-color: ${activated ? color : theme['switch.backgroundColor']};
+  ${({ toggled, color, theme, clickable, dense }) => css`
+    background-color: ${toggled
+      ? theme.button.primary.background
+      : theme.switch.background};
     cursor: ${clickable ? 'pointer' : 'default'};
     width: ${dense ? 32 : 42}px;
     height: ${dense ? 16 : 25}px;
 
     &:hover {
       &:after {
-        background-color: ${!activated && theme.dark
+        background-color: ${!toggled && theme.dark
           ? 'rgba(0, 0, 0, 0.06)'
           : 'rgba(255, 255, 255, 0.12)'};
       }

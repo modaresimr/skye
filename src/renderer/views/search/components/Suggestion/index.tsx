@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import * as React from 'react';
+import React from 'react';
 
 import { transparency, ICON_PAGE, ICON_SEARCH } from '~/renderer/constants';
 import {
@@ -74,7 +74,7 @@ export const Suggestion = observer(({ suggestion }: Props) => {
             backgroundImage: `url(${favicon})`,
             opacity: customFavicon ? 1 : transparency.icons.inactive,
             filter: !customFavicon
-              ? store.theme['searchBox.lightForeground']
+              ? store.theme.dark
                 ? 'invert(100%)'
                 : 'none'
               : 'none',

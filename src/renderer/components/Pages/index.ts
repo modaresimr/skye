@@ -37,6 +37,5 @@ export const Content = styled.div`
 
 export const LeftContent = styled.div`
   position: relative;
-  margin: 64px;
-  max-width: 1024px;
+  max-width: 600px;
 `;

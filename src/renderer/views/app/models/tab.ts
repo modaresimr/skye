@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
 import { observable, computed, action, makeObservable } from 'mobx';
-import * as React from 'react';
+import React from 'react';
 
 import store from '../store';
 import {

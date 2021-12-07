@@ -1,16 +1,26 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { ThemeProvider } from 'styled-components';
 
-import { StyledApp, Title, Row, Label, Buttons, Col, Select } from './style';
+import {
+  StyledApp,
+  Title,
+  Row,
+  Label,
+  Buttons,
+  Col,
+  Select,
+  Subtitle,
+} from './style';
 import store from '../../store';
 import { Input, Dropdown } from '~/renderer/components/Input';
-import { Button } from '~/renderer/components/Button';
+import { Button } from '~/renderer/components/Button/Button';
 import { ipcRenderer } from 'electron';
 import { getBookmarkTitle } from '~/renderer/views/bookmarks/utils';
 import { UIStyle } from '~/renderer/mixins/default-styles';
 
-const onDone = () => {
+const onDone = async () => {
+  await store.addBookmark();
   store.hide();
 };
 
@@ -37,6 +47,7 @@ export const App = observer(() => {
     <ThemeProvider theme={{ ...store.theme }}>
       <StyledApp visible={store.visible}>
         <UIStyle />
+        <Subtitle>{store.dialogURL}</Subtitle>
         <Title>{store.dialogTitle || 'New Bookmark'}</Title>
         <Col>
           <Label>Name</Label>
@@ -68,18 +79,14 @@ export const App = observer(() => {
           </Select>
         </Col>
         <Buttons>
-          <Button onClick={onDone}>Done</Button>
-          <Button
-            onClick={onRemove}
-            background={
-              store.theme['dialog.lightForeground'] ? '#11151A' : '#F2F8FF'
-            }
-            foreground={
-              store.theme['dialog.lightForeground'] ? 'white' : 'black'
-            }
-          >
-            Remove
-          </Button>
+          {!store.bookmark && <Button onClick={onDone}>Add Bookmark</Button>}
+          {store.bookmark ? (
+            <Button onClick={onRemove} primary>
+              Remove
+            </Button>
+          ) : (
+            <Button secondary>Cancel</Button>
+          )}
         </Buttons>
       </StyledApp>
     </ThemeProvider>

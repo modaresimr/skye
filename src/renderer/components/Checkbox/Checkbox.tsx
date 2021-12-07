@@ -1,9 +1,7 @@
+import { faCheck } from '@fortawesome/pro-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as React from 'react';
-import { ICON_CHECK } from '~/renderer/constants';
-
-import { Label } from '../RadioButton/styles';
-import { Container, StyledCheckbox, Icon } from './styles';
+import React from 'react';
+import { Container, StyledCheckbox, Icon } from './Checkbox.styles';
 
 interface Props {
   children?: any;
@@ -42,10 +40,9 @@ export default class Checkbox extends React.PureComponent<Props, State> {
           onClick={this.onClick}
         >
           <Icon toggled={toggled}>
-            <FontAwesomeIcon icon={ICON_CHECK} />
+            <FontAwesomeIcon icon={faCheck} />
           </Icon>
         </StyledCheckbox>
-        {children && <Label>{children}</Label>}
       </Container>
     );
   }

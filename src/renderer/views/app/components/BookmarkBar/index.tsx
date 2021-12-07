@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import * as React from 'react';
+import React from 'react';
 import store from '../../store';
 import { observer } from 'mobx-react-lite';
 import {

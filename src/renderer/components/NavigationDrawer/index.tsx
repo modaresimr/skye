@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import {
   StyledNavigationDrawer,
@@ -9,6 +9,8 @@ import {
   Header,
 } from './style';
 import { NavigationDrawerItem } from './NavigationDrawerItem';
+import Avatar from '../Avatar';
+import { useHash } from '../Avatar/Avatar';
 
 export const NavigationDrawer = ({
   children,
@@ -28,17 +30,15 @@ export const NavigationDrawer = ({
   dense?: boolean;
   global?: boolean;
 }) => {
+  const hash = useHash('adam');
   return (
     <StyledNavigationDrawer style={style} dense={dense}>
       {title !== '' && (
         <Header>
-          <Title>{title}</Title>
+          <Avatar hash={hash} />
+          <Title>adam</Title>
+          <p>adam@inn.com</p>
         </Header>
-      )}
-      {search && (
-        <Search>
-          <Input placeholder="Search" onInput={onSearchInput} />
-        </Search>
       )}
       <MenuItems global={global}>{children}</MenuItems>
     </StyledNavigationDrawer>

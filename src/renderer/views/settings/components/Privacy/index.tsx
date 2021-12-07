@@ -1,12 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 
-import { Header, Row, Title, Control } from '../App/style';
-import { Button } from '~/renderer/components/Button';
+import { Header, Row, Title, Control } from '../../style';
+import { Button } from '~/renderer/components/Button/Button';
 import store from '../../store';
-import { BLUE_500 } from '~/renderer/constants';
 import { observer } from 'mobx-react-lite';
 import { onSwitchChange } from '../../utils';
-import { Switch } from '~/renderer/components/Switch';
+import Switch from '~/renderer/components/Switch';
 
 const onClearBrowsingData = () => {
   store.dialogContent = 'privacy';
@@ -30,7 +29,7 @@ const DoNotTrackToggle = observer(() => {
         </a>
       </Title>
       <Control>
-        <Switch value={doNotTrack} />
+        <Switch toggled={doNotTrack} />
       </Control>
     </Row>
   );
@@ -64,11 +63,7 @@ export const Privacy = () => {
   return (
     <>
       <Header>Privacy</Header>
-      <Button
-        type="outlined"
-        foreground={BLUE_500}
-        onClick={onClearBrowsingData}
-      >
+      <Button primary onClick={onClearBrowsingData}>
         Clear browsing data
       </Button>
       <GlobalPrivacyControlToggle />

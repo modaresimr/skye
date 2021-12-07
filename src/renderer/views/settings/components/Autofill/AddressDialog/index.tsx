@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { Button } from '~/renderer/components/Button';
+import Button from '~/renderer/components/Button';
 import store from '../../../store';
 import { Textfield } from '~/renderer/components/Textfield';
 import { Dropdown } from '~/renderer/components/Dropdown';
-import { Row } from '../../App/style';
+import { Row } from '../../../style';
 import { Dialog, Title, Content, Buttons, CloseButton } from '../../Dialog';
 
 export default observer(() => {

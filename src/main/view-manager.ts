@@ -162,7 +162,6 @@ export class ViewManager extends EventEmitter {
   }
 
   public async select(id: number, focus = true) {
-    console.trace();
     const { selected } = this;
     const view = this.views.get(id);
     if (!view) {

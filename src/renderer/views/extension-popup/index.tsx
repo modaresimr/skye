@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
 import { resolve } from 'path';
-import * as remote from '@electron/remote';
+import remote from '@electron/remote';
 
 const getWebContentsId = () => ipcRenderer.sendSync('get-webcontents-id');
 
