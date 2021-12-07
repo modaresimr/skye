@@ -74,13 +74,19 @@ export const registerProtocol = (session: Electron.Session) => {
   );
 
   session.protocol.registerStreamProtocol('ipfs', async (req, cb) => {
-    console.log(req);
     const url = new URL(req.url);
     // TODO:  Check if IPFS is ready
 
-    const name = await ipfs.resolve('/ipfs/' + url.hostname + url.pathname, {
-      recursive: true,
-    });
+    let name: string;
+    try {
+      name = await ipfs.resolve('/ipfs/' + url.hostname + url.pathname, {
+        recursive: true,
+      });
+    } catch (e) {
+      return cb({
+        statusCode: 404,
+      });
+    }
 
     let stats: any;
     try {
@@ -141,11 +147,18 @@ export const registerProtocol = (session: Electron.Session) => {
     const url = new URL(req.url);
     // TODO:  Check if IPFS is ready
 
-    const name = await itLast(
-      ipfs.name.resolve('/ipns/' + url.hostname + url.pathname, {
-        recursive: true,
-      }),
-    );
+    let name: string;
+    try {
+      name = await itLast(
+        ipfs.name.resolve('/ipns/' + url.hostname + url.pathname, {
+          recursive: true,
+        }),
+      );
+    } catch (e) {
+      return cb({
+        statusCode: 404,
+      });
+    }
 
     let stats: any;
     try {
