@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { body2, centerIcon, interMedium } from '~/renderer/mixins';
 import { ITheme } from '~/interfaces';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Style = css`
   body {
@@ -30,8 +31,7 @@ export const Title = styled.div`
 `;
 
 export const Header = styled.div`
-  margin-top: 4px;
-  margin-bottom: 16px;
+  margin-bottom: 5px;
   font-size: 20px;
   font-weight: 900;
   display: flex;
@@ -41,22 +41,6 @@ export const Header = styled.div`
 interface RowProps {
   theme?: ITheme;
 }
-
-export const Row = styled.div<RowProps>`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  min-height: 70px;
-
-  cursor: pointer;
-  &:last-of-type {
-    border: none;
-  }
-
-  ${({ theme }) => css`
-    border-bottom: 1px solid ${theme.control.border};
-  `}
-`;
 
 export const Control = styled.div`
   margin-left: auto;
@@ -100,12 +84,16 @@ export const Back = styled(IconButton)`
 export const StyledSettings = styled.div`
   display: flex;
   align-items: center;
+  height: 100%;
   max-width: 1200px;
   width: 900ex;
   margin-left: auto;
   padding: 200px;
+  /* padding-top: 200px; */
+  padding-left: 200px;
+  padding-right: 200px;
   margin-right: auto;
-  margin-top: 200px;
+  margin-top: 100px;
 `;
 
 export const StyledSetDefaultButton = styled.button`
@@ -117,4 +105,42 @@ export const StyledSetDefaultButton = styled.button`
   cursor: pointer;
   padding: 0;
   text-align: left;
+`;
+
+export const StyledSettingsCard = styled.div`
+  border-radius: 12px;
+  padding: 1.8rem;
+  height: 130px;
+  background-image: linear-gradient(90deg, #000000 0%, #161616 100%);
+  border: 1px solid #2b2b2b;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px 0 rgba(15, 15, 15, 0.5);
+`;
+
+export const StyledSettingsCardGrid = styled.div`
+  display: grid;
+  margin-top: 20px;
+  grid-gap: 20px;
+  grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+`;
+
+export const StyledSettingsTitle = styled.h1`
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+`;
+
+export const StyledSettingsSubtitle = styled.h2`
+  font-weight: 400;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-bottom: 0;
+  margin-top: 5px;
+`;
+
+export const StyledSettingsIcon = styled(FontAwesomeIcon)`
+  margin-top: auto;
+  margin-right: auto;
+  font-size: 1rem;
 `;
