@@ -35,17 +35,81 @@ export const registerProtocol = (session: Electron.Session) => {
     // TODO:  Check if IPFS is ready
     // TODO: Check if IPFS file exists
     // TODO: Prefix with index.html/.html if not found
+    // const file = ipfs.cat(url.hostname + url.pathname);
+    // console.log(file);
+    // cb({
+    // data: itToStream(file),
+    // });
+
+    const name = await ipfs.resolve('/ipfs/' + url.hostname + url.pathname, {
+      recursive: true,
+    });
+
+    let stats: any;
+    try {
+      // TODO: try to append .html
+      stats = await ipfs.files.stat(name);
+    } catch {
+      return cb({
+        statusCode: 404,
+      });
+    }
+
+    if (stats.type === 'directory') {
+      const index = path.join(name, 'index.html');
+
+      try {
+        await ipfs.files.stat(index);
+      } catch {
+        return cb({
+          statusCode: 404,
+        });
+      }
+
+      const file = ipfs.cat(index);
+      cb({
+        data: itToStream(file),
+      });
+    } else {
+      const file = ipfs.cat(name);
+      console.log(file);
+      cb({
+        data: itToStream(file),
+      });
+    }
+  });
+
+  session.protocol.registerStreamProtocol('ipns', async (req, cb) => {
+    const url = new URL(req.url);
+    // TODO:  Check if IPFS is ready
+
     const name = await itLast(
-      ipfs.name.resolve(url.hostname + url.pathname, {
+      ipfs.name.resolve('/ipns/' + url.hostname + url.pathname, {
         recursive: true,
       }),
     );
 
-    const stats = await ipfs.files.stat(name);
+    let stats: any;
+    try {
+      // TODO: try to append .html
+      stats = await ipfs.files.stat(name);
+    } catch {
+      return cb({
+        statusCode: 404,
+      });
+    }
 
     if (stats.type === 'directory') {
       const index = path.join(name, 'index.html');
-      await ipfs.files.stat(index);
+
+      try {
+        await ipfs.files.stat(index);
+      } catch {
+        return cb({
+          statusCode: 404,
+        });
+      }
+
       const file = ipfs.cat(index);
       cb({
         data: itToStream(file),
