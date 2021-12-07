@@ -2,6 +2,9 @@ import { protocol } from 'electron';
 import { join } from 'path';
 import { ERROR_PROTOCOL, WEBUI_PROTOCOL } from '~/constants/files';
 import { URL } from 'url';
+import * as IPFS from 'ipfs-core';
+//@ts-ignore
+import itToStream from 'it-to-stream';
 
 protocol.registerSchemesAsPrivileged([
   {
@@ -17,7 +20,25 @@ protocol.registerSchemesAsPrivileged([
   },
 ]);
 
+let ipfs: IPFS.IPFS;
+
+// TODO: Maybe block until IPFS is ready?
+(async () => {
+  console.log(process.versions);
+  ipfs = await IPFS.create();
+})();
+
 export const registerProtocol = (session: Electron.Session) => {
+  session.protocol.registerStreamProtocol('ipfs', (req, cb) => {
+    const url = new URL(req.url);
+    // TODO:  Check if IPFS is ready
+    // TODO: Check if IPFS file exists
+    const file = ipfs.cat(url.hostname + url.pathname);
+    cb({
+      data: itToStream(file),
+    });
+  });
+
   session.protocol.registerFileProtocol(
     ERROR_PROTOCOL,
     (request, callback: any) => {

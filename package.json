@@ -124,6 +124,8 @@
     "electron-chrome-extensions": "^3.8.0",
     "fast-average-color": "^6.4.2",
     "hex-to-rgb": "^1.0.1",
+    "ipfs-core": "^0.12.2",
+    "it-to-stream": "^1.0.0",
     "jwt-decode": "^3.1.2",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",

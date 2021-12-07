@@ -12,6 +12,17 @@ let electronProcess;
 
 const mainConfig = getConfig({
   target: 'electron-main',
+  node: {
+    global: true,
+    __dirname: true,
+    __filename: true,
+  },
+  externals: {
+    bufferutil: 'bufferutil',
+    'utf-8-validate': 'utf-8-validate',
+    // 'noble-ed25519': 'noble-ed25519',
+    // noble: 'noble',
+  },
 
   devtool: dev ? 'inline-source-map' : false,
 
@@ -25,8 +36,7 @@ const mainConfig = getConfig({
     new CopyPlugin({
       patterns: [
         {
-          from:
-            'node_modules/@cliqz/adblocker-electron-preload/dist/preload.cjs.js',
+          from: 'node_modules/@cliqz/adblocker-electron-preload/dist/preload.cjs.js',
           to: 'preload.js',
           transform: async (fileContent, path) => {
             return (
