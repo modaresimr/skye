@@ -11,7 +11,7 @@ import {
   StyledAction,
   StyledPinAction,
   TabContainer,
-} from './style';
+} from './Tab.styles';
 import {
   ICON_CLOSE,
   ICON_SETTINGS,
@@ -23,12 +23,11 @@ import store from '../../store';
 import * as remote from '@electron/remote';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const removeTab = (tab: ITab) => async (
-  e: React.MouseEvent<HTMLDivElement>,
-) => {
-  e.stopPropagation();
-  await tab.close();
-};
+const removeTab =
+  (tab: ITab) => async (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    await tab.close();
+  };
 
 const toggleMuteTab = (tab: ITab) => (e: React.MouseEvent<HTMLDivElement>) => {
   e.stopPropagation();
@@ -78,13 +77,12 @@ const onClick = (tab: ITab) => async (e: React.MouseEvent<HTMLDivElement>) => {
   }
 };
 
-const onMouseUp = (tab: ITab) => async (
-  e: React.MouseEvent<HTMLDivElement>,
-) => {
-  if (e.button === 1) {
-    await tab.close();
-  }
-};
+const onMouseUp =
+  (tab: ITab) => async (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.button === 1) {
+      await tab.close();
+    }
+  };
 
 const onContextMenu = (tab: ITab) => () => {
   const menu = remote.Menu.buildFromTemplate([

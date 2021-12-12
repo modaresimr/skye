@@ -17,6 +17,6 @@ export const Separator = styled.div<SeperatorProps>`
   margin-right: 4px;
 
   ${({ theme }) => css`
-    background-color: ${theme['toolbar.separator.color']};
+    background-color: ${theme.toolbar.seperator};
   `};
 `;

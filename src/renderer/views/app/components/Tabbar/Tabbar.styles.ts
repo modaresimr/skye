@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { platform } from 'os';
 
-import { ToolbarButton } from '../TitlebarButton';
+import TitlebarButton from '../TitlebarButton';
 import {
   TOOLBAR_BUTTON_WIDTH,
   ADD_TAB_BUTTON_WIDTH,
@@ -62,7 +62,7 @@ export const TabsContainer = styled.div`
   }
 `;
 
-export const AddTab = styled(ToolbarButton)`
+export const AddTab = styled(TitlebarButton)`
   position: absolute;
   left: 0;
   min-width: ${ADD_TAB_BUTTON_WIDTH}px;

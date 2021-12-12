@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { ITabGroup } from '../../models';
-import { StyledTabGroup, Line, Placeholder } from './style';
+import { StyledTabGroup, Line, Placeholder } from './TabGroup.styles';
 import { ipcRenderer } from 'electron';
 import store from '../../store';
 

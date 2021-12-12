@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { ToolbarButton } from '../TitlebarButton';
+import TitlebarButton from '../TitlebarButton';
 import { IBrowserAction } from '../../models';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
@@ -104,7 +104,7 @@ export const BrowserAction = observer(({ data }: Props) => {
     data;
 
   return (
-    <ToolbarButton
+    <TitlebarButton
       onClick={onClick(data)}
       onMouseDown={onMouseDown(data)}
       onContextMenu={onContextMenu(data)}
@@ -120,6 +120,6 @@ export const BrowserAction = observer(({ data }: Props) => {
       badgeBackground={badgeBackgroundColor}
       badgeTextColor={badgeTextColor}
       badgeText={badgeText}
-    ></ToolbarButton>
+    ></TitlebarButton>
   );
 });

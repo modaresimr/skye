@@ -5,10 +5,15 @@ import store from '../../store';
 import { isURL } from '~/utils';
 import { callViewMethod } from '~/utils/view';
 import { ipcRenderer } from 'electron';
-import { ToolbarButton } from '../TitlebarButton';
-import { StyledAddressBar, InputContainer, Input, Text } from './style';
+import TitlebarButton from '../TitlebarButton';
+import {
+  StyledAddressBar,
+  InputContainer,
+  Input,
+  Text,
+} from './AddressBar.styles';
 import { ICON_SEARCH } from '~/renderer/constants';
-import { SiteButtons } from '../SiteButtons';
+import SiteButtons from '../SiteButtons';
 import { DEFAULT_TITLEBAR_HEIGHT } from '~/constants/design';
 import { NEWTAB_URL } from '~/constants/tabs';
 
@@ -163,7 +168,7 @@ export const AddressBar = observer(() => {
       focus={store.addressbarFocused}
       color={store.tabs.selectedTab?.color}
     >
-      <ToolbarButton
+      <TitlebarButton
         toggled={false}
         icon={ICON_SEARCH}
         size={16}

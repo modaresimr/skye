@@ -1,14 +1,14 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
-import { StyledToolbar } from './style';
-import { NavigationButtons } from '../NavigationButtons';
+import { StyledToolbar } from './Titlebar.styles';
+import NavigationButtons from '../NavigationButtons';
 
-import { AddressBar } from '../AddressBar';
-import { RightButtons } from '../RightButtons';
+import AddressBar from '../AddressBar';
+import RightButtons from '../RightButtons';
 import store from '../../store';
 import { platform } from 'os';
-import { FullscreenExitButton } from '../Toolbar/style';
+import { FullscreenExitButton } from '../Toolbar/Toolbar.styles';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
 import { WindowsControls } from 'react-windows-controls';

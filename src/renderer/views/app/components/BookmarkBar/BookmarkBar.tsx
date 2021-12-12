@@ -3,13 +3,13 @@ import React from 'react';
 import store from '../../store';
 import { observer } from 'mobx-react-lite';
 import {
-  BookmarkButton,
-  BookmarkBar as StyledBookmarkBar,
-  BookmarkSection,
-  Favicon,
-  Title,
-} from './style';
-import { ToolbarButton } from '../TitlebarButton';
+  StyledBookmarkButton,
+  StyledBookmarkBar,
+  StyledBookmarkSection,
+  StyledFavicon,
+  StyledTitle,
+} from './BookmarkBar.styles';
+import TitlebarButton from '../TitlebarButton';
 import {
   ICON_FOLDER,
   ICON_PAGE,
@@ -45,7 +45,7 @@ const Bookmark = observer(
       store.bookmarksBar.createContextMenu(event, id);
     }
     return (
-      <BookmarkButton
+      <StyledBookmarkButton
         dense
         width={buttonWidth}
         theme={store.theme}
@@ -54,7 +54,7 @@ const Bookmark = observer(
         onClick={onClick}
         onContextMenu={onContextMenu}
       >
-        <Favicon
+        <StyledFavicon
           style={{
             backgroundImage: `url(${favicon ? favicon : ''})`,
           }}
@@ -62,9 +62,9 @@ const Bookmark = observer(
           {!favicon && (
             <FontAwesomeIcon icon={isFolder ? ICON_FOLDER : ICON_PAGE} />
           )}
-        </Favicon>
-        <Title>{title}</Title>
-      </BookmarkButton>
+        </StyledFavicon>
+        <StyledTitle>{title}</StyledTitle>
+      </StyledBookmarkButton>
     );
   },
 );
@@ -74,7 +74,7 @@ export const BookmarkBar = observer(() => {
 
   return store.settings.object.bookmarksBar ? (
     <StyledBookmarkBar color={store.tabs.selectedTab?.color}>
-      <BookmarkSection>
+      <StyledBookmarkSection>
         {list.map(({ title, url, favicon, _id, isFolder }: IBookmark) => (
           <Bookmark
             key={_id}
@@ -85,9 +85,9 @@ export const BookmarkBar = observer(() => {
             isFolder={isFolder}
           />
         ))}
-      </BookmarkSection>
+      </StyledBookmarkSection>
       {store.bookmarksBar.overflowItems.length > 0 && (
-        <ToolbarButton icon={ICON_ARROW_RIGHT} onClick={showOverflow} />
+        <TitlebarButton icon={ICON_ARROW_RIGHT} onClick={showOverflow} />
       )}
     </StyledBookmarkBar>
   ) : null;

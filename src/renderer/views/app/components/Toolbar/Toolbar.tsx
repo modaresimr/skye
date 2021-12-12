@@ -3,14 +3,14 @@ import React from 'react';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
 import store from '../../store';
-import { Tabbar } from '../Tabbar';
+import Tabbar from '../Tabbar';
 import { platform } from 'os';
 import { WindowsControls } from 'react-windows-controls';
-import { StyledToolbar, FullscreenExitButton } from './style';
-import { NavigationButtons } from '../NavigationButtons';
-import { RightButtons } from '../RightButtons';
-import { Separator } from '../RightButtons/style';
-import { SiteButtons } from '../SiteButtons';
+import { StyledToolbar, FullscreenExitButton } from './Toolbar.styles';
+import NavigationButtons from '../NavigationButtons';
+import RightButtons from '../RightButtons';
+import { Separator } from '../RightButtons/RightButtons.styles';
+import SiteButtons from '../SiteButtons';
 
 const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
   if (store.addressbarFocused) {

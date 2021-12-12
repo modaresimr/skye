@@ -1,13 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-
-import { AddTab, StyledTabbar, TabsContainer } from './style';
-import { Tabs } from '../Tabs';
+import { StyledTabbar, TabsContainer } from './Tabbar.styles';
+import Tabs from '../Tabs';
 import store from '../../store';
-import { ipcRenderer } from 'electron';
-import { TabGroup } from '../TabGroup';
-import { ICON_ADD } from '~/renderer/constants/icons';
-import { AddressBarContainer } from '../AddressBarContainer';
+import TabGroup from '../TabGroup';
+import AddressBarContainer from '../AddressBarContainer';
 
 let timeout: any;
 

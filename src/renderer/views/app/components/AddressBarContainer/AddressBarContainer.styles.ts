@@ -27,7 +27,7 @@ export const StyledAddressBarContainer = styled.div<AddressBarContainerProps>`
     pointer-events: ${visible ? 'inherit' : 'none'};
     -webkit-app-region: no-drag;
     background-color: ${() => {
-      const { r, g, b } = hexToRgb(theme['titlebar.backgroundColor']);
+      const { r, g, b } = hexToRgb(theme.titlebar.background);
       return `rgba(${r}, ${g}, ${b}, 0.75)`;
     }};
   `}

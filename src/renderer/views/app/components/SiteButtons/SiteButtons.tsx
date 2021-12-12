@@ -11,7 +11,7 @@ import {
 } from '~/renderer/constants/icons';
 import { ipcRenderer } from 'electron';
 import store from '../../store';
-import { ToolbarButton } from '../TitlebarButton';
+import TitlebarButton from '../TitlebarButton';
 import * as remote from '@electron/remote';
 
 const showAddBookmarkDialog = async () => {
@@ -106,7 +106,7 @@ export const SiteButtons = observer(() => {
   return (
     <>
       {process.env.ENABLE_AUTOFILL && hasCredentials && (
-        <ToolbarButton
+        <TitlebarButton
           dense={dense}
           icon={ICON_KEY}
           size={16}
@@ -115,7 +115,7 @@ export const SiteButtons = observer(() => {
         />
       )}
       {(store.dialogsVisibility['zoom'] || store.zoomFactor !== 1) && (
-        <ToolbarButton
+        <TitlebarButton
           id="zoom"
           toggled={store.dialogsVisibility['zoom']}
           icon={store.zoomFactor >= 1 ? ICON_MAGNIFY_PLUS : ICON_MAGNIFY_MINUS}
@@ -125,7 +125,7 @@ export const SiteButtons = observer(() => {
           onMouseDown={onZoomClick}
         />
       )}
-      <ToolbarButton
+      <TitlebarButton
         id="star"
         toggled={store.dialogsVisibility['add-bookmark']}
         icon={store.isBookmarked ? ICON_STAR_FILLED : ICON_STAR}
@@ -134,7 +134,7 @@ export const SiteButtons = observer(() => {
         inhertTextColor
         onMouseDown={onStarClick}
       />
-      <ToolbarButton
+      <TitlebarButton
         id="shield"
         size={18}
         toggled={store.dialogsVisibility['tracking']}
@@ -144,7 +144,7 @@ export const SiteButtons = observer(() => {
         inhertTextColor
         dense={dense}
         onMouseDown={onShieldClick}
-      ></ToolbarButton>
+      ></TitlebarButton>
     </>
   );
 });

@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 
-import { StyledContainer } from './style';
+import { StyledContainer } from './NavigationButtons.styles';
 import store from '../../store';
-import { ToolbarButton } from '../TitlebarButton';
+import TitlebarButton from '../TitlebarButton';
 import {
   ICON_CLOSE,
   ICON_FORWARD,
@@ -38,7 +38,7 @@ export const NavigationButtons = observer(() => {
 
   return (
     <StyledContainer>
-      <ToolbarButton
+      <TitlebarButton
         disabled={!store.navigationState.canGoBack}
         size={20}
         icon={ICON_BACK}
@@ -46,14 +46,14 @@ export const NavigationButtons = observer(() => {
         style={{ marginLeft: 6 }}
         onClick={onBackClick}
       />
-      <ToolbarButton
+      <TitlebarButton
         disabled={!store.navigationState.canGoForward}
         size={20}
         inhertTextColor
         icon={ICON_FORWARD}
         onClick={onForwardClick}
       />
-      <ToolbarButton
+      <TitlebarButton
         size={20}
         inhertTextColor
         icon={loading ? ICON_CLOSE : ICON_REFRESH}

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Button } from '../TitlebarButton/style';
+import { Button } from '../TitlebarButton/TitlebarButton.styles';
 import { ITheme } from '~/interfaces';
 import { contrast } from '~/utils/colors';
 
@@ -8,7 +8,7 @@ interface BookmarkBarProps {
   color?: string;
 }
 
-export const BookmarkBar = styled.div<BookmarkBarProps>`
+export const StyledBookmarkBar = styled.div<BookmarkBarProps>`
   position: relative;
   z-index: 100;
   display: flex;
@@ -61,7 +61,7 @@ export const BookmarkBar = styled.div<BookmarkBarProps>`
   transition-timing-function: ease-out;
 `;
 
-export const BookmarkSection = styled.div`
+export const StyledBookmarkSection = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -70,7 +70,7 @@ export const BookmarkSection = styled.div`
   overflow: hidden;
 `;
 
-export const BookmarkButton = styled(Button)`
+export const StyledBookmarkButton = styled(Button)`
   max-width: ${({ width }: { width: number }) => width}px;
   width: auto;
   padding: 4px;
@@ -81,7 +81,7 @@ export const BookmarkButton = styled(Button)`
   align-items: center;
 `;
 
-export const Title = styled.div`
+export const StyledTitle = styled.div`
   min-width: 0;
   max-width: 125px;
   white-space: nowrap;
@@ -90,7 +90,7 @@ export const Title = styled.div`
   padding: 0 4px 0 0;
 `;
 
-export const Favicon = styled.div`
+export const StyledFavicon = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

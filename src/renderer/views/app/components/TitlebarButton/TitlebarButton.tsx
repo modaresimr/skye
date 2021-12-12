@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 
 import { transparency } from '~/renderer/constants/transparency';
-import { Button, Icon, Badge, PreloaderBg } from './style';
+import { Button, Icon, Badge, PreloaderBg } from './TitlebarButton.styles';
 import { Preloader } from '~/renderer/components/Preloader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -36,7 +36,7 @@ interface Props {
   id?: string;
 }
 
-export const ToolbarButton = observer(
+export const TitlebarButton = observer(
   ({
     icon,
     onClick,
@@ -125,7 +125,7 @@ export const ToolbarButton = observer(
   },
 );
 
-(ToolbarButton as any).defaultProps = {
+(TitlebarButton as any).defaultProps = {
   size: 20,
   opacity: transparency.icons.active,
   autoInvert: true,

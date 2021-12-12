@@ -2,8 +2,8 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
-import { ToolbarButton } from '../TitlebarButton';
-import { BrowserAction } from '../BrowserAction';
+import TitlebarButton from '../TitlebarButton';
+import BrowserAction from '../BrowserAction';
 import {
   ICON_ADD,
   ICON_SHIELD,
@@ -11,10 +11,10 @@ import {
   ICON_INCOGNITO,
   ICON_MORE,
 } from '~/renderer/constants/icons';
-import { Buttons, Separator } from './style';
+import { Buttons, Separator } from './RightButtons.styles';
 import store from '../../store';
-import { SiteButtons } from '../SiteButtons';
-import { AddTab } from '../Tabbar/style';
+import SiteButtons from '../SiteButtons';
+import { AddTab } from '../Tabbar/Tabbar.styles';
 
 let menuRef: HTMLDivElement = null;
 
@@ -79,7 +79,7 @@ export const RightButtons = observer(() => {
       )}
 
       {store.downloadsButtonVisible && (
-        <ToolbarButton
+        <TitlebarButton
           size={18}
           badge={store.downloadNotification}
           onMouseDown={onDownloadsClick}
@@ -90,10 +90,10 @@ export const RightButtons = observer(() => {
           inhertTextColor
           preloader
           value={store.downloadProgress}
-        ></ToolbarButton>
+        ></TitlebarButton>
       )}
-      {store.isIncognito && <ToolbarButton icon={ICON_INCOGNITO} size={18} />}
-      <ToolbarButton
+      {store.isIncognito && <TitlebarButton icon={ICON_INCOGNITO} size={18} />}
+      <TitlebarButton
         divRef={(r: any) => (menuRef = r)}
         toggled={store.dialogsVisibility['menu']}
         badge={store.updateAvailable}
@@ -104,7 +104,7 @@ export const RightButtons = observer(() => {
         icon={ICON_MORE}
         size={18}
       />
-      <ToolbarButton
+      <TitlebarButton
         badgeRight={10}
         onMouseDown={onAddTabClick}
         inhertTextColor
