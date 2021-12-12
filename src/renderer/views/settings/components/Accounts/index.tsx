@@ -1,43 +1,45 @@
 import React from 'react';
 
-import { Title, Row, Control, Header, SecondaryText } from '../../style';
+import { Title, Control, Header, SecondaryText } from '../../style';
 import store from '../../store';
 import { getWebUIURL } from '~/common/webui';
 import { observer } from 'mobx-react-lite';
 import Button from '~/renderer/components/Button';
+import axios from 'axios';
+import { useQuery } from 'react-query';
+import { applicationID, idApi, idWeb } from '~/constants';
 
 export const Accounts = observer(() => {
   const { token } = store.settings;
-  const [username, setUsername] = React.useState('Loading...');
 
-  React.useEffect(() => {
-    if (!token) return;
-
-    fetch(
-      'https://api.id.innatical.com/users.me?' +
-        new URLSearchParams({ input: JSON.stringify({ token }) }),
-    )
-      .then((res) => res.json())
-      .then(
-        (json: {
-          result: {
-            data: { ok: true; user: { username: string } } | { ok: false };
-          };
-        }) =>
-          json.result.data.ok
-            ? setUsername(json.result.data.user.username)
-            : undefined,
-      );
-  }, [token]);
+  const { data: user } = useQuery(
+    ['currentUser'],
+    async () =>
+      (
+        await axios.get<{
+          id: string;
+          email: string;
+          username: string;
+          name: string;
+          avatar?: string;
+          createdAt: Date;
+          updatedAt: Date;
+        }>(`${idApi}/apps/users/me`, {
+          headers: {
+            authorization: token,
+          },
+        })
+      ).data,
+  );
 
   return (
     <>
       <Header>Account</Header>
-      <Row>
+      <div>
         <div>
           <Title>{token ? 'Logged In' : 'Logged Out'}</Title>
           <SecondaryText>
-            {token ? username : 'No user logged In'}
+            {token ? user?.username : 'No user logged In'}
           </SecondaryText>
         </div>
 
@@ -54,7 +56,7 @@ export const Accounts = observer(() => {
           ) : (
             <Button
               onClick={() =>
-                (window.location.href = `https://id.innatical.com/connect?id=ea27b1df-ff32-4252-996f-65ceda9f0953&callback=${getWebUIURL(
+                (window.location.href = `${idWeb}/connect?id=${applicationID}&callback=${getWebUIURL(
                   'settings',
                 )}`)
               }
@@ -63,7 +65,7 @@ export const Accounts = observer(() => {
             </Button>
           )}
         </Control>
-      </Row>
+      </div>
     </>
   );
 });

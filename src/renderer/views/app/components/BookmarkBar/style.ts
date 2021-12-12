@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Button } from '../ToolbarButton/style';
+import { Button } from '../TitlebarButton/style';
 import { ITheme } from '~/interfaces';
 import { contrast } from '~/utils/colors';
 
@@ -20,16 +20,16 @@ export const BookmarkBar = styled.div<BookmarkBarProps>`
   width: 100%;
   min-height: 32px;
   padding: 0 4px 2px 8px;
-  ${({theme, color}) => css`
+  ${({ theme, color }) => css`
     margin-top: ${theme.isCompact ? 0 : -1}px;
-    background-color: ${!!color ? color : theme['titlebar.backgroundColor']};
+    background-color: ${!!color ? color : theme.titlebar.background};
   `};
 
-  ${({color, theme}) => {
+  ${({ color, theme }) => {
     if (color && color !== '') {
       const cc = contrast(color);
 
-      const isDarkMode = theme['toolbar.lightForeground'];
+      const isDarkMode = theme.toolbar.background;
       switch (cc) {
         case 'dark':
           if (isDarkMode) {
@@ -53,7 +53,7 @@ export const BookmarkBar = styled.div<BookmarkBarProps>`
       }
     }
     return css`
-      color: ${theme['addressbar.textColor']};
+      color: ${theme.addressbar.text};
     `;
   }}
 

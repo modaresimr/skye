@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Header, Row, Title, Control } from '../../style';
+import { Header, Title, Control, StyledSettingsCardGrid } from '../../style';
 import { Button } from '~/renderer/components/Button/Button';
 import store from '../../store';
 import { observer } from 'mobx-react-lite';
 import { onSwitchChange } from '../../utils';
 import Switch from '~/renderer/components/Switch';
+import Card from '~/renderer/components/Card';
+import { faTrash, faUserShield } from '@fortawesome/pro-solid-svg-icons';
 
 const onClearBrowsingData = () => {
   store.dialogContent = 'privacy';
@@ -15,7 +17,7 @@ const DoNotTrackToggle = observer(() => {
   const { doNotTrack } = store.settings;
 
   return (
-    <Row onClick={onSwitchChange('doNotTrack')}>
+    <div onClick={onSwitchChange('doNotTrack')}>
       <Title>
         Send a &quot;Do Not Track&quot; request with your browsing traffic. Not
         recommended,{' '}
@@ -31,7 +33,7 @@ const DoNotTrackToggle = observer(() => {
       <Control>
         <Switch toggled={doNotTrack} />
       </Control>
-    </Row>
+    </div>
   );
 });
 
@@ -39,7 +41,7 @@ const GlobalPrivacyControlToggle = observer(() => {
   const { globalPrivacyControl } = store.settings;
 
   return (
-    <Row onClick={onSwitchChange('globalPrivacyControl')}>
+    <div onClick={onSwitchChange('globalPrivacyControl')}>
       <Title>
         Send a{' '}
         <a
@@ -53,21 +55,30 @@ const GlobalPrivacyControlToggle = observer(() => {
         request with your browsing traffic
       </Title>
       <Control>
-        <Switch value={globalPrivacyControl} />
+        <Switch toggled={globalPrivacyControl} />
       </Control>
-    </Row>
+    </div>
   );
 });
 
 export const Privacy = () => {
+  const { globalPrivacyControl, doNotTrack } = store.settings;
   return (
     <>
       <Header>Privacy</Header>
-      <Button primary onClick={onClearBrowsingData}>
-        Clear browsing data
-      </Button>
-      <GlobalPrivacyControlToggle />
-      <DoNotTrackToggle />
+      <StyledSettingsCardGrid>
+        <Card
+          title={'Global Privacy Control'}
+          subtitle={globalPrivacyControl ? 'Enabled' : 'Disabled'}
+          icon={faUserShield}
+        />
+        <Card
+          title={'Do Not Track'}
+          subtitle={`Deprecated | ${doNotTrack ? 'Enabled' : 'Disabled'}`}
+          icon={faUserShield}
+        />
+        <Card title={'Clear Browsing Data'} icon={faTrash} />
+      </StyledSettingsCardGrid>
     </>
   );
 };

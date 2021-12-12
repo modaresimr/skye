@@ -56,10 +56,10 @@ export const Thumb = styled.div<ThumbProps>`
   transition: 0.15s left;
   ${centerVertical()};
 
-  ${({ activated, dense }) => css`
+  ${({ activated, dense, theme }) => css`
     width: ${dense ? 12 : 14}px;
     height: ${dense ? 12 : 14}px;
     left: ${activated ? (dense ? 18 : 22) : 5}px;
-    background-color: #fff;
+    background-color: ${theme.backgroundColor};
   `}
 `;

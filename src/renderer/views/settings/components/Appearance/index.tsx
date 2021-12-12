@@ -1,15 +1,7 @@
 import React from 'react';
 
-import {
-  Header,
-  StyledSettingsCardGrid,
-  StyledSettingsCard,
-  StyledSettingsTitle,
-  StyledSettingsSubtitle,
-  StyledSettingsIcon,
-} from '../../style';
+import { Header, StyledSettingsCardGrid, Control } from '../../style';
 import store from '../../store';
-import { onSwitchChange } from '../../utils';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import {
@@ -19,6 +11,12 @@ import {
   faImageLandscape,
   faSquareExclamation,
 } from '@fortawesome/pro-solid-svg-icons';
+import Card from '~/renderer/components/Card';
+import Switch from '~/renderer/components/Switch';
+import { Dialog } from '@headlessui/react';
+import { Dropdown } from '~/renderer/components/Dropdown';
+import Button from '~/renderer/components/Button';
+import { Input } from '~/renderer/components/Input';
 
 const onThemeChange = (value: string) => {
   if (value === 'auto') {
@@ -35,16 +33,22 @@ const ThemeVariant = observer(() => {
   const defaultValue = store.settings.theme;
 
   return (
-    <StyledSettingsCard>
-      <StyledSettingsTitle>Theme Variant</StyledSettingsTitle>
-      <StyledSettingsSubtitle>
-        {store.settings.themeAuto
+    <Card
+      title="Theme Variant"
+      subtitle={
+        store.settings.themeAuto
           ? 'Auto'
           : defaultValue === 'skye-light'
           ? 'Light'
-          : 'Dark'}
-      </StyledSettingsSubtitle>
-      {/* <Control>
+          : 'Dark'
+      }
+      icon={faEclipse}
+    >
+      <Dialog.Title>Theme Variant</Dialog.Title>
+      <Dialog.Description>
+        The variant of the theme of the browser
+      </Dialog.Description>
+      <Control>
         <Dropdown
           defaultValue={store.settings.themeAuto ? 'auto' : defaultValue}
           onChange={onThemeChange}
@@ -53,9 +57,8 @@ const ThemeVariant = observer(() => {
           <Dropdown.Item value="skye-light">Light</Dropdown.Item>
           <Dropdown.Item value="skye-dark">Dark</Dropdown.Item>
         </Dropdown>
-      </Control> */}
-      <StyledSettingsIcon icon={faEclipse} />
-    </StyledSettingsCard>
+      </Control>
+    </Card>
   );
 });
 
@@ -63,17 +66,25 @@ const WarnQuit = observer(() => {
   const { warnOnQuit } = store.settings;
 
   return (
-    <StyledSettingsCard onClick={onSwitchChange('warnOnQuit')}>
-      <StyledSettingsTitle>Warn before Quitting</StyledSettingsTitle>
-      <StyledSettingsSubtitle>
-        {warnOnQuit ? 'Enabled' : 'Disabled'}
-      </StyledSettingsSubtitle>
-      {/* <Title>Show warning dialog when closing multiple tabs</Title> */}
-      {/* <Control>
-        <Switch toggled={warnOnQuit} />
-      </Control> */}
-      <StyledSettingsIcon icon={faSquareExclamation} />
-    </StyledSettingsCard>
+    <Card
+      title={'Warn before Quit'}
+      subtitle={warnOnQuit ? 'Enabled' : 'Disabled'}
+      icon={faSquareExclamation}
+    >
+      <Dialog.Title>Warn before Quit</Dialog.Title>
+      <Dialog.Description>
+        Show warning dialog when closing multiple tabs
+      </Dialog.Description>
+      <Control>
+        <Switch
+          toggled={warnOnQuit}
+          onToggle={() => {
+            store.settings.warnOnQuit = !warnOnQuit;
+            store.save();
+          }}
+        />
+      </Control>
+    </Card>
   );
 });
 
@@ -81,16 +92,25 @@ const BookmarksBar = observer(() => {
   const { bookmarksBar } = store.settings;
 
   return (
-    <StyledSettingsCard onClick={onSwitchChange('bookmarksBar')}>
-      <StyledSettingsTitle>Bookmarks Bar</StyledSettingsTitle>
-      <StyledSettingsSubtitle>
-        {bookmarksBar ? 'Enabled' : 'Disabled'}
-      </StyledSettingsSubtitle>
-      {/* <Control>
-        <Switch toggled={bookmarksBar} />
-      </Control> */}
-      <StyledSettingsIcon icon={faBookBookmark} />
-    </StyledSettingsCard>
+    <Card
+      title={'Bookmarks Bar'}
+      subtitle={bookmarksBar ? 'Enabled' : 'Disabled'}
+      icon={faBookBookmark}
+    >
+      <Dialog.Title>Bookmarks Bar</Dialog.Title>
+      <Dialog.Description>
+        Show a bar with your bookmarks under tabs
+      </Dialog.Description>
+      <Control>
+        <Switch
+          toggled={bookmarksBar}
+          onToggle={() => {
+            store.settings.bookmarksBar = !bookmarksBar;
+            store.save();
+          }}
+        />
+      </Control>
+    </Card>
   );
 });
 
@@ -98,13 +118,25 @@ const ShowFrequentlyVisited = observer(() => {
   const { tab } = store.settings;
 
   return (
-    <StyledSettingsCard onClick={onSwitchChange('tab', 'topSites')}>
-      <StyledSettingsTitle>Frequently Visited</StyledSettingsTitle>
-      <StyledSettingsSubtitle>
-        {tab.topSites ? 'Shown' : 'Not Shown'}
-      </StyledSettingsSubtitle>
-      <StyledSettingsIcon icon={faChartSimple} />
-    </StyledSettingsCard>
+    <Card
+      title="Frequently Visited"
+      subtitle={tab.topSites ? 'Shown' : 'Not Shown'}
+      icon={faChartSimple}
+    >
+      <Dialog.Title>Frequently Visited</Dialog.Title>
+      <Dialog.Description>
+        Show your frequently visited pages in new tab
+      </Dialog.Description>
+      <Control>
+        <Switch
+          toggled={tab.topSites}
+          onToggle={() => {
+            store.settings.tab.topSites = !tab.topSites;
+            store.save();
+          }}
+        />
+      </Control>
+    </Card>
   );
 });
 
@@ -112,9 +144,12 @@ const NewTabImage = observer(() => {
   const { tab } = store.settings;
   const [image, setImage] = useState('');
   return (
-    <StyledSettingsCard>
-      <StyledSettingsTitle>New Tab Background</StyledSettingsTitle>
-      {/* <Control>
+    <Card title="New Tab Background" icon={faImageLandscape}>
+      <Dialog.Title>New Tab Background</Dialog.Title>
+      <Dialog.Description>
+        The image to show as the background of the new tab
+      </Dialog.Description>
+      <Control>
         <Input
           onChange={(event) => {
             setImage(event.target.value);
@@ -127,6 +162,7 @@ const NewTabImage = observer(() => {
           value={tab.image}
         />
       </Control>
+      <br />
       <Button
         primary
         onClick={() => {
@@ -135,9 +171,8 @@ const NewTabImage = observer(() => {
         }}
       >
         Save
-      </Button> */}
-      <StyledSettingsIcon icon={faImageLandscape} />
-    </StyledSettingsCard>
+      </Button>
+    </Card>
   );
 });
 

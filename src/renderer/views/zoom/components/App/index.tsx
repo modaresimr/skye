@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { ThemeProvider } from 'styled-components';
 
 import { StyledApp, Label, Buttons, Spacer } from './style';
-import { ToolbarButton } from '../../../app/components/ToolbarButton';
+import { ToolbarButton } from '../../../app/components/TitlebarButton';
 import store from '../../store';
 import Button from '~/renderer/components/Button';
 import { ipcRenderer } from 'electron';

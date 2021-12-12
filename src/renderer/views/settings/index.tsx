@@ -37,8 +37,14 @@ import { Dialog } from './components/Dialog';
 import { Downloads } from './components/Downloads';
 import { Privacy } from './components/Privacy';
 import { OnStartup } from './components/Startup';
-import { StyledSetDefaultButton, StyledSettings } from './style';
-
+import {
+  StyledSetDefaultButton,
+  StyledSettings,
+  StyledSettingsContent,
+} from './style';
+import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
+import { useMedia } from 'react-use';
+const queryClient = new QueryClient();
 const MenuItem = observer(
   ({
     section,
@@ -129,6 +135,7 @@ const App = observer(() => {
   } else if (store.dialogContent === 'add-search-engine') {
     dialogTitle = 'Add search engine';
   }
+  const darkMode = useMedia('(prefers-color-scheme: dark)');
 
   useEffect(() => {
     (async () => {
@@ -146,105 +153,106 @@ const App = observer(() => {
   }, []);
 
   return (
-    <ThemeProvider theme={{ ...store.theme }}>
-      <Container
-        onMouseDown={(e) => (store.dialogVisible = false)}
-        darken={store.dialogVisible}
-      >
-        <WebUIStyle />
-        <ContextMenu
-          tabIndex={1}
-          ref={store.menuRef}
-          onBlur={onBlur}
-          style={{
-            top: store.menuInfo.top,
-            left: store.menuInfo.left,
-          }}
-          visible={store.menuVisible}
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={{ ...store.theme, dark: darkMode }}>
+        <Container
+          onMouseDown={(e) => (store.dialogVisible = false)}
+          darken={store.dialogVisible}
         >
-          {store.editedSearchEngine &&
-            store.editedSearchEngine.keyword !== store.searchEngine.keyword && (
-              <>
-                <ContextMenuItem onClick={onMakeDefaultClick}>
-                  Make default
-                </ContextMenuItem>
-                <ContextMenuItem onClick={onRemoveClick}>
-                  <FontAwesomeIcon icon={ICON_TRASH} />
-                  Remove
-                </ContextMenuItem>
-              </>
-            )}
-          {store.editedSearchEngine && (
-            <ContextMenuItem onClick={onEditClick}>
-              <FontAwesomeIcon icon={ICON_EDIT} />
-              Edit
-            </ContextMenuItem>
-          )}
-        </ContextMenu>
-        <Dialog
-          onMouseDown={(e) => e.stopPropagation()}
-          visible={store.dialogVisible}
-          ref={store.dialogRef}
-          style={{ width: 350 }}
-        >
-          <DialogTitle>{dialogTitle}</DialogTitle>
-          <Textfield
-            style={{ width: '100%' }}
-            ref={store.searchEngineInputRef}
-            label="Search engine"
-          ></Textfield>
-
-          <Textfield
+          <WebUIStyle />
+          <ContextMenu
+            tabIndex={1}
+            ref={store.menuRef}
+            onBlur={onBlur}
             style={{
-              width: '100%',
-              marginTop: 16,
+              top: store.menuInfo.top,
+              left: store.menuInfo.left,
             }}
-            ref={store.searchEngineKeywordInputRef}
-            label="Keyword"
-          ></Textfield>
-
-          <Textfield
-            style={{
-              width: '100%',
-              marginTop: 16,
-            }}
-            ref={store.searchEngineUrlInputRef}
-            label="URL with %s in place of query"
-          ></Textfield>
-
-          <DialogButtons>
-            <Button onClick={() => (store.dialogVisible = false)}>
-              Cancel
-            </Button>
-            <Button onClick={onSaveClick} style={{ marginLeft: 8 }}>
-              Save
-            </Button>
-          </DialogButtons>
-          <div style={{ clear: 'both' }}></div>
-        </Dialog>
-        <StyledSettings>
-          <NavigationDrawer title="Settings">
-            <MenuItem section="appearance">Appearance</MenuItem>
-            {process.env.ENABLE_AUTOFILL && (
-              <MenuItem section="autofill">Autofill</MenuItem>
+            visible={store.menuVisible}
+          >
+            {store.editedSearchEngine &&
+              store.editedSearchEngine.keyword !==
+                store.searchEngine.keyword && (
+                <>
+                  <ContextMenuItem onClick={onMakeDefaultClick}>
+                    Make default
+                  </ContextMenuItem>
+                  <ContextMenuItem onClick={onRemoveClick}>
+                    <FontAwesomeIcon icon={ICON_TRASH} />
+                    Remove
+                  </ContextMenuItem>
+                </>
+              )}
+            {store.editedSearchEngine && (
+              <ContextMenuItem onClick={onEditClick}>
+                <FontAwesomeIcon icon={ICON_EDIT} />
+                Edit
+              </ContextMenuItem>
             )}
-            <MenuItem section="startup">On startup</MenuItem>
-            <MenuItem section="address-bar" subSections={['search-engines']}>
-              Address bar
-            </MenuItem>
-            <MenuItem section="downloads">Downloads</MenuItem>
-            <MenuItem section="privacy">Privacy</MenuItem>
-            <MenuItem section="account">Innatical ID</MenuItem>
-            <StyledSetDefaultButton
-              onClick={async () => {
-                await ipcRenderer.invoke('set-default-browser');
+          </ContextMenu>
+          <Dialog
+            onMouseDown={(e) => e.stopPropagation()}
+            visible={store.dialogVisible}
+            ref={store.dialogRef}
+            style={{ width: 350 }}
+          >
+            <DialogTitle>{dialogTitle}</DialogTitle>
+            <Textfield
+              style={{ width: '100%' }}
+              ref={store.searchEngineInputRef}
+              label="Search engine"
+            ></Textfield>
+
+            <Textfield
+              style={{
+                width: '100%',
+                marginTop: 16,
               }}
-            >
-              Set as default browser
-            </StyledSetDefaultButton>
-          </NavigationDrawer>
-          <Content>
-            <LeftContent>
+              ref={store.searchEngineKeywordInputRef}
+              label="Keyword"
+            ></Textfield>
+
+            <Textfield
+              style={{
+                width: '100%',
+                marginTop: 16,
+              }}
+              ref={store.searchEngineUrlInputRef}
+              label="URL with %s in place of query"
+            ></Textfield>
+
+            <DialogButtons>
+              <Button onClick={() => (store.dialogVisible = false)}>
+                Cancel
+              </Button>
+              <Button onClick={onSaveClick} style={{ marginLeft: 8 }}>
+                Save
+              </Button>
+            </DialogButtons>
+            <div style={{ clear: 'both' }}></div>
+          </Dialog>
+          <StyledSettings>
+            <NavigationDrawer title="Settings">
+              <MenuItem section="appearance">Appearance</MenuItem>
+              {process.env.ENABLE_AUTOFILL && (
+                <MenuItem section="autofill">Autofill</MenuItem>
+              )}
+              <MenuItem section="startup">On Startup</MenuItem>
+              <MenuItem section="address-bar" subSections={['search-engines']}>
+                Address Bar
+              </MenuItem>
+              <MenuItem section="downloads">Downloads</MenuItem>
+              <MenuItem section="privacy">Privacy</MenuItem>
+              <MenuItem section="account">Innatical ID</MenuItem>
+              <StyledSetDefaultButton
+                onClick={async () => {
+                  await ipcRenderer.invoke('set-default-browser');
+                }}
+              >
+                Set as default browser
+              </StyledSetDefaultButton>
+            </NavigationDrawer>
+            <StyledSettingsContent>
               {selectedSection === 'appearance' && <Appearance />}
               {selectedSection === 'autofill' &&
                 process.env.ENABLE_AUTOFILL && <Autofill />}
@@ -254,11 +262,11 @@ const App = observer(() => {
               {selectedSection === 'privacy' && <Privacy />}
               {selectedSection === 'downloads' && <Downloads />}
               {selectedSection === 'account' && <Accounts />}
-            </LeftContent>
-          </Content>
-        </StyledSettings>
-      </Container>
-    </ThemeProvider>
+            </StyledSettingsContent>
+          </StyledSettings>
+        </Container>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 });
 

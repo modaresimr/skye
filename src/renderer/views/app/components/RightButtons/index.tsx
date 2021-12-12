@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '../TitlebarButton';
 import { BrowserAction } from '../BrowserAction';
 import {
   ICON_ADD,

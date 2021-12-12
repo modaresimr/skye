@@ -9,7 +9,7 @@ import {
   Favicon,
   Title,
 } from './style';
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '../TitlebarButton';
 import {
   ICON_FOLDER,
   ICON_PAGE,

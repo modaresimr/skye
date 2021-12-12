@@ -24,7 +24,6 @@ export class AppWindow {
 
       height: 700,
       titleBarStyle: 'hiddenInset',
-      backgroundColor: '#ffffff',
       webPreferences: {
         plugins: true,
         // TODO: enable sandbox, contextIsolation and disable nodeIntegration to improve security
@@ -153,9 +152,10 @@ export class AppWindow {
         Application.instance.sessions.unloadIncognitoExtensions();
       }
 
-      Application.instance.windows.list = Application.instance.windows.list.filter(
-        (x) => x.win.id !== this.win.id,
-      );
+      Application.instance.windows.list =
+        Application.instance.windows.list.filter(
+          (x) => x.win.id !== this.win.id,
+        );
 
       Application.instance.windows.current = undefined;
     });

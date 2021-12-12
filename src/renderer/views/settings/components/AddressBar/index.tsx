@@ -2,7 +2,13 @@ import React from 'react';
 
 import { Dropdown } from '~/renderer/components/Dropdown';
 import Switch from '~/renderer/components/Switch';
-import { Title, Control, Header, Back, Row } from '../../style';
+import {
+  Title,
+  Control,
+  Header,
+  Back,
+  StyledSettingsCardGrid,
+} from '../../style';
 import store from '../../store';
 import { onSwitchChange } from '../../utils';
 import { observer } from 'mobx-react-lite';
@@ -16,17 +22,19 @@ import {
 
 import { ISearchEngine } from '~/interfaces';
 import Button from '~/renderer/components/Button';
+import Card from '~/renderer/components/Card';
+import { faQuestionCircle, faSearch } from '@fortawesome/pro-solid-svg-icons';
 
 const SuggestionsToggle = observer(() => {
   const { suggestions } = store.settings;
 
   return (
-    <Row onClick={onSwitchChange('suggestions')}>
+    <div onClick={onSwitchChange('suggestions')}>
       <Title>Show search and site suggestions</Title>
       <Control>
         <Switch toggled={suggestions} />
       </Control>
-    </Row>
+    </div>
   );
 });
 
@@ -42,7 +50,7 @@ const SearchEngineRow = observer(() => {
   const se = store.searchEngine;
 
   return (
-    <Row>
+    <div>
       <Title>Search engine used in the address bar</Title>
       <Control>
         <Dropdown defaultValue={se.name} onChange={onSearchEngineChange}>
@@ -53,7 +61,7 @@ const SearchEngineRow = observer(() => {
           ))}
         </Dropdown>
       </Control>
-    </Row>
+    </div>
   );
 });
 
@@ -61,16 +69,15 @@ const onBackClick = () => {
   store.selectedSection = 'address-bar';
 };
 
-const onMoreClick = (data: ISearchEngine) => (
-  e: React.MouseEvent<HTMLDivElement>,
-) => {
-  const { top, left } = e.currentTarget.getBoundingClientRect();
-  store.menuInfo.left = left - store.menuRef.current.offsetWidth;
-  store.menuInfo.top = top;
+const onMoreClick =
+  (data: ISearchEngine) => (e: React.MouseEvent<HTMLDivElement>) => {
+    const { top, left } = e.currentTarget.getBoundingClientRect();
+    store.menuInfo.left = left - store.menuRef.current.offsetWidth;
+    store.menuInfo.top = top;
 
-  store.editedSearchEngine = data;
-  store.menuVisible = true;
-};
+    store.editedSearchEngine = data;
+    store.menuVisible = true;
+  };
 
 export const SearchEngine = observer(({ data }: { data: ISearchEngine }) => {
   const isDefault = store.searchEngine.keyword === data.keyword;
@@ -107,14 +114,14 @@ export const ManageSearchEngines = observer(() => {
         <Back onClick={onBackClick} />
         Manage search engines
       </Header>
-      <Row>
+      <div>
         <Title>Address bar search engines</Title>
         <Control>
           <Button primary onClick={onAddClick}>
             Add
           </Button>
         </Control>
-      </Row>
+      </div>
       <EnginesTable>
         <TableRow>
           <TableHeader>Search engine</TableHeader>
@@ -135,15 +142,26 @@ const onManageSearchEngines = () => {
 };
 
 export const AddressBar = observer(() => {
+  const { suggestions } = store.settings;
+  const searchEngine = store.searchEngine;
   return (
     <>
-      <Header>Address bar</Header>
-      <SuggestionsToggle />
-      <SearchEngineRow />
-      <Row onClick={onManageSearchEngines}>
-        <Title>Manage search engines</Title>
-        <Control></Control>
-      </Row>
+      <Header>Address Bar</Header>
+      <span>
+        Change your address bar and search engine to whatever you like.
+      </span>
+      <StyledSettingsCardGrid>
+        <Card
+          title="Search Suggestions"
+          subtitle={suggestions ? 'Enabled' : 'Disabled'}
+          icon={faQuestionCircle}
+        />
+        <Card
+          title="Search Engine"
+          subtitle={searchEngine.name}
+          icon={faSearch}
+        />
+      </StyledSettingsCardGrid>
     </>
   );
 });

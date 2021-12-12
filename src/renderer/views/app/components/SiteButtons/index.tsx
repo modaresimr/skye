@@ -11,7 +11,7 @@ import {
 } from '~/renderer/constants/icons';
 import { ipcRenderer } from 'electron';
 import store from '../../store';
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '../TitlebarButton';
 import * as remote from '@electron/remote';
 
 const showAddBookmarkDialog = async () => {

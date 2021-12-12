@@ -11,6 +11,10 @@ import {
 import { NavigationDrawerItem } from './NavigationDrawerItem';
 import Avatar from '../Avatar';
 import { useHash } from '../Avatar/Avatar';
+import store from '~/renderer/views/settings/store';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+import { idApi } from '~/constants';
 
 export const NavigationDrawer = ({
   children,
@@ -31,13 +35,35 @@ export const NavigationDrawer = ({
   global?: boolean;
 }) => {
   const hash = useHash('adam');
+  const { token } = store.settings;
+
+  const { data: user } = useQuery(
+    ['currentUser'],
+    async () =>
+      (
+        await axios.get<{
+          id: string;
+          email: string;
+          username: string;
+          name: string;
+          avatar?: string;
+          createdAt: Date;
+          updatedAt: Date;
+        }>(`${idApi}/apps/users/me`, {
+          headers: {
+            authorization: token,
+          },
+        })
+      ).data,
+  );
+
   return (
     <StyledNavigationDrawer style={style} dense={dense}>
       {title !== '' && (
         <Header>
           <Avatar hash={hash} />
-          <Title>adam</Title>
-          <p>adam@inn.com</p>
+          <Title>{user?.name ?? 'Guest'}</Title>
+          <p>{user?.email ?? 'Innatical ID'}</p>
         </Header>
       )}
       <MenuItems global={global}>{children}</MenuItems>

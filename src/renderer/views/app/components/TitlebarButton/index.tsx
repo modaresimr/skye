@@ -3,7 +3,6 @@ import React from 'react';
 
 import { transparency } from '~/renderer/constants/transparency';
 import { Button, Icon, Badge, PreloaderBg } from './style';
-import { BLUE_500 } from '~/renderer/constants';
 import { Preloader } from '~/renderer/components/Preloader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -130,7 +129,7 @@ export const ToolbarButton = observer(
   size: 20,
   opacity: transparency.icons.active,
   autoInvert: true,
-  badgeBackground: BLUE_500,
+  badgeBackground: '',
   badgeTextColor: 'white',
   badgeTop: 4,
   badgeRight: 4,

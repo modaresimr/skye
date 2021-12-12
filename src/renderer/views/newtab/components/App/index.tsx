@@ -48,7 +48,7 @@ const Forecast = () => {
 export default observer(() => {
   const theme = useAsync(async () => {
     if (store.settings.tab.image == '') {
-      return '#070b10';
+      return '#000';
     }
 
     const fac = new FastAverageColor();

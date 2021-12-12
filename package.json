@@ -121,6 +121,8 @@
     "@fortawesome/pro-solid-svg-icons": "^6.0.0-beta3",
     "@fortawesome/pro-thin-svg-icons": "^6.0.0-beta3",
     "@fortawesome/react-fontawesome": "^0.1.16",
+    "@headlessui/react": "^1.4.2",
+    "axios": "^0.24.0",
     "electron-chrome-extensions": "^3.8.0",
     "fast-average-color": "^6.4.2",
     "hex-to-rgb": "^1.0.1",

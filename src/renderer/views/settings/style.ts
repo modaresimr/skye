@@ -83,17 +83,23 @@ export const Back = styled(IconButton)`
 
 export const StyledSettings = styled.div`
   display: flex;
-  align-items: center;
   height: 100%;
   max-width: 1200px;
-  width: 900ex;
+  width: 1200px;
   margin-left: auto;
-  padding: 200px;
-  /* padding-top: 200px; */
   padding-left: 200px;
   padding-right: 200px;
   margin-right: auto;
-  margin-top: 100px;
+  padding-top: 100px;
+  overflow-y: scroll;
+  @media (max-width: 1200px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  @media (max-height: 600px) {
+    padding-top: 50px;
+  }
 `;
 
 export const StyledSetDefaultButton = styled.button`
@@ -125,6 +131,10 @@ export const StyledSettingsCardGrid = styled.div`
   grid-template-columns: calc(50% - 10px) calc(50% - 10px);
 `;
 
+export const StyledSettingsContent = styled.div`
+  width: 100%;
+  margin-left: 40px;
+`;
 export const StyledSettingsTitle = styled.h1`
   font-size: 0.9rem;
   font-weight: 600;

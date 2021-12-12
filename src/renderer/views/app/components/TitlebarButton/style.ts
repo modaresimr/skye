@@ -23,11 +23,7 @@ export const Icon = styled.div<IconProps>`
   justify-content: center;
   ${({ size, disabled, opacity, theme, inhertTextColor }) => css`
     ${centerIcon(size)};
-    color: ${inhertTextColor
-      ? 'inhert'
-      : theme['toolbar.lightForeground']
-      ? '#DEDEDE'
-      : '#323232'};
+    color: ${inhertTextColor ? 'inhert' : theme.dark ? '#DEDEDE' : '#323232'};
     opacity: ${disabled ? 0.25 : opacity};
   `};
 `;
@@ -54,13 +50,13 @@ export const Button = styled.div<ButtonProps>`
     -webkit-app-region: ${disabled ? 'drag' : 'no-drag'};
 
     background-color: ${toggled
-      ? theme['toolbar.lightForeground']
+      ? theme.dark
         ? 'rgba(255, 255, 255, 0.12)'
         : 'rgba(0, 0, 0, 0.1)'
       : 'none'};
 
     &:active {
-      background-color: ${theme['toolbar.lightForeground']
+      background-color: ${theme.dark
         ? 'rgba(255, 255, 255, 0.12)'
         : 'rgba(0, 0, 0, 0.1)'} !important;
     }
@@ -68,7 +64,7 @@ export const Button = styled.div<ButtonProps>`
     ${!toggled &&
     css`
       &:hover {
-        background-color: ${theme['toolbar.lightForeground']
+        background-color: ${theme.dark
           ? 'rgba(255, 255, 255, 0.08)'
           : 'rgba(0, 0, 0, 0.06)'};
       }
@@ -116,8 +112,6 @@ export const PreloaderBg = styled.div<PreloaderBgProps>`
 
   ${({ theme }) => css`
     border: 3px solid
-      ${theme['toolbar.lightForeground']
-        ? 'rgba(255, 255, 255, 0.1)'
-        : 'rgba(0, 0, 0, 0.06)'};
+      ${theme.dark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)'};
   `};
 `;

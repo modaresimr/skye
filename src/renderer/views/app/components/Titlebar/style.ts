@@ -1,68 +1,67 @@
 import styled, { css } from 'styled-components';
+
 import { ITheme } from '~/interfaces';
 import { platform } from 'os';
-import { ICON_FULLSCREEN_EXIT } from '~/renderer/constants/icons';
-import { centerIcon } from '~/renderer/mixins';
+import { contrast } from '~/utils/colors';
 
-interface TitlebarProps {
+export interface ToolbarProps {
   isFullscreen: boolean;
   theme: ITheme;
+  color?: string;
   dialogOpen: boolean;
 }
 
-export const StyledTitlebar = styled.div<TitlebarProps>`
+export const StyledToolbar = styled.div<ToolbarProps>`
   position: relative;
   z-index: 100;
   display: flex;
+  align-items: center;
   flex-flow: row;
-  color: rgba(0, 0, 0, 0.8);
   width: 100%;
-
-  &:before {
-    position: absolute;
-    z-index: 0;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    bottom: 0;
-    content: '';
-  }
-
+  justify-content: center;
   ${({ isFullscreen, theme, color, dialogOpen }) => css`
-    background-color: ${color ? color : theme['titlebar.backgroundColor']};
-    height: 45px;
+    background-color: ${!!color ? color : theme.titlebar.background};
     align-items: ${theme.isCompact ? 'center' : 'initial'};
-
+    padding-left: ${platform() === 'darwin' && !isFullscreen ? 78 : 4}px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     &:before {
       -webkit-app-region: ${isFullscreen || dialogOpen ? 'no-drag' : 'drag'};
     }
   `};
 
+  ${({ color, theme }) => {
+    if (color && color !== '') {
+      const cc = contrast(color);
+
+      const isDarkMode = theme.dark;
+      switch (cc) {
+        case 'dark':
+          if (isDarkMode) {
+            return css`
+              color: #fff;
+            `;
+          } else {
+            return css`
+              color: #e5e5e5;
+            `;
+          }
+        case 'light': {
+          if (isDarkMode) {
+            return css`
+              color: #000;
+            `;
+          } else {
+            return css``;
+          }
+        }
+      }
+    }
+    return css`
+      color: ${theme.addressbar.text};
+    `;
+  }}
+
   transition: background-color 0.4s, color 0.4s;
   transition-timing-function: ease-out;
-`;
-
-interface FullscreenExistButtonProps {
-  theme?: ITheme;
-}
-
-export const FullscreenExitButton = styled.div<FullscreenExistButtonProps>`
-  top: 0;
-  right: 0;
-  height: 45px;
-  margin-bottom: 5px;
-  min-width: 45px;
-  -webkit-app-region: no-drag;
-  margin-left: 8px;
-  transition: 0.1s background-color;
-  ${centerIcon(24)};
-
-  ${({ theme }) => css`
-    color: ${theme['toolbar.lightForeground'] ? '#DEDEDE' : '#323232'};
-    /* filter: ${theme['dialog.lightForeground'] ? `invert(100%)` : `none`}; */
-  `}
-
-  &:hover {
-    background-color: rgba(60, 60, 60, 0.4);
-  }
 `;

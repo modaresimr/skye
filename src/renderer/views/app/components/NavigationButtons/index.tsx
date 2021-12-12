@@ -3,7 +3,7 @@ import React from 'react';
 
 import { StyledContainer } from './style';
 import store from '../../store';
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '../TitlebarButton';
 import {
   ICON_CLOSE,
   ICON_FORWARD,

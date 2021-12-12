@@ -58,7 +58,7 @@ export const StyledAddressBar = styled.div<AddressBarProps>`
           ? 'rgba(255, 255, 255, 0.12)'
           : 'transparent'
         : focus
-        ? `${theme.accentColor} !important`
+        ? `rgba(255, 255, 255, 0.5) !important`
         : 'transparent'};
 
     ${!theme.isCompact &&

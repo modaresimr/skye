@@ -5,7 +5,7 @@ import store from '../../store';
 import { isURL } from '~/utils';
 import { callViewMethod } from '~/utils/view';
 import { ipcRenderer } from 'electron';
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '../TitlebarButton';
 import { StyledAddressBar, InputContainer, Input, Text } from './style';
 import { ICON_SEARCH } from '~/renderer/constants';
 import { SiteButtons } from '../SiteButtons';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '../TitlebarButton';
 import { IBrowserAction } from '../../models';
 import { ipcRenderer } from 'electron';
 import * as remote from '@electron/remote';
@@ -29,74 +29,68 @@ const showPopup = (
 
 // let canOpenPopup = true;
 
-const onClick = (data: IBrowserAction) => (
-  e: React.MouseEvent<HTMLDivElement>,
-) => {
-  if (data.tabId) {
-    // TODO:
-    //extensionsRenderer.browserAction.onClicked(data.extensionId, data.tabId);
-    const {
-      left,
-      top,
-      width,
-      height,
-    } = e.currentTarget.getBoundingClientRect();
+const onClick =
+  (data: IBrowserAction) => (e: React.MouseEvent<HTMLDivElement>) => {
+    if (data.tabId) {
+      // TODO:
+      //extensionsRenderer.browserAction.onClicked(data.extensionId, data.tabId);
+      const { left, top, width, height } =
+        e.currentTarget.getBoundingClientRect();
 
-    ipcRenderer.invoke(
-      'crx-msg-remote',
-      'persist:view',
-      'browserAction.activate',
+      ipcRenderer.invoke(
+        'crx-msg-remote',
+        'persist:view',
+        'browserAction.activate',
+        {
+          eventType: 'click',
+          extensionId: data.extensionId,
+          tabId: data.tabId,
+          anchorRect: {
+            x: left,
+            y: top,
+            width: width,
+            height: height,
+          },
+        },
+      );
+    }
+
+    // if (canOpenPopup) {
+    //   const { right, bottom } = e.currentTarget.getBoundingClientRect();
+
+    //   showPopup(data, right, bottom, false);
+    // }
+  };
+
+const onContextMenu =
+  (data: IBrowserAction) => (e: React.MouseEvent<HTMLDivElement>) => {
+    const { target } = e;
+    const menu = remote.Menu.buildFromTemplate([
       {
-        eventType: 'click',
-        extensionId: data.extensionId,
-        tabId: data.tabId,
-        anchorRect: {
-          x: left,
-          y: top,
-          width: width,
-          height: height,
+        label: 'Uninstall',
+        click: () => {
+          store.extensions.uninstallExtension(data.extensionId);
         },
       },
-    );
-  }
-
-  // if (canOpenPopup) {
-  //   const { right, bottom } = e.currentTarget.getBoundingClientRect();
-
-  //   showPopup(data, right, bottom, false);
-  // }
-};
-
-const onContextMenu = (data: IBrowserAction) => (
-  e: React.MouseEvent<HTMLDivElement>,
-) => {
-  const { target } = e;
-  const menu = remote.Menu.buildFromTemplate([
-    {
-      label: 'Uninstall',
-      click: () => {
-        store.extensions.uninstallExtension(data.extensionId);
+      {
+        label: 'Inspect popup',
+        click: () => {
+          const { right, bottom } = (target as any).getBoundingClientRect();
+          showPopup(data, right, bottom, true);
+        },
       },
-    },
-    {
-      label: 'Inspect popup',
-      click: () => {
-        const { right, bottom } = (target as any).getBoundingClientRect();
-        showPopup(data, right, bottom, true);
+      {
+        label: 'Inspect background page',
+        click: () => {
+          extensionMainChannel
+            .getInvoker()
+            .inspectBackgroundPage(data.extensionId);
+        },
       },
-    },
-    {
-      label: 'Inspect background page',
-      click: () => {
-        extensionMainChannel
-          .getInvoker()
-          .inspectBackgroundPage(data.extensionId);
-      },
-    },
-  ]);
+    ]);
 
-  menu.popup();
-};
+    menu.popup();
+  };
 
 const onMouseDown = (data: IBrowserAction) => async (e: any) => {
   // canOpenPopup =
@@ -106,13 +100,8 @@ const onMouseDown = (data: IBrowserAction) => async (e: any) => {
 };
 
 export const BrowserAction = observer(({ data }: Props) => {
-  const {
-    icon,
-    badgeText,
-    badgeBackgroundColor,
-    badgeTextColor,
-    extensionId,
-  } = data;
+  const { icon, badgeText, badgeBackgroundColor, badgeTextColor, extensionId } =
+    data;
 
   return (
     <ToolbarButton

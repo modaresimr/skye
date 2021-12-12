@@ -98,7 +98,7 @@ export const skyeLight: ITheme = {
 
 export const skyeDark: ITheme = {
   titlebar: {
-    background: '#070B10',
+    background: '#000',
   },
   addressbar: {
     text: '#fff',
@@ -164,7 +164,7 @@ export const skyeDark: ITheme = {
     text: '#fff',
   },
   searchbox: {
-    background: '#070B10',
+    background: '#000',
   },
   pages: {
     background: '#000',

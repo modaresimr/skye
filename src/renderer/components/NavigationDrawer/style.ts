@@ -10,7 +10,6 @@ interface NavigationDrawerProps {
 }
 
 export const StyledNavigationDrawer = styled.div<NavigationDrawerProps>`
-  height: 100vh;
   left: 0;
   display: flex;
   flex-flow: column;

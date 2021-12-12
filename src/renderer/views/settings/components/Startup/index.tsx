@@ -1,13 +1,15 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { Title, Row, Header } from '../../style';
+import { Title, Header, StyledSettingsCardGrid } from '../../style';
 import { Textfield } from '~/renderer/components/Textfield';
 import { RadioButton } from '~/renderer/components/RadioButton';
 import Button from '~/renderer/components/Button';
 import { IStartupTab } from '~/interfaces/startup-tab';
 import { ICON_CLOSE } from '~/renderer/constants';
 import store from '../../store';
+import Card from '~/renderer/components/Card';
+import { faBrowsers } from '@fortawesome/pro-solid-svg-icons';
 
 interface Props {
   initialValue: 'continue' | 'urls' | 'empty';
@@ -99,40 +101,45 @@ class StartupControl extends React.PureComponent<Props, State> {
     return (
       <>
         <Header>On Startup</Header>
-        <Row style={rowStyle} onClick={this.select('empty')}>
-          <RadioButton selected={this.state.value === 'empty'} />
-          <Title style={titleStyle}>Open the New Tab page</Title>
-        </Row>
-        <Row style={rowStyle} onClick={this.select('continue')}>
-          <RadioButton selected={this.state.value === 'continue'} />
-          <Title style={titleStyle}>Continue where you left off</Title>
-        </Row>
-        <Row style={rowStyle} onClick={this.select('urls')}>
-          <RadioButton selected={this.state.value === 'urls'} />
-          <Title style={titleStyle}>Open specific pages</Title>
-        </Row>
-        {this.state.value === 'urls' && (
-          <div style={{ marginLeft: 36 }}>
-            <div>
-              {this.state.customURLs.map((item, index) => (
-                <Textfield
-                  key={index}
-                  width={350}
-                  placeholder={item.url}
-                  onChange={(value) => this.onUpdateItemURL(index, value)}
-                  icon={ICON_CLOSE}
-                  onIconClick={(target) => this.onDeleteItemClick(index)}
-                  delay={500}
-                  style={{ marginBottom: 8 }}
-                />
-              ))}
-            </div>
+        <span>Customize how Skye starts up to the way you want it.</span>
+        <StyledSettingsCardGrid>
+          <Card
+            title={'Open Innatical Tab'}
+            subtitle={this.state.value === 'empty' ? 'Enabled' : 'Disabled'}
+            icon={faBrowsers}
+          />
+          <Card
+            title={'Contiune where you left off'}
+            subtitle={this.state.value === 'continue' ? 'Enabled' : 'Disabled'}
+          />
+          <Card
+            title={'Open Specific Pages'}
+            subtitle={this.state.value === 'urls' ? 'Enabled' : 'Disabled'}
+          />
 
-            <Button primary onClick={this.onAddNewPageClick}>
-              Add a new page
-            </Button>
-          </div>
-        )}
+          {this.state.value === 'urls' && (
+            <div style={{ marginLeft: 36 }}>
+              <div>
+                {this.state.customURLs.map((item, index) => (
+                  <Textfield
+                    key={index}
+                    width={350}
+                    placeholder={item.url}
+                    onChange={(value) => this.onUpdateItemURL(index, value)}
+                    icon={ICON_CLOSE}
+                    onIconClick={(target) => this.onDeleteItemClick(index)}
+                    delay={500}
+                    style={{ marginBottom: 8 }}
+                  />
+                ))}
+              </div>
+
+              <Button primary onClick={this.onAddNewPageClick}>
+                Add a new page
+              </Button>
+            </div>
+          )}
+        </StyledSettingsCardGrid>
       </>
     );
   }

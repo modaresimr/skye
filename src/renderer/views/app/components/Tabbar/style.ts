@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { platform } from 'os';
 
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '../TitlebarButton';
 import {
   TOOLBAR_BUTTON_WIDTH,
   ADD_TAB_BUTTON_WIDTH,
@@ -10,7 +10,7 @@ import {
 import { ITheme } from '~/interfaces';
 
 export const StyledTabbar = styled.div<{
-  color: string;
+  color?: string;
   theme: ITheme;
 }>`
   height: 100%;
@@ -23,7 +23,7 @@ export const StyledTabbar = styled.div<{
   margin-left: 10px;
 
   ${({ color, theme }) => css`
-    background-color: ${color ? color : theme['titlebar.backgroundColor']};
+    background-color: ${color ? color : theme.titlebar.background};
   `};
 
   transition: background-color 0.4s, color 0.4s;

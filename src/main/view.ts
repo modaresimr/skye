@@ -79,7 +79,7 @@ export class View {
       },
     });
 
-    this.browserView.setBackgroundColor('#FFFFFFFF');
+    // this.browserView.setBackgroundColor('#FFFFFFFF');
 
     this.incognito = incognito;
 

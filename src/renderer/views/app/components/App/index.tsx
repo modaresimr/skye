@@ -3,8 +3,8 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { StyledApp, Line } from './style';
-import { Titlebar } from '../Titlebar';
 import { Toolbar } from '../Toolbar';
+import { Titlebar } from '../Titlebar';
 import store from '../../store';
 import { UIStyle } from '~/renderer/mixins/default-styles';
 import { BookmarkBar } from '../BookmarkBar';
@@ -16,6 +16,7 @@ import {
   COMPACT_TAB_HEIGHT,
   DEFAULT_TAB_HEIGHT,
 } from '~/constants/design';
+import { useMedia } from 'react-use';
 
 const onAppLeave = () => {
   store.barHideTimer = setTimeout(function () {
@@ -40,6 +41,7 @@ const onLineEnter = () => {
 };
 
 const App = observer(() => {
+  const darkMode = useMedia('(prefers-color-scheme: dark)');
   return (
     <ThemeProvider
       theme={{
@@ -62,8 +64,8 @@ const App = observer(() => {
       >
         <UIStyle />
 
-        {store.settings.object.topBarVariant === 'default' && <Toolbar />}
-        <Titlebar />
+        {store.settings.object.topBarVariant === 'default' && <Titlebar />}
+        <Toolbar />
         <BookmarkBar />
       </StyledApp>
       <Line
