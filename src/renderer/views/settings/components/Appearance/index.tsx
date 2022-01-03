@@ -14,7 +14,7 @@ import {
 import Card from '~/renderer/components/Card';
 import Switch from '~/renderer/components/Switch';
 import { Dialog } from '@headlessui/react';
-import { Dropdown } from '~/renderer/components/Dropdown';
+import Dropdown from '~/renderer/components/Dropdown';
 import Button from '~/renderer/components/Button';
 import { Input } from '~/renderer/components/Input';
 
@@ -50,13 +50,23 @@ const ThemeVariant = observer(() => {
       </Dialog.Description>
       <Control>
         <Dropdown
-          defaultValue={store.settings.themeAuto ? 'auto' : defaultValue}
+          value={store.settings.themeAuto ? 'auto' : defaultValue}
           onChange={onThemeChange}
-        >
-          <Dropdown.Item value="auto">Auto</Dropdown.Item>
-          <Dropdown.Item value="skye-light">Light</Dropdown.Item>
-          <Dropdown.Item value="skye-dark">Dark</Dropdown.Item>
-        </Dropdown>
+          items={[
+            {
+              id: 'auto',
+              name: 'Auto',
+            },
+            {
+              id: 'skye-light',
+              name: 'Light',
+            },
+            {
+              id: 'skye-dark',
+              name: 'Dark',
+            },
+          ]}
+        />
       </Control>
     </Card>
   );
@@ -142,7 +152,7 @@ const ShowFrequentlyVisited = observer(() => {
 
 const NewTabImage = observer(() => {
   const { tab } = store.settings;
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(tab.image);
   return (
     <Card title="New Tab Background" icon={faImageLandscape}>
       <Dialog.Title>New Tab Background</Dialog.Title>
@@ -159,7 +169,7 @@ const NewTabImage = observer(() => {
           }}
           tabIndex={0}
           className="textfield"
-          value={tab.image}
+          defaultValue={image}
         />
       </Control>
       <br />

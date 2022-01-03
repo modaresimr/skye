@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { ERROR_COLOR, BLUE_500 } from '~/renderer/constants';
 import { StyledTextfield, Input, Label, Indicator, Icon } from './style';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,7 +33,6 @@ export class Textfield extends React.PureComponent<TextFieldProps, State> {
   private timer: number;
 
   private static defaultProps: TextFieldProps = {
-    color: BLUE_500,
     inputType: 'text',
     width: 280,
     delay: 200,
@@ -140,7 +138,7 @@ export class Textfield extends React.PureComponent<TextFieldProps, State> {
     const hasLabel = label != null && label !== '';
     const hasIcon = icon != null && icon !== '';
 
-    const primaryColor = error ? ERROR_COLOR : color;
+    const primaryColor = error ? color : color;
 
     return (
       <StyledTextfield

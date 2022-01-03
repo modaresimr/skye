@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import store from '../../store';
+import store, { SystemTabType } from '../../store';
 import { isURL } from '~/utils';
 import { callViewMethod } from '~/utils/view';
 import { ipcRenderer } from 'electron';
@@ -16,6 +16,7 @@ import { ICON_SEARCH } from '~/renderer/constants';
 import SiteButtons from '../SiteButtons';
 import { DEFAULT_TITLEBAR_HEIGHT } from '~/constants/design';
 import { NEWTAB_URL } from '~/constants/tabs';
+import { faCloud } from '@fortawesome/pro-solid-svg-icons';
 
 let mouseUpped = false;
 
@@ -170,7 +171,9 @@ export const AddressBar = observer(() => {
     >
       <TitlebarButton
         toggled={false}
-        icon={ICON_SEARCH}
+        icon={
+          store.systemTabType === SystemTabType.SETTINGS ? faCloud : ICON_SEARCH
+        }
         size={16}
         dense
         inhertTextColor

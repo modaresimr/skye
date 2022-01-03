@@ -41,7 +41,6 @@ const RangeItem = observer(
     <NavigationDrawer.Item
       onClick={() => (store.selectedRange = range)}
       selected={store.selectedRange === range}
-      icon={icon}
     >
       {children}
     </NavigationDrawer.Item>
@@ -108,7 +107,7 @@ export default observer(() => {
             Older
           </RangeItem>
           <div style={{ flex: 1 }} />
-          <NavigationDrawer.Item icon={ICON_TRASH} onClick={onClearClick}>
+          <NavigationDrawer.Item onClick={onClearClick}>
             Clear Browsing Data
           </NavigationDrawer.Item>
         </NavigationDrawer>

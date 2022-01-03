@@ -7,7 +7,7 @@ export const StyledApp = styled(DialogStyle)`
   padding: 16px;
 
   ${({ theme }: { theme?: ITheme; visible: boolean }) => css`
-    color: ${theme['dialog.lightForeground'] ? '#fff' : '#000'};
+    color: ${theme.dark ? '#fff' : '#000'};
   `}
 `;
 

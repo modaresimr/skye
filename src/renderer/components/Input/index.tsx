@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
 import { ITheme } from '~/interfaces';
-import { BLUE_500 } from '~/renderer/constants';
 import { centerIcon } from '~/renderer/mixins';
 
 export const Control = css`
@@ -15,13 +14,9 @@ export const Control = css`
   padding: 0 8px;
   font-size: 12px;
 
-  &:focus {
-    box-shadow: 0 0 0 2px ${BLUE_500};
-  }
-
-  ${({ theme }: { theme: ITheme }) => css`
-    background-color: ${theme['control.backgroundColor']};
-    color: ${theme['control.valueColor']};
+  ${({ theme }) => css`
+    background-color: ${theme.control.background};
+    color: ${theme.control.value};
   `}
 `;
 

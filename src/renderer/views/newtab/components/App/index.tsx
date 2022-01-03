@@ -3,7 +3,13 @@ import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
 import { ThemeProvider } from 'styled-components';
-import { Wrapper, Content, Image, StyledTime, StyledForecast } from './style';
+import {
+  Wrapper,
+  Content,
+  StyledImage,
+  StyledTime,
+  StyledForecast,
+} from './style';
 import { TopSites } from '../TopSites';
 import { WebUIStyle } from '~/renderer/mixins/default-styles';
 
@@ -45,14 +51,31 @@ const Forecast = () => {
   );
 };
 
+const imageExists = (url: string) => {
+  return new Promise((resolve, reject) => {
+    var img = new Image();
+    img.onload = function () {
+      resolve(true);
+    };
+    img.onerror = function () {
+      reject();
+    };
+    img.src = url;
+  });
+};
 export default observer(() => {
   const theme = useAsync(async () => {
-    if (store.settings.tab.image == '') {
-      return '#000';
+    if (
+      store.settings.tab.image == '' ||
+      !(await imageExists(store.settings.tab.image))
+    ) {
+      return '#141414';
     }
 
     const fac = new FastAverageColor();
-    return (await fac.getColorAsync(store.settings.tab.image)).hex;
+    const color = (await fac.getColorAsync(store.settings.tab.image)).hex;
+
+    return color;
   }, [store.settings.tab.image]);
   return (
     <QueryClientProvider client={queryClient}>
@@ -64,7 +87,7 @@ export default observer(() => {
           <WebUIStyle />
 
           <Wrapper color={theme.value} theme={store.theme}>
-            <Image src={store.settings.tab.image} />
+            <StyledImage src={store.settings.tab.image} />
             <Content>
               <Time />
               <Forecast />

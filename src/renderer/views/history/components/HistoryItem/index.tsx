@@ -53,7 +53,7 @@ export default observer(({ data }: { data: IHistoryItem }) => {
           backgroundImage: typeof favicon === 'string' ? `url(${favicon})` : '',
           opacity: customFavicon ? 1 : 0.54,
           filter:
-            !customFavicon && store.theme['pages.lightForeground']
+            !customFavicon && store.theme.dark
               ? 'invert(100%)'
               : 'none',
         }}

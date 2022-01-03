@@ -1,15 +1,3 @@
-import {
-  FONT_INTER_BLACK,
-  FONT_INTER_BOLD,
-  FONT_INTER_EXTRABOLD,
-  FONT_INTER_EXTRALIGHT,
-  FONT_INTER_LIGHT,
-  FONT_INTER_MEDIUM,
-  FONT_INTER_REGULAR,
-  FONT_INTER_SEMIBOLD,
-  FONT_INTER_THIN,
-} from '../constants';
-
 export const getLetterSpacing = (fontSize: number, tracking: number) =>
   tracking / fontSize;
 
@@ -128,25 +116,21 @@ export const injectFonts = () => {
       font-family: 'Inter';
       font-style: normal;
       font-weight: 400;
-      src: url(${FONT_INTER_REGULAR}) format('woff2');
     }
     @font-face {
       font-family: 'Inter';
       font-style: normal;
       font-weight: 500;
-      src: url(${FONT_INTER_MEDIUM}) format('woff2');
     }
     @font-face {
       font-family: 'Inter';
       font-style: normal;
       font-weight: 300;
-      src: url(${FONT_INTER_LIGHT}) format('woff2');
     }
      @font-face {
       font-family: 'Inter';
       font-style: normal;
       font-weight: 900;
-      src: url(${FONT_INTER_BLACK}) format('woff2');
     }
 `;
 

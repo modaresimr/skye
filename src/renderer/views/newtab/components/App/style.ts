@@ -5,7 +5,7 @@ import { ContextMenuRow } from '~/renderer/components/ContextMenu';
 import { ITheme } from '~/interfaces';
 import { contrast } from '~/utils/colors';
 
-export const Image = styled.div`
+export const StyledImage = styled.div`
   position: absolute;
   z-index: 1;
   background-size: cover;
@@ -51,7 +51,7 @@ export const Wrapper = styled.div`
     if (color && color !== '') {
       const cc = contrast(color);
 
-      const isDarkMode = theme['toolbar.lightForeground'];
+      const isDarkMode = theme.dark;
       switch (cc) {
         case 'dark':
           if (isDarkMode) {
@@ -73,7 +73,7 @@ export const Wrapper = styled.div`
       }
     }
     return css`
-      color: ${theme['addressbar.textColor']};
+      color: ${theme.addressbar.text};
     `;
   }}
 `;

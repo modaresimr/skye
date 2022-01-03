@@ -45,12 +45,12 @@ export const App = observer(() => {
         <Buttons>
           <Button
             background={
-              store.theme['dialog.lightForeground']
+              store.theme.dark
                 ? 'rgba(255, 255, 255, 0.08)'
                 : 'rgba(0, 0, 0, 0.08)'
             }
             foreground={
-              store.theme['dialog.lightForeground'] ? 'white' : 'black'
+              store.theme.dark ? 'white' : 'black'
             }
             onClick={() => sendResult(true)}
           >
@@ -58,12 +58,12 @@ export const App = observer(() => {
           </Button>
           <Button
             background={
-              store.theme['dialog.lightForeground']
+              store.theme.dark
                 ? 'rgba(255, 255, 255, 0.08)'
                 : 'rgba(0, 0, 0, 0.08)'
             }
             foreground={
-              store.theme['dialog.lightForeground'] ? 'white' : 'black'
+              store.theme.dark ? 'white' : 'black'
             }
             style={{ marginLeft: 8 }}
             onClick={() => sendResult(false)}
@@ -71,7 +71,7 @@ export const App = observer(() => {
             Deny
           </Button>
         </Buttons>
-        <div style={{ clear: 'both' }}></div>
+        <div style={{clear: 'both'}}/>
       </StyledApp>
     </ThemeProvider>
   );

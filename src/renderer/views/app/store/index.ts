@@ -19,10 +19,14 @@ import { getTheme } from '~/utils/themes';
 import { AutoFillStore } from './autofill';
 import { IDownloadItem, BrowserActionChangeType } from '~/interfaces';
 import { IBrowserAction } from '../models';
-import { NEWTAB_URL } from '~/constants/tabs';
+import { NEWTAB_URL, SETTINGS_URL } from '~/constants/tabs';
 import { IURLSegment } from '~/interfaces/urls';
 import { BookmarkBarStore } from './bookmark-bar';
 
+export enum SystemTabType {
+  NEWTAB,
+  SETTINGS,
+}
 export class Store {
   public settings = new SettingsStore(this);
   public addTab = new AddTabStore();
@@ -54,6 +58,8 @@ export class Store {
   public addressbarFocused = false;
 
   public addressbarEditing = false;
+
+  public systemTabType: SystemTabType = undefined;
 
   public isAlwaysOnTop = false;
 
@@ -118,10 +124,21 @@ export class Store {
   public get addressbarValue() {
     const tab = this.tabs.selectedTab;
     if (tab?.addressbarValue != null) return tab?.addressbarValue;
-    else if (tab && !tab?.url?.startsWith(NEWTAB_URL))
+    else if (
+      tab &&
+      !tab?.url?.startsWith(NEWTAB_URL) &&
+      !tab?.url.startsWith(SETTINGS_URL)
+    ) {
+      this.systemTabType = undefined;
       return tab.url[tab.url.length - 1] === '/'
         ? tab.url.slice(0, -1)
         : tab.url;
+    }
+    if (tab?.url.startsWith(SETTINGS_URL)) {
+      this.systemTabType = SystemTabType.SETTINGS;
+      return 'Settings';
+    }
+    this.systemTabType = SystemTabType.NEWTAB;
     return '';
   }
 

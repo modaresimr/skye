@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Dropdown } from '~/renderer/components/Dropdown';
+import Dropdown from '~/renderer/components/Dropdown';
 import Switch from '~/renderer/components/Switch';
 import {
   Title,
@@ -53,12 +53,10 @@ const SearchEngineRow = observer(() => {
     <div>
       <Title>Search engine used in the address bar</Title>
       <Control>
-        <Dropdown defaultValue={se.name} onChange={onSearchEngineChange}>
-          {Object.values(store.settings.searchEngines).map((item, key) => (
-            <Dropdown.Item key={key} value={item.name}>
-              {item.name}
-            </Dropdown.Item>
-          ))}
+        <Dropdown value={se.name} onChange={onSearchEngineChange} items={
+          Object.values(store.settings.searchEngines).map((item, key) => ({
+            id: item.name, value: item.name, name: item.name
+          }))}>
         </Dropdown>
       </Control>
     </div>

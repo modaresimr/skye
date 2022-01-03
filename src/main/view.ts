@@ -17,7 +17,7 @@ import {
 import { TabEvent } from '~/interfaces/tabs';
 import { Queue } from '~/utils/queue';
 import { Application } from './application';
-import { getUserAgentForURL } from './user-agent';
+import { getUserAgentForURL } from './utils/user-agent';
 
 interface IAuthInfo {
   url: string;

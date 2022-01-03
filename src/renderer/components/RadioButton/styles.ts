@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { transparency, BLUE_500 } from '~/renderer/constants';
+import { transparency } from '~/renderer/constants';
 import { interRegular } from '~/renderer/mixins';
 import { ITheme } from '~/interfaces';
 
@@ -36,7 +36,7 @@ export const Circle = styled.div<CircleProps>`
   ${({ selected, theme }) => css`
     width: ${selected ? `calc(100% - 8px)` : 0};
     height: ${selected ? `calc(100% - 8px)` : 0};
-    background: ${selected ? BLUE_500 : 'rgba(0, 0, 0, 0.54)'};
+    background: ${selected ? theme.accentColor : 'rgba(0, 0, 0, 0.54)'};
 
     &::before {
       transition: ${selected ? `opacity 0.5s ease` : 'none'};
@@ -49,7 +49,7 @@ export const Circle = styled.div<CircleProps>`
       transform: translate(-50%, -50%);
       border: 2px solid
         ${selected
-          ? BLUE_500
+          ? theme.accentColor
           : theme.dark
           ? 'rgba(255, 255, 255, 0.54)'
           : 'rgba(0, 0, 0, 0.54)'};

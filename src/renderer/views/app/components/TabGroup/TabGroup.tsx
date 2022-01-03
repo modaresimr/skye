@@ -24,17 +24,11 @@ export const TabGroup = observer(({ tabGroup }: { tabGroup: ITabGroup }) => {
           onMouseDown={onPlaceholderClick(tabGroup)}
           ref={tabGroup.placeholderRef}
           hasName={tabGroup.name !== ''}
-          style={{
-            backgroundColor: tabGroup.color,
-          }}
         >
           {tabGroup.name}
         </Placeholder>
         <Line
           ref={tabGroup.lineRef}
-          style={{
-            backgroundColor: tabGroup.color,
-          }}
         />
       </StyledTabGroup>
     </>

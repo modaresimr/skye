@@ -103,7 +103,7 @@ export const SiteButtons = observer(() => {
 
   const dense = !store.isCompact;
 
-  return (
+  return store.systemTabType === undefined ? (
     <>
       {process.env.ENABLE_AUTOFILL && hasCredentials && (
         <TitlebarButton
@@ -144,7 +144,9 @@ export const SiteButtons = observer(() => {
         inhertTextColor
         dense={dense}
         onMouseDown={onShieldClick}
-      ></TitlebarButton>
+      />
     </>
+  ) : (
+    <></>
   );
 });

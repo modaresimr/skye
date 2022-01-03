@@ -15,16 +15,16 @@ export const StyledApp = styled(DialogStyle)`
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${theme['dialog.lightForeground']
+      background-color: ${theme.dark
         ? 'rgba(255, 255, 255, 0.2)'
         : 'rgba(0, 0, 0, 0.2)'};
 
       &:hover {
-        background-color: ${theme['dialog.lightForeground']
+        background-color: ${theme.dark
           ? 'rgba(255, 255, 255, 0.3)'
           : 'rgba(0, 0, 0, 0.3)'};
       }
     }
-    color: ${theme['dialog.lightForeground'] ? 'white' : 'black'};
+    color: ${theme.dark ? 'white' : 'black'};
   `};
 `;

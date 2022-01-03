@@ -7,7 +7,7 @@ import {
   centerIcon,
   coloredCursor,
 } from '~/renderer/mixins';
-import { transparency, EASING_FUNCTION } from '~/renderer/constants';
+import { transparency } from '~/renderer/constants';
 
 interface StyledTextfieldProps {
   width?: number;
@@ -76,11 +76,11 @@ export const Label = styled.div<LabelProps>`
   left: 12px;
   position: absolute;
   transition: 0.2s font-size, 0.2s color, 0.2s margin-top;
-  transition-timing-function: ${EASING_FUNCTION};
+
   -webkit-font-smoothing: antialiased;
   ${centerVertical()};
 
-  ${({ activated, focused, color, dark }) => css`
+  ${({ activated, focused, color, dark, theme }) => css`
     font-size: ${activated ? 12 : 16}px;
     margin-top: ${activated ? -12 : 0}px;
     color: ${focused
@@ -89,6 +89,7 @@ export const Label = styled.div<LabelProps>`
       ? `rgba(255, 255, 255, ${transparency.text.medium})`
       : `rgba(0, 0, 0, ${transparency.text.medium})`};
     ${activated ? interMedium() : interRegular()};
+    transition-timing-function: ${theme.easingFunction};
   `}
 `;
 
@@ -104,11 +105,12 @@ export const Indicator = styled.div<IndicatorProps>`
   right: 0;
   bottom: 0;
   position: absolute;
-  transition: 0.2s width ${EASING_FUNCTION};
+ 
 
-  ${({ focused, color }) => css`
+  ${({ focused, color, theme }) => css`
     width: ${focused ? 100 : 0}%;
     background-color: ${color};
+    transition: 0.2s width ${theme.easingFunction};
   `}
 `;
 

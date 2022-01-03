@@ -10,6 +10,7 @@ import {
   ICON_BACK,
   ICON_REFRESH,
 } from '~/renderer/constants/icons';
+import { faListDropdown } from '@fortawesome/pro-light-svg-icons';
 
 const onBackClick = () => {
   store.tabs.selectedTab.callViewMethod('goBack');
@@ -39,11 +40,16 @@ export const NavigationButtons = observer(() => {
   return (
     <StyledContainer>
       <TitlebarButton
+        size={20}
+        style={{ marginLeft: 6 }}
+        inhertTextColor
+        icon={faListDropdown}
+      />
+      <TitlebarButton
         disabled={!store.navigationState.canGoBack}
         size={20}
         icon={ICON_BACK}
         inhertTextColor
-        style={{ marginLeft: 6 }}
         onClick={onBackClick}
       />
       <TitlebarButton

@@ -27,7 +27,7 @@ const MenuItem = observer(
     <NavigationDrawer.Item
       onClick={() => (window.location.href = getWebUIURL(name))}
       selected={window.location.href.startsWith(getWebUIURL(name))}
-      icon={icon}
+     
       global={global}
     >
       {children}

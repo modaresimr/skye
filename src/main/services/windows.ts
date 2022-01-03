@@ -1,6 +1,6 @@
-import { AppWindow } from './windows/app';
+import { AppWindow } from '../windows/app';
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { SessionsService } from './sessions-service';
+import { SessionsService } from './sessions';
 import { ElectronChromeExtensions } from 'electron-chrome-extensions';
 
 export class WindowsService {

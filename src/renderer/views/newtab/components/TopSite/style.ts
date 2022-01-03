@@ -17,8 +17,9 @@ export const Item = styled(ItemBase)<{
   position: relative;
   z-index: 1;
 
-  ${({ backgroundColor }) => css`
-    background-color: ${backgroundColor};
+  ${({ backgroundColor, theme }) => css`
+    background-color: ${backgroundColor ??
+    (theme.dark ? '#141414' : '#FEFEFE')};
     animation: all 5s infinite;
     &:hover {
       top: -2.5px;
@@ -42,11 +43,7 @@ export const Icon = styled.div<IconProps>`
   ${centerIcon()};
   position: relative;
 
-  ${({
-    add,
-    icon,
-    custom
-  }) => css`
+  ${({ add, icon, custom }) => css`
     height: ${add ? 32 : 24}px;
     width: ${add ? 32 : 24}px;
     background-image: url(${icon});

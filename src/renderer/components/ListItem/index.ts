@@ -14,15 +14,15 @@ export const ListItem = styled.div<ListItemProps>`
   ${({ selected, theme }) => css`
     background-color: ${
       selected
-        ? theme['pages.lightForeground']
+        ? theme.dark
           ? 'rgba(255, 255, 255, 0.12)'
           : 'rgba(0, 0, 0, 0.08)'
         : 'transparent'
     };
-      color: ${theme['pages.lightForeground'] ? '#fff' : '#000'};
+      color: ${theme.dark ? '#fff' : '#000'};
     &:hover {
       background-color: ${
-        theme['pages.lightForeground']
+        theme.dark
           ? `rgba(255, 255, 255, ${selected ? 0.12 : 0.08})`
           : `rgba(0, 0, 0, ${selected ? 0.08 : 0.04})`
       };

@@ -13,7 +13,7 @@ export const StyledApp = styled(DialogStyle)<AppProps>`
   display: flex;
   flex-direction: column;
   ${({ theme }) => css`
-    color: ${theme['dialog.lightForeground'] ? '#fff' : '#000'};
+    color: ${theme.dark ? '#fff' : '#000'};
   `}
 `;
 
@@ -74,10 +74,10 @@ export const Select = styled.select<{
   align-items: center;
   -webkit-appearance: none;
   ${({ theme }) => css`
-    background-color: ${theme['control.backgroundColor']};
+    background-color: ${theme.control.background};
 
     &:hover {
-      background-color: ${theme['control.hover.backgroundColor']};
+      background-color: ${theme.control.hover.background};
     }
   `}
 `;

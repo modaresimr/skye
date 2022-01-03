@@ -9,15 +9,14 @@ import {
 } from '~/renderer/mixins/dialogs';
 
 export const StyledApp = styled.div`
-  margin: 16px;
-  margin-top: 3px;
+  margin: 3px 16px 16px;
   box-shadow: ${DIALOG_BOX_SHADOW};
   border-radius: ${DIALOG_BORDER_RADIUS}px;
   background: white;
 
-  ${({ theme }: { theme?: ITheme }) => css`
-    background-color: ${theme['dialog.backgroundColor']};
-    color: ${theme['dialog.lightForeground'] ? 'white' : 'black'};
+  ${({theme}) => css`
+    background-color: ${theme.dialog.background};
+    color: ${theme.dark ? 'white' : 'black'};
   `}
 `;
 
@@ -39,8 +38,8 @@ export const SearchIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ theme }: { theme?: ITheme }) => css`
-    color: ${theme['dialog.lightForeground'] ? 'white' : 'black'};
+  ${({ theme }) => css`
+    color: ${theme.dark ? 'white' : 'black'};
   `}
 `;
 
@@ -59,7 +58,7 @@ export const Input = styled.input`
 export const Button = styled.div`
   ${({ size, theme }: { size: number; theme?: ITheme }) => css`
     ${centerIcon(size)};
-    color: ${theme['dialog.lightForeground'] ? 'white' : 'black'};
+    color: ${theme.dark ? 'white' : 'black'};
   `}
 
   width: 24px;

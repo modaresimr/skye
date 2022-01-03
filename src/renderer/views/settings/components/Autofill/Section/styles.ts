@@ -13,7 +13,7 @@ export const StyledSection = styled.div<SectionProps>`
   margin-top: 12px;
 
   ${({ theme }) => css`
-    background-color: ${theme['pages.lightForeground']
+    background-color: ${theme.dark
       ? 'rgba(255, 255, 255, 0.04)'
       : 'rgba(0, 0, 0, 0.04)'};
   `};
@@ -36,7 +36,7 @@ export const Icon = styled.div`
 
   ${({ icon, theme }: { icon: string; theme?: ITheme }) => css`
     background-image: url(${icon});
-    filter: ${theme['pages.lightForeground'] ? 'invert(100%)' : 'none'};
+    filter: ${theme.dark ? 'invert(100%)' : 'none'};
   `};
 `;
 
@@ -59,7 +59,7 @@ export const DropIcon = styled.div<DropIconProps>`
 
   ${({ expanded, theme }) => css`
     transform: ${expanded ? 'rotate(180deg)' : 'rotate(0deg)'};
-    filter: ${theme['pages.lightForeground'] ? 'invert(100%)' : 'none'};
+    filter: ${theme.dark ? 'invert(100%)' : 'none'};
   `}
 `;
 interface ContainerProps {

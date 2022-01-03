@@ -7,7 +7,7 @@ import { showMenuDialog } from '../dialogs/menu';
 import { IFormFillData, IBookmark } from '~/interfaces';
 import { SearchDialog } from '../dialogs/search';
 import { URL } from 'url';
-import bookmarkMenu from '../menus/bookmarks';
+import * as bookmarkMenu from '../menus/bookmarks';
 import { showFindDialog } from '../dialogs/find';
 import { showAddBookmarkDialog } from '../dialogs/add-bookmark';
 import { showExtensionDialog } from '../dialogs/extension-popup';

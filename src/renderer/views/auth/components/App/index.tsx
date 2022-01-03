@@ -28,21 +28,21 @@ const onClick = () => {
 export const App = observer(() => {
   return (
     <ThemeProvider
-      theme={{ ...store.theme, dark: store.theme['dialog.lightForeground'] }}
+      theme={{ ...store.theme, dark: store.theme.dark }}
     >
       <StyledApp>
         <UIStyle />
         <Title>Login</Title>
         <Subtitle>{store.url}</Subtitle>
         <Textfield
-          dark={store.theme['dialog.lightForeground']}
+          dark={store.theme.dark}
           ref={ref1}
           test={(str) => str.trim().length !== 0}
           style={{ width: '100%', marginTop: 16 }}
           label="Username"
         ></Textfield>
         <PasswordInput
-          dark={store.theme['dialog.lightForeground']}
+          dark={store.theme.dark}
           ref={ref2}
           style={{ width: '100%', marginTop: 16 }}
         ></PasswordInput>
@@ -50,12 +50,12 @@ export const App = observer(() => {
           <Button onClick={onClick}>Login</Button>
           <Button
             background={
-              store.theme['dialog.lightForeground']
+              store.theme.dark
                 ? 'rgba(255, 255, 255, 0.08)'
                 : 'rgba(0, 0, 0, 0.08)'
             }
             foreground={
-              store.theme['dialog.lightForeground'] ? 'white' : 'black'
+              store.theme.dark ? 'white' : 'black'
             }
             style={{ marginLeft: 8 }}
             onClick={() => sendResponse(null)}

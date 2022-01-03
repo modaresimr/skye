@@ -25,8 +25,6 @@ export const Placeholder = styled(ItemBase)`
 
   ${({ theme }: { theme?: ITheme }) => css`
     border: 2px dashed
-      ${!theme['pages.lightForeground']
-        ? 'rgba(0, 0, 0, 0.2)'
-        : 'rgba(255, 255, 255, 0.3)'};
+      ${!theme.dark ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.3)'};
   `}
 `;

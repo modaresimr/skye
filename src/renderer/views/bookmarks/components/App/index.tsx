@@ -171,20 +171,19 @@ export default observer(() => {
         darken={store.dialogVisible}
       >
         <WebUIStyle />
-        <GlobalNavigationDrawer></GlobalNavigationDrawer>
+        <GlobalNavigationDrawer />
         <NavigationDrawer title="Bookmarks" search onSearchInput={onInput}>
           <Tree />
           <div style={{ flex: 1 }} />
           <NavigationDrawer.Item
-            icon={ICON_NEW_FOLDER}
             onClick={onNewFolderClick}
           >
             New folder
           </NavigationDrawer.Item>
-          <NavigationDrawer.Item icon={ICON_DOWNLOAD} onClick={onImportClick}>
+          <NavigationDrawer.Item onClick={onImportClick}>
             Import
           </NavigationDrawer.Item>
-          <NavigationDrawer.Item icon={ICON_SAVE} onClick={onExportClick}>
+          <NavigationDrawer.Item onClick={onExportClick}>
             Export
           </NavigationDrawer.Item>
         </NavigationDrawer>
@@ -221,10 +220,10 @@ export default observer(() => {
         <DialogTitle>{dialogTitle}</DialogTitle>
         <Textfield
           style={{ width: '100%' }}
-          dark={store.theme['dialog.lightForeground']}
+          dark={store.theme.dark}
           ref={store.nameInputRef}
           label="Name"
-        ></Textfield>
+        />
 
         <Textfield
           style={{
@@ -232,21 +231,21 @@ export default observer(() => {
             marginTop: 16,
             display: store.dialogContent === 'edit' ? 'block' : 'none',
           }}
-          dark={store.theme['dialog.lightForeground']}
+          dark={store.theme.dark}
           ref={store.urlInputRef}
           label="URL"
-        ></Textfield>
+        />
 
         <DialogButtons>
           <Button
             onClick={() => (store.dialogVisible = false)}
             background={
-              store.theme['dialog.lightForeground']
+              store.theme.dark
                 ? 'rgba(255, 255, 255, 0.08)'
                 : 'rgba(0, 0, 0, 0.08)'
             }
             foreground={
-              store.theme['dialog.lightForeground'] ? 'white' : 'black'
+              store.theme.dark ? 'white' : 'black'
             }
           >
             Cancel
@@ -255,7 +254,7 @@ export default observer(() => {
             Save
           </Button>
         </DialogButtons>
-        <div style={{ clear: 'both' }}></div>
+        <div style={{clear: 'both'}}/>
       </Dialog>
     </ThemeProvider>
   );

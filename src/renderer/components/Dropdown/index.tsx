@@ -1,4 +1,5 @@
-import React from 'react';
+import { Listbox } from '@headlessui/react';
+import React, { FC } from 'react';
 
 import {
   ContextMenu,
@@ -31,102 +32,129 @@ interface State {
   value?: string;
 }
 
-export class Dropdown extends React.PureComponent<Props, State> {
-  public static Item = Item;
-
-  public state: State = {
-    expanded: false,
-  };
-
-  componentDidMount() {
-    const { defaultValue } = this.props;
-
-    if (defaultValue != null) {
-      this.setValue(defaultValue, false);
-    }
-  }
-
-  componentDidUpdate(prevProps: Props) {
-    if (this.props.defaultValue !== prevProps.defaultValue) {
-      this.setValue(this.props.defaultValue, false);
-    }
-  }
-
-  public setValue(value: string, emitEvent = true) {
-    const { onChange, children } = this.props;
-    const oldValue = this.state.value;
-    const el = children.find((r: any) => r.props.value === value);
-
-    if (el) {
-      this.setState({
-        value,
-        label: el.props.children,
-      });
-
-      if (emitEvent && onChange) {
-        onChange(value, oldValue);
-      }
-    }
-  }
-
-  public toggleMenu(val: boolean) {
-    this.setState({ expanded: val });
-
-    requestAnimationFrame(() => {
-      if (val) {
-        window.addEventListener('mousedown', this.onWindowMouseDown);
-      } else {
-        window.removeEventListener('mousedown', this.onWindowMouseDown);
-      }
-    });
-  }
-
-  private onItemClick = (value: string) => () => {
-    this.setValue(value);
-    this.toggleMenu(false);
-  };
-
-  private onItemMouseDown = (e: React.MouseEvent<any>) => {
-    e.stopPropagation();
-  };
-
-  private onMouseDown = (e: React.MouseEvent<any>) => {
-    e.stopPropagation();
-
-    if (this.props.onMouseDown) this.props.onMouseDown(e);
-
-    const { expanded } = this.state;
-    this.toggleMenu(!expanded);
-  };
-
-  public onWindowMouseDown = () => {
-    this.toggleMenu(false);
-  };
-
-  render() {
-    const { children, style } = this.props;
-    const { expanded, label, value } = this.state;
-
-    return (
-      <StyledDropdown
-        className="dropdown"
-        onMouseDown={this.onMouseDown}
-        style={style}
-      >
-        <Label>{label}</Label>
-        <DropIcon expanded={expanded} />
-        <ContextMenu style={{ top: 32, width: '100%' }} visible={expanded}>
-          {React.Children.map(children, (child) => {
-            const { props } = child;
-
-            return React.cloneElement(child, {
-              selected: value === props.value,
-              onClick: this.onItemClick(props.value),
-              onMouseDown: this.onItemMouseDown,
-            });
-          })}
-        </ContextMenu>
+const Dropdown: FC<{
+  value: string;
+  onChange: (value: string) => void;
+  items: {
+    id: string;
+    name: string;
+  }[];
+}> = ({ value, onChange, items }) => {
+  const selected = items.find((item) => item.id === value);
+  return (
+    <Listbox value={value} onChange={onChange}>
+      <StyledDropdown>
+        <Listbox.Button>{selected.name}</Listbox.Button>
       </StyledDropdown>
-    );
-  }
-}
+      <Listbox.Options>
+        {items.map((item) => (
+          <Listbox.Option key={item.id} value={item.id}>
+            {item.name}
+          </Listbox.Option>
+        ))}
+      </Listbox.Options>
+    </Listbox>
+  );
+};
+
+export default Dropdown;
+
+// export class Dropdown extends React.PureComponent<Props, State> {
+//   public static Item = Item;
+
+//   public state: State = {
+//     expanded: false,
+//   };
+
+//   componentDidMount() {
+//     const { defaultValue } = this.props;
+
+//     if (defaultValue != null) {
+//       this.setValue(defaultValue, false);
+//     }
+//   }
+
+//   componentDidUpdate(prevProps: Props) {
+//     if (this.props.defaultValue !== prevProps.defaultValue) {
+//       this.setValue(this.props.defaultValue, false);
+//     }
+//   }
+
+//   public setValue(value: string, emitEvent = true) {
+//     const { onChange, children } = this.props;
+//     const oldValue = this.state.value;
+//     const el = children.find((r: any) => r.props.value === value);
+
+//     if (el) {
+//       this.setState({
+//         value,
+//         label: el.props.children,
+//       });
+
+//       if (emitEvent && onChange) {
+//         onChange(value, oldValue);
+//       }
+//     }
+//   }
+
+//   public toggleMenu(val: boolean) {
+//     this.setState({ expanded: val });
+
+//     requestAnimationFrame(() => {
+//       if (val) {
+//         window.addEventListener('mousedown', this.onWindowMouseDown);
+//       } else {
+//         window.removeEventListener('mousedown', this.onWindowMouseDown);
+//       }
+//     });
+//   }
+
+//   private onItemClick = (value: string) => () => {
+//     this.setValue(value);
+//     this.toggleMenu(false);
+//   };
+
+//   private onItemMouseDown = (e: React.MouseEvent<any>) => {
+//     e.stopPropagation();
+//   };
+
+//   private onMouseDown = (e: React.MouseEvent<any>) => {
+//     e.stopPropagation();
+
+//     if (this.props.onMouseDown) this.props.onMouseDown(e);
+
+//     const { expanded } = this.state;
+//     this.toggleMenu(!expanded);
+//   };
+
+//   public onWindowMouseDown = () => {
+//     this.toggleMenu(false);
+//   };
+
+//   render() {
+//     const { children, style } = this.props;
+//     const { expanded, label, value } = this.state;
+
+//     return (
+//       <StyledDropdown
+//         className="dropdown"
+//         onMouseDown={this.onMouseDown}
+//         style={style}
+//       >
+//         <Label>{label}</Label>
+//         <DropIcon expanded={expanded} />
+//         <ContextMenu style={{ top: 32, width: '100%' }} visible={expanded}>
+//           {React.Children.map(children, (child) => {
+//             const { props } = child;
+
+//             return React.cloneElement(child, {
+//               selected: value === props.value,
+//               onClick: this.onItemClick(props.value),
+//               onMouseDown: this.onItemMouseDown,
+//             });
+//           })}
+//         </ContextMenu>
+//       </StyledDropdown>
+//     );
+//   }
+// }

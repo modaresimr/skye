@@ -1,11 +1,11 @@
 import { app, ipcMain, Menu } from 'electron';
 import { isAbsolute, extname } from 'path';
 import { existsSync } from 'fs';
-import { SessionsService } from './sessions-service';
+import { SessionsService } from './services/sessions';
 import { checkFiles } from '~/utils/files';
 import { Settings } from './models/settings';
 import { isURL, prefixHttp } from '~/utils';
-import { WindowsService } from './windows-service';
+import { WindowsService } from './services/windows';
 import { StorageService } from './services/storage';
 import { getMainMenu } from './menus/main';
 import { runAutoUpdaterService } from './services';

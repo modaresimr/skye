@@ -11,7 +11,7 @@ export const StyledApp = styled(PersistentDialogStyle)`
   max-width: ${TAB_MAX_WIDTH}px;
 
   ${({ theme, xTransition }: { theme?: ITheme; xTransition: boolean }) => css`
-    color: ${theme['dialog.textColor']};
+    color: ${theme.dialog.text};
     transition: 0.15s opacity ${xTransition ? ', 0.08s transform' : ''};
   `}
 `;

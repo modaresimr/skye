@@ -1,15 +1,11 @@
 import styled, { css } from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins';
-import { ITheme } from '~/interfaces';
-import { ICON_CLOSE } from '~/renderer/constants/icons';
-import { RED_500 } from '~/renderer/constants';
 
 export const Remove = styled.div`
   height: 16px;
   width: 16px;
   cursor: pointer;
-  color: ${RED_500};
   display: flex;
   justify-content: center;
   align-items: center;

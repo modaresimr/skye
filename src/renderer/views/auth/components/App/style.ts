@@ -17,8 +17,8 @@ export const StyledApp = styled.div<AppProps>`
   position: relative;
 
   ${({ theme }) => css`
-    background-color: ${theme['dialog.backgroundColor']};
-    color: ${theme['dialog.lightForeground'] ? 'white' : 'black'};
+    background-color: ${theme.dialog.background};
+    color: ${theme.dark ? 'white' : 'black'};
   `}
 `;
 

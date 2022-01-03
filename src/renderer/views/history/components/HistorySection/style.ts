@@ -12,7 +12,7 @@ export const EmptySection = styled.div`
   }
 
   ${({ theme }: { theme?: ITheme }) => css`
-    background-color: ${theme['pages.lightForeground']
+    background-color: ${theme.dark
       ? 'rgba(255, 255, 255, 0.05)'
       : '#fafafa'};
   `};

@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import {
-  EASING_FUNCTION,
-  transparency,
-  ICON_DROPDOWN,
-} from '~/renderer/constants';
+import { transparency } from '~/renderer/constants';
 import { centerIcon } from '~/renderer/mixins';
 import { ITheme } from '~/interfaces';
 
@@ -13,22 +9,27 @@ interface DropdownProps {
 }
 
 export const StyledDropdown = styled.div<DropdownProps>`
-  height: 40px;
-  min-width: 200px;
-  position: relative;
-  border-radius: 8px;
-  user-select: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+  width: 100%;
+  button {
+    padding: 0.9rem;
+    min-width: 200px;
+    position: relative;
+    border-radius: 8px;
+    user-select: none;
+    cursor: pointer;
+    width: 100%;
+    border: 0;
+    display: flex;
+    align-items: center;
 
-  ${({ theme }) => css`
-    background-color: ${theme['control.backgroundColor']};
+    ${({ theme }) => css`
+      background-color: ${theme.control.background};
 
-    &:hover {
-      background-color: ${theme['control.hover.backgroundColor']};
-    }
-  `}
+      &:hover {
+        background-color: ${theme.control.hover.background};
+      }
+    `}
+  }
 `;
 
 interface LabelProps {
@@ -41,7 +42,7 @@ export const Label = styled.div<LabelProps>`
   pointer-events: none;
 
   ${({ theme }) => css`
-    color: ${theme['control.valueColor']};
+    color: ${theme.control.value};
   `}
 `;
 
@@ -56,11 +57,11 @@ export const DropIcon = styled.div<DropIconProps>`
   margin-left: auto;
   margin-right: 2px;
   opacity: ${transparency.icons.inactive};
-  transition: 0.2s ${EASING_FUNCTION} transform;
+  transition: 0.2s ${({ theme }) => theme.easingFunction} transform;
   ${centerIcon(24)};
 
   ${({ expanded, theme }) => css`
     transform: ${expanded ? 'rotate(180deg)' : 'rotate(0deg)'};
-    filter: ${theme['control.lightIcon'] ? 'invert(100%)' : 'unset'};
+    filter: ${!theme.dark ? 'invert(100%)' : 'unset'};
   `}
 `;

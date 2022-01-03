@@ -120,6 +120,6 @@ export const BrowserAction = observer(({ data }: Props) => {
       badgeBackground={badgeBackgroundColor}
       badgeTextColor={badgeTextColor}
       badgeText={badgeText}
-    ></TitlebarButton>
+    />
   );
 });

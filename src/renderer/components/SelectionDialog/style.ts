@@ -31,7 +31,7 @@ export const StyledSmallDialog = styled.div<SmallDialogProps>`
   ${({ visible, theme }) => css`
     opacity: ${visible ? 1 : 0};
     pointer-events: ${visible ? 'inherit' : 'none'};
-    background-color: ${theme['dialog.backgroundColor']};
+    background-color: ${theme.dialog.background};
   `};
 `;
 

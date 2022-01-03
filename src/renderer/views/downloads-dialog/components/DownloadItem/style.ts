@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { BLUE_500, ICON_PAGE, ICON_MORE } from '~/renderer/constants';
 import { centerIcon } from '~/renderer/mixins';
 import { ITheme } from '~/interfaces';
 
@@ -15,12 +14,12 @@ export const StyledDownloadItem = styled.div`
   transition: 0.1s background-color, 0.1s border;
 
   ${({ theme }: { theme?: ITheme }) => css`
-    background-color: ${theme['dialog.lightForeground']
+    background-color: ${theme.dark
       ? `rgba(255, 255, 255, 0.04)`
       : `rgba(0, 0, 0, 0.02)`};
 
     &:hover {
-      background-color: ${theme['dialog.lightForeground']
+      background-color: ${theme.dark
         ? `rgba(255, 255, 255, 0.06)`
         : `rgba(0, 0, 0, 0.04)`};
     }
@@ -44,7 +43,6 @@ export const SecondaryText = styled.div`
 
 export const Progress = styled.div`
   height: 100%;
-  background-color: ${BLUE_500};
   border-radius: 16px;
 `;
 
@@ -57,7 +55,7 @@ export const ProgressBackground = styled.div`
   flex: 1;
 
   ${({ theme }: { theme?: ITheme }) => css`
-    background-color: ${theme['dialog.lightForeground']
+    background-color: ${theme.dark
       ? `rgba(255, 255, 255, 0.12)`
       : `rgba(0, 0, 0, 0.12)`};
   `}
@@ -84,7 +82,7 @@ export const Icon = styled.div`
   justify-content: center;
   align-items: center;
   ${({ theme }: { theme?: ITheme }) => css`
-    filter: ${theme['dialog.lightForeground'] ? 'invert(0%)' : ''};
+    filter: ${theme.dark ? 'invert(0%)' : ''};
   `}
 `;
 
@@ -101,7 +99,7 @@ export const MoreButton = styled.div`
   transition: 0.1s background-color;
 
   ${({ theme }: { theme?: ITheme }) => css`
-    filter: ${theme['dialog.lightForeground'] ? 'invert(0%)' : ''};
+    filter: ${theme.dark ? 'invert(0%)' : ''};
   `}
 
   &:hover {
@@ -117,7 +115,7 @@ export const Separator = styled.div`
   background-color: rgba(0, 0, 0, 0.12);
 
   ${({ theme }: { theme?: ITheme }) => css`
-    background-color: ${theme['dialog.lightForeground']
+    background-color: ${theme.dark
       ? 'rgba(255, 255, 255, 0.12)'
       : 'rgba(0, 0, 0, 0.12)'};
   `}

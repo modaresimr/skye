@@ -298,10 +298,7 @@ export default observer(({ tab, index }: { tab: ITab; index: number }) => {
         color={store.tabs.selectedTab?.color}
         style={{
           marginLeft: index !== 0 ? '8px' : '1px',
-          borderColor:
-            tab.isSelected && tab.tabGroupId !== -1 && !store.isCompact
-              ? tab.tabGroup.color
-              : 'transparent',
+          borderColor: 'transparent',
         }}
       >
         <Content tab={tab} />
