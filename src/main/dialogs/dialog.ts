@@ -49,6 +49,7 @@ export class PersistentDialog {
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
+        spellcheck: true,
         // @ts-ignore
         transparent: true,
         ...webPreferences,

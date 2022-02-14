@@ -61,6 +61,7 @@ export class DialogsService {
     const view = new BrowserView({
       webPreferences: {
         nodeIntegration: true,
+        spellcheck: true,
         contextIsolation: false,
         // @ts-ignore
         transparent: true,

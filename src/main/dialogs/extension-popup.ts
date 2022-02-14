@@ -43,6 +43,7 @@ export const showExtensionDialog = async (
       webPreferences.sandbox = true;
       webPreferences.nodeIntegration = false;
       webPreferences.contextIsolation = true;
+      webPreferences.spellcheck= true;
     },
   );
 

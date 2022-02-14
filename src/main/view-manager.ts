@@ -162,7 +162,7 @@ export class ViewManager extends EventEmitter {
   }
 
   public async select(id: number, focus = true) {
-    console.trace();
+    // console.trace();
     const { selected } = this;
     const view = this.views.get(id);
     if (!view) {
@@ -211,7 +211,7 @@ export class ViewManager extends EventEmitter {
     const newBounds = {
       x: 0,
       y: this.fullscreen ? 0 : toolbarContentHeight,
-      width,
+      width:width,
       height: this.fullscreen ? height : height - toolbarContentHeight,
     };
 

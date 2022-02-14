@@ -73,6 +73,7 @@ export class View {
         sandbox: true,
         partition: incognito ? 'view_incognito' : 'persist:view',
         plugins: true,
+        spellcheck: true,
         nativeWindowOpen: true,
         webSecurity: true,
         javascript: true,
@@ -315,8 +316,8 @@ export class View {
     this.browserView.setAutoResize({
       width: true,
       height: true,
-      horizontal: false,
-      vertical: false,
+      horizontal: true,
+      vertical: true,
     });
   }
 
